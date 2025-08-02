@@ -17,6 +17,8 @@ namespace GameDevS
 
         List<Sprite> sprites;
 
+        Player player;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -36,7 +38,9 @@ namespace GameDevS
             sprites.Add(new Sprite(_enemyTexture, new Vector2(400, 200), 0.1f));
             sprites.Add(new Sprite(_enemyTexture, new Vector2(700, 300), 0.1f));
 
-            sprites.Add(new Player(_heroTexture, Vector2.Zero, 1f));
+            player = new Player(_heroTexture, Vector2.Zero, 1f, sprites);
+
+            sprites.Add(player);
         }
 
         protected override void LoadContent()
@@ -53,18 +57,7 @@ namespace GameDevS
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-            //if (!space_pressed && Keyboard.GetState().IsKeyDown(Keys.Space))
-            //{
-            //    space_pressed = true;
-            //    Debug.WriteLine("Space key pressed");
-            //}
-
-            //if (Keyboard.GetState().IsKeyUp(Keys.Space))
-            //{
-            //    space_pressed = false;
-            //}
-
+            List<Sprite> killList = new List<Sprite>();
             foreach (var sprite in sprites)
             {
                 sprite.Update(gameTime);

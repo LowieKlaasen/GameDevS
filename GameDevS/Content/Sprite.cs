@@ -22,8 +22,8 @@ namespace GameDevS.Content
                 return new Rectangle(
                     (int)position.X, 
                     (int)position.Y, 
-                    texture.Width, 
-                    texture.Height
+                    (int)(texture.Width * Scale), 
+                    (int)(texture.Height * Scale)
                 );
             }
         }

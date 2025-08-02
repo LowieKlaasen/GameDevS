@@ -2,33 +2,61 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace GameDevS
 {
     internal class Player : Sprite
     {
+        private const int Speed = 4;
 
-        public Player(Texture2D texture, Vector2 position, float scale) : base(texture, position, scale) {   }
+        private List<Sprite> collisionGroup;
+
+        public Player(Texture2D texture, Vector2 position, float scale, List<Sprite> collisionGroup) : base(texture, position, scale) 
+        {
+            this.collisionGroup = collisionGroup;
+        }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
 
+            float changeX = 0;
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
-                position.X += 2;
+                changeX += Speed;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
-                position.X -= 2;
+                changeX -= Speed;
             }
+            position.X += changeX;
+
+            foreach (var sprite in collisionGroup)
+            {
+                if (sprite != this && sprite.Rectangle.Intersects(Rectangle))
+                {
+                    position.X -= changeX;
+                }
+            }
+
+            float changeY = 0;
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {
-                position.Y -= 2;
+                changeY -= Speed;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Down))
             {
-                position.Y += 2;
+                changeY += Speed;
+            }
+            position.Y += changeY;
+
+            foreach (var sprite in collisionGroup)
+            {
+                if (sprite != this && sprite.Rectangle.Intersects(Rectangle))
+                {
+                    position.Y -= changeY;
+                }
             }
         }
     }
