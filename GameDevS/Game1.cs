@@ -1,5 +1,4 @@
-﻿using GameDevS.Content;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
@@ -38,7 +37,7 @@ namespace GameDevS
             sprites.Add(new Sprite(_enemyTexture, new Vector2(400, 200), 0.1f));
             sprites.Add(new Sprite(_enemyTexture, new Vector2(700, 300), 0.1f));
 
-            player = new Player(_heroTexture, Vector2.Zero, 1f, sprites);
+            player = new Player(_heroTexture, Vector2.Zero, 1f, sprites, 22, 21, 48, 53);
 
             sprites.Add(player);
         }

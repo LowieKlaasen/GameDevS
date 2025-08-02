@@ -1,5 +1,4 @@
-﻿using GameDevS.Content;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
@@ -12,7 +11,7 @@ namespace GameDevS
 
         private List<Sprite> collisionGroup;
 
-        public Player(Texture2D texture, Vector2 position, float scale, List<Sprite> collisionGroup) : base(texture, position, scale) 
+        public Player(Texture2D texture, Vector2 position, float scale, List<Sprite> collisionGroup, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight) : base(texture, position, scale, hitboxStartX, hitboxStartY, hitboxWidth, hitboxHeight) 
         {
             this.collisionGroup = collisionGroup;
         }
