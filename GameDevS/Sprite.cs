@@ -46,7 +46,9 @@ namespace GameDevS
             }
         }
 
-        public Sprite(Texture2D texture, Vector2 position, float scale)
+        public Animation animation;
+
+        public Sprite(Texture2D texture, Vector2 position, float scale, int numberOfWidthSprites, int numberOfHeightSprites)
         {
             this.texture = texture;
             this.position = position;
@@ -56,8 +58,11 @@ namespace GameDevS
             hitboxStartY = 0;
             hitboxWidth = (int)(texture.Width * Scale);
             hitboxHeight = (int)(texture.Height * Scale);
+
+            animation = new Animation();
+            animation.GetFramesFromTextureProperties(texture.Width, texture.Height, numberOfWidthSprites, numberOfHeightSprites);
         }
-        public Sprite(Texture2D texture, Vector2 position, float scale, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight)
+        public Sprite(Texture2D texture, Vector2 position, float scale, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight, int numberOfWidthSprites, int numberOfHeightSprites)
         {
             this.texture = texture;
             this.position = position;
@@ -67,11 +72,14 @@ namespace GameDevS
             this.hitboxStartY = hitboxStartY;
             this.hitboxWidth = hitboxWidth;
             this.hitboxHeight = hitboxHeight;
+
+            animation = new Animation();
+            animation.GetFramesFromTextureProperties(texture.Width, texture.Height, numberOfWidthSprites, numberOfHeightSprites);
         }
 
         public virtual void Update(GameTime gameTime)
         {
-
+            animation.Update(gameTime);
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
@@ -81,7 +89,7 @@ namespace GameDevS
             spriteBatch.Draw(
                 texture,
                 position,
-                null,
+                animation.CurrentFrame.SourceRectangle,
                 Color.White,
                 0f,
                 Vector2.Zero,

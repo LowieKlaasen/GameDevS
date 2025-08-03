@@ -33,11 +33,11 @@ namespace GameDevS
 
             sprites = new List<Sprite>();
 
-            sprites.Add(new Sprite(_enemyTexture, new Vector2(100, 100), 0.1f, 23, 22, 41, 54));
-            sprites.Add(new Sprite(_enemyTexture, new Vector2(400, 200), 0.1f, 23, 22, 41, 54));
-            sprites.Add(new Sprite(_enemyTexture, new Vector2(700, 300), 0.1f, 23, 22, 41, 54));
+            sprites.Add(new Sprite(_enemyTexture, new Vector2(100, 100), 0.1f, 23, 22, 41, 54, 1, 1));
+            sprites.Add(new Sprite(_enemyTexture, new Vector2(400, 200), 0.1f, 23, 22, 41, 54, 1, 1));
+            sprites.Add(new Sprite(_enemyTexture, new Vector2(700, 300), 0.1f, 23, 22, 41, 54, 1, 1));
 
-            player = new Player(_heroTexture, Vector2.Zero, 1f, sprites, 22, 21, 48, 53);
+            player = new Player(_heroTexture, Vector2.Zero, 1f, sprites, 22, 21, 48, 53, 4, 2);
 
             sprites.Add(player);
         }
@@ -47,7 +47,8 @@ namespace GameDevS
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            _heroTexture = Content.Load<Texture2D>("rogue_cropped");
+            //_heroTexture = Content.Load<Texture2D>("rogue_cropped");
+            _heroTexture = Content.Load<Texture2D>("RogueRunning_Cropped");
             _enemyTexture = Content.Load<Texture2D>("goblin_single");
         }
 

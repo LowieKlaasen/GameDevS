@@ -11,7 +11,7 @@ namespace GameDevS
 
         private List<Sprite> collisionGroup;
 
-        public Player(Texture2D texture, Vector2 position, float scale, List<Sprite> collisionGroup, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight) : base(texture, position, scale, hitboxStartX, hitboxStartY, hitboxWidth, hitboxHeight) 
+        public Player(Texture2D texture, Vector2 position, float scale, List<Sprite> collisionGroup, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight, int numberOfWidthSprites, int numberOfHeightSprites) : base(texture, position, scale, hitboxStartX, hitboxStartY, hitboxWidth, hitboxHeight, numberOfWidthSprites, numberOfHeightSprites) 
         {
             this.collisionGroup = collisionGroup;
         }
