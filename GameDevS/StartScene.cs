@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 
@@ -17,6 +18,11 @@ namespace GameDevS
         private Texture2D[] parallax;
 
         private SpriteFont titleFont;
+
+        private Option[] menuOptions;
+        private int selectedOption;
+
+        private bool selectionKeyLifted;
 
         public StartScene(ContentManager contentManager, SceneManager sceneManager, GraphicsDevice graphicsDevice)
         {
@@ -39,11 +45,54 @@ namespace GameDevS
             }
 
             titleFont = contentManager.Load<SpriteFont>("fonts/UnifrakturCook");
+
+            menuOptions = new Option[3];
+            menuOptions[0] = new Option(contentManager.Load<SpriteFont>("fonts/Jacquard24"), "option 1", new Color(64, 48, 22), Color.Gold);
+            menuOptions[1] = new Option(contentManager.Load<SpriteFont>("fonts/Jacquard24"), "option 2", new Color(64, 48, 22), Color.Gold);
+            menuOptions[2] = new Option(contentManager.Load<SpriteFont>("fonts/Jacquard24"), "option 3", new Color(64, 48, 22), Color.Gold);
+
+            menuOptions[0].Selected = true;
+            selectedOption = 0;
+
+            selectionKeyLifted = true;
         }
 
         public void Update(GameTime gameTime)
         {
-            //throw new NotImplementedException();
+            if (selectionKeyLifted && Keyboard.GetState().IsKeyDown(Keys.Down))
+            {
+                menuOptions[selectedOption].Selected = false;
+
+                selectedOption++;
+                if (selectedOption > menuOptions.Length - 1)
+                {
+                    selectedOption = 0;
+                }
+                
+                menuOptions[selectedOption].Selected = true;
+
+                selectionKeyLifted = false;
+            }
+
+            if (selectionKeyLifted && Keyboard.GetState().IsKeyDown(Keys.Up))
+            {
+                menuOptions[selectedOption].Selected = false;
+
+                selectedOption--;
+                if (selectedOption < 0)
+                {
+                    selectedOption = menuOptions.Length - 1;
+                }
+
+                menuOptions[selectedOption].Selected = true;
+
+                selectionKeyLifted = false;
+            }
+
+            if (!selectionKeyLifted && Keyboard.GetState().IsKeyUp(Keys.Down) && Keyboard.GetState().IsKeyUp(Keys.Up))
+            {
+                selectionKeyLifted = true;
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -61,6 +110,13 @@ namespace GameDevS
             spriteBatch.Draw(woodenBoard, new Rectangle(startingpointX, startingpointY, woodenBoard.Width, woodenBoard.Height), Color.White);
 
             spriteBatch.DrawString(titleFont, "Ancient Escape", new Vector2((woodenBoard.Width / 2), startingpointY + 30), Color.Gold);
+
+            int spacer = 110;
+            foreach (var option in menuOptions)
+            {
+                spriteBatch.DrawString(option.Font, option.Text, new Vector2(woodenBoard.Width/2, startingpointY + spacer), option.GetColor());
+                spacer += 40;
+            }
 
             #endregion
         }
