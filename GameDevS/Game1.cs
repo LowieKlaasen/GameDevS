@@ -18,11 +18,15 @@ namespace GameDevS
 
         Player player;
 
+        private SceneManager sceneManager;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+
+            // ToDo: Check if sceneManager initialization should be here or in Initialize()-method
+            sceneManager = new SceneManager();
         }
 
         protected override void Initialize()
@@ -50,6 +54,8 @@ namespace GameDevS
             //_heroTexture = Content.Load<Texture2D>("rogue_cropped");
             _heroTexture = Content.Load<Texture2D>("RogueRunning_Cropped");
             _enemyTexture = Content.Load<Texture2D>("goblin_single");
+
+            sceneManager.AddScene(new GameScene(Content, sceneManager));
         }
 
         protected override void Update(GameTime gameTime)
@@ -62,6 +68,8 @@ namespace GameDevS
             {
                 sprite.Update(gameTime);
             }
+
+            sceneManager.GetCurrentScene().Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -77,6 +85,8 @@ namespace GameDevS
             {
                 sprite.Draw(_spriteBatch);
             }
+
+            sceneManager.GetCurrentScene().Draw(_spriteBatch);
 
             _spriteBatch.End();
 
