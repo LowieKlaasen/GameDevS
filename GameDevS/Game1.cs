@@ -34,7 +34,8 @@ namespace GameDevS
             // TODO: use this.Content to load your game content here
 
             // ToDo: Check wheter AddScene needs to be here or in Initialize()?
-            sceneManager.AddScene(new GameScene(Content, sceneManager));
+            //sceneManager.AddScene(new GameScene(Content, sceneManager));
+            sceneManager.AddScene(new StartScene(Content, sceneManager, GraphicsDevice));
         }
 
         protected override void Update(GameTime gameTime)
