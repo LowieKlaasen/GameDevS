@@ -102,6 +102,8 @@ namespace GameDevS
                         sceneManager.AddScene(new GameScene(contentManager, sceneManager));
                         break;
                     case 1:
+                        // ToDo: Add redirection to level 2
+                        throw new NotImplementedException();
                         break;
                     case 2:
                         break;
