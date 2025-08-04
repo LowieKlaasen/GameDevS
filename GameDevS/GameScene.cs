@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 using System.Collections.Generic;
 
 namespace GameDevS
@@ -12,11 +11,21 @@ namespace GameDevS
         private ContentManager contentManager;
         private SceneManager sceneManager;
 
-        #region Demo
+        #region Game1
 
-        private Texture2D texture;
+        private Texture2D _heroTexture;
+        private Texture2D _enemyTexture;
+
+        List<Sprite> sprites;
+        Player player;
 
         #endregion
+
+        //#region Demo
+
+        //private Texture2D texture;
+
+        //#endregion
 
         public GameScene(ContentManager contentManager, SceneManager sceneManager)
         {
@@ -24,22 +33,59 @@ namespace GameDevS
             this.sceneManager = sceneManager;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(texture, new Rectangle(10, 10, 400, 400), new Rectangle(0, 0, 90, 90), Color.White);
-        }
 
         public void Load()
         {
-            texture = contentManager.Load<Texture2D>("rogue_cropped");
+            //texture = contentManager.Load<Texture2D>("rogue_cropped");
+
+            #region Game1
+
+            _heroTexture = contentManager.Load<Texture2D>("RogueRunning_Cropped");
+            _enemyTexture = contentManager.Load<Texture2D>("goblin_single");
+
+            sprites = new List<Sprite>();
+
+            sprites.Add(new Sprite(_enemyTexture, new Vector2(100, 100), 0.1f, 23, 22, 41, 54, 1, 1));
+            sprites.Add(new Sprite(_enemyTexture, new Vector2(400, 200), 0.1f, 23, 22, 41, 54, 1, 1));
+            sprites.Add(new Sprite(_enemyTexture, new Vector2(700, 300), 0.1f, 23, 22, 41, 54, 1, 1));
+
+            player = new Player(_heroTexture, Vector2.Zero, 1f, sprites, 22, 21, 48, 53, 4, 2);
+
+            sprites.Add(player);
+
+            #endregion
         }
 
         public void Update(GameTime gameTime)
         {
+            #region Game1
+
+            foreach (var sprite in sprites)
+            {
+                sprite.Update(gameTime);
+            }
+
+            #endregion
+
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
                 sceneManager.AddScene(new ExitScene(contentManager));
             }
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            //spriteBatch.Draw(texture, new Rectangle(10, 10, 400, 400), new Rectangle(0, 0, 90, 90), Color.White);
+
+            #region Game1
+
+            foreach (var sprite in sprites)
+            {
+                sprite.Draw(spriteBatch);
+            }
+
+            #endregion
+
         }
     }
 }

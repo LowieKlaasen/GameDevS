@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace GameDevS
 {
@@ -35,15 +34,15 @@ namespace GameDevS
 
             base.Initialize();
 
-            sprites = new List<Sprite>();
+            //sprites = new List<Sprite>();
 
-            sprites.Add(new Sprite(_enemyTexture, new Vector2(100, 100), 0.1f, 23, 22, 41, 54, 1, 1));
-            sprites.Add(new Sprite(_enemyTexture, new Vector2(400, 200), 0.1f, 23, 22, 41, 54, 1, 1));
-            sprites.Add(new Sprite(_enemyTexture, new Vector2(700, 300), 0.1f, 23, 22, 41, 54, 1, 1));
+            //sprites.Add(new Sprite(_enemyTexture, new Vector2(100, 100), 0.1f, 23, 22, 41, 54, 1, 1));
+            //sprites.Add(new Sprite(_enemyTexture, new Vector2(400, 200), 0.1f, 23, 22, 41, 54, 1, 1));
+            //sprites.Add(new Sprite(_enemyTexture, new Vector2(700, 300), 0.1f, 23, 22, 41, 54, 1, 1));
 
-            player = new Player(_heroTexture, Vector2.Zero, 1f, sprites, 22, 21, 48, 53, 4, 2);
+            //player = new Player(_heroTexture, Vector2.Zero, 1f, sprites, 22, 21, 48, 53, 4, 2);
 
-            sprites.Add(player);
+            //sprites.Add(player);
         }
 
         protected override void LoadContent()
@@ -52,8 +51,8 @@ namespace GameDevS
 
             // TODO: use this.Content to load your game content here
             //_heroTexture = Content.Load<Texture2D>("rogue_cropped");
-            _heroTexture = Content.Load<Texture2D>("RogueRunning_Cropped");
-            _enemyTexture = Content.Load<Texture2D>("goblin_single");
+            //_heroTexture = Content.Load<Texture2D>("RogueRunning_Cropped");
+            //_enemyTexture = Content.Load<Texture2D>("goblin_single");
 
             sceneManager.AddScene(new GameScene(Content, sceneManager));
         }
@@ -63,11 +62,10 @@ namespace GameDevS
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            List<Sprite> killList = new List<Sprite>();
-            foreach (var sprite in sprites)
-            {
-                sprite.Update(gameTime);
-            }
+            //foreach (var sprite in sprites)
+            //{
+            //    sprite.Update(gameTime);
+            //}
 
             sceneManager.GetCurrentScene().Update(gameTime);
 
@@ -81,10 +79,10 @@ namespace GameDevS
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
 
-            foreach (var sprite in sprites)
-            {
-                sprite.Draw(_spriteBatch);
-            }
+            //foreach (var sprite in sprites)
+            //{
+            //    sprite.Draw(_spriteBatch);
+            //}
 
             sceneManager.GetCurrentScene().Draw(_spriteBatch);
 
