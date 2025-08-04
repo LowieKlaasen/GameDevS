@@ -73,6 +73,13 @@
 /processorParam:TextureFormat=Color
 /build:background/Jungle/plx-5.png
 
+#begin fonts/UnifrakturCook.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fonts/UnifrakturCook.spritefont
+
 #begin goblin_single.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -109,7 +116,7 @@
 /processorParam:TextureFormat=Color
 /build:RogueRunning_Cropped.png
 
-#begin StartScreen.png
+#begin woodenBoard.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -119,5 +126,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:StartScreen.png
+/build:woodenBoard.png
 

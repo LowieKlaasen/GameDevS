@@ -16,6 +16,8 @@ namespace GameDevS
 
         private Texture2D[] parallax;
 
+        private SpriteFont titleFont;
+
         public StartScene(ContentManager contentManager, SceneManager sceneManager, GraphicsDevice graphicsDevice)
         {
             this.contentManager = contentManager;
@@ -25,7 +27,7 @@ namespace GameDevS
 
         public void Load()
         {
-            woodenBoard = contentManager.Load<Texture2D>("StartScreen");
+            woodenBoard = contentManager.Load<Texture2D>("woodenBoard");
 
             parallax = new Texture2D[5];
 
@@ -35,6 +37,8 @@ namespace GameDevS
 
                 parallax[i] = contentManager.Load<Texture2D>(fileName);
             }
+
+            titleFont = contentManager.Load<SpriteFont>("fonts/UnifrakturCook");
         }
 
         public void Update(GameTime gameTime)
@@ -49,7 +53,16 @@ namespace GameDevS
                 spriteBatch.Draw(bg, new Rectangle(0, 0, graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height), Color.White);
             }
 
-            //spriteBatch.Draw(woodenBoard, new Rectangle(100, 100, 500, 300), Color.White);
+            #region woodenBoard
+
+            int startingpointX = (graphicsDevice.Viewport.Width - woodenBoard.Width) / 2;
+            int startingpointY = (graphicsDevice.Viewport.Height - woodenBoard.Height) / 2;
+
+            spriteBatch.Draw(woodenBoard, new Rectangle(startingpointX, startingpointY, woodenBoard.Width, woodenBoard.Height), Color.White);
+
+            spriteBatch.DrawString(titleFont, "Ancient Escape", new Vector2((woodenBoard.Width / 2), startingpointY + 30), Color.Gold);
+
+            #endregion
         }
     }
 }
