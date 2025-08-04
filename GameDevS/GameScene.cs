@@ -21,23 +21,14 @@ namespace GameDevS
 
         #endregion
 
-        //#region Demo
-
-        //private Texture2D texture;
-
-        //#endregion
-
         public GameScene(ContentManager contentManager, SceneManager sceneManager)
         {
             this.contentManager = contentManager;
             this.sceneManager = sceneManager;
         }
 
-
         public void Load()
         {
-            //texture = contentManager.Load<Texture2D>("rogue_cropped");
-
             #region Game1
 
             _heroTexture = contentManager.Load<Texture2D>("RogueRunning_Cropped");
@@ -75,7 +66,6 @@ namespace GameDevS
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            //spriteBatch.Draw(texture, new Rectangle(10, 10, 400, 400), new Rectangle(0, 0, 90, 90), Color.White);
 
             #region Game1
 
