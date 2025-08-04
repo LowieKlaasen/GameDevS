@@ -81,17 +81,20 @@ namespace GameDevS
         {
             //spriteBatch.Draw(texture, Rectangle, Color.White);
 
-            spriteBatch.Draw(
-                texture,
-                position,
-                animation.CurrentFrame.SourceRectangle,
-                Color.White,
-                0f,
-                Vector2.Zero,
-                Scale,
-                SpriteEffects.None,
-                0f
-            );
+            if (animation.CurrentFrame != null)
+            {
+                spriteBatch.Draw(
+                    texture,
+                    position,
+                    animation.CurrentFrame.SourceRectangle,
+                    Color.White,
+                    0f,
+                    Vector2.Zero,
+                    Scale,
+                    SpriteEffects.None,
+                    0f
+                );
+            }
         }
     }
 }

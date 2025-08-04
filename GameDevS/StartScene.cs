@@ -47,8 +47,8 @@ namespace GameDevS
             titleFont = contentManager.Load<SpriteFont>("fonts/UnifrakturCook");
 
             menuOptions = new Option[3];
-            menuOptions[0] = new Option(contentManager.Load<SpriteFont>("fonts/Jacquard24"), "option 1", new Color(64, 48, 22), Color.Gold);
-            menuOptions[1] = new Option(contentManager.Load<SpriteFont>("fonts/Jacquard24"), "option 2", new Color(64, 48, 22), Color.Gold);
+            menuOptions[0] = new Option(contentManager.Load<SpriteFont>("fonts/Jacquard24"), "Level 1", new Color(64, 48, 22), Color.Gold);
+            menuOptions[1] = new Option(contentManager.Load<SpriteFont>("fonts/Jacquard24"), "Level 2", new Color(64, 48, 22), Color.Gold);
             menuOptions[2] = new Option(contentManager.Load<SpriteFont>("fonts/Jacquard24"), "option 3", new Color(64, 48, 22), Color.Gold);
 
             menuOptions[0].Selected = true;
@@ -92,6 +92,22 @@ namespace GameDevS
             if (!selectionKeyLifted && Keyboard.GetState().IsKeyUp(Keys.Down) && Keyboard.GetState().IsKeyUp(Keys.Up))
             {
                 selectionKeyLifted = true;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+            {
+                switch (selectedOption)
+                {
+                    case 0:
+                        sceneManager.AddScene(new GameScene(contentManager, sceneManager));
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    default:
+                        throw new IndexOutOfRangeException();
+                }
             }
         }
 
