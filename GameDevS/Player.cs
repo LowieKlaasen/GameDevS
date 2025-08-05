@@ -11,6 +11,8 @@ namespace GameDevS
 
         private List<Sprite> collisionGroup;
 
+        private float gravity = 1f;
+
         public Player(Texture2D texture, Vector2 position, float scale, List<Sprite> collisionGroup, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight, int numberOfWidthSprites, int numberOfHeightSprites) : base(texture, position, scale, hitboxStartX, hitboxStartY, hitboxWidth, hitboxHeight, numberOfWidthSprites, numberOfHeightSprites) 
         {
             this.collisionGroup = collisionGroup;
@@ -41,7 +43,7 @@ namespace GameDevS
                 }
             }
 
-            float changeY = 0;
+            float changeY = gravity;
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {
                 changeY -= Speed;
