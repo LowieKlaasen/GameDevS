@@ -15,6 +15,8 @@ namespace GameDevS
 
         private float Scale;
 
+        protected SpriteEffects effect = SpriteEffects.None;
+
         //public Rectangle Rectangle 
         //{ 
         //    get
@@ -91,7 +93,8 @@ namespace GameDevS
                     0f,
                     Vector2.Zero,
                     Scale,
-                    SpriteEffects.None,
+                    //SpriteEffects.None,
+                    effect,
                     0f
                 );
             }

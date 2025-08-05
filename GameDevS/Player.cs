@@ -24,10 +24,12 @@ namespace GameDevS
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
                 changeX += Speed;
+                this.effect = SpriteEffects.None;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
                 changeX -= Speed;
+                this.effect = SpriteEffects.FlipHorizontally;
             }
             position.X += changeX;
 
