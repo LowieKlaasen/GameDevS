@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System.IO;
 
 namespace GameDevS
 {
@@ -20,6 +21,10 @@ namespace GameDevS
         Player player;
 
         #endregion
+
+        private Dictionary<Vector2, int> tilemap;
+        private List<Rectangle> textureStore;
+        private Texture2D textureSwamp;
 
         public GameScene(ContentManager contentManager, SceneManager sceneManager)
         {
@@ -45,6 +50,16 @@ namespace GameDevS
             sprites.Add(player);
 
             #endregion
+
+            textureSwamp = contentManager.Load<Texture2D>("map/swamp_tileset");
+
+            tilemap = LoadMap("../../../Data/Try_Fixed.csv");
+            //textureStore = new List<Rectangle>()
+            //{
+            //    new Rectangle(0,0,32,32),
+            //    new Rectangle(32,0,32,32)
+            //};
+            textureStore = loadTiles(32, 32, 10, 6);
         }
 
         public void Update(GameTime gameTime)
@@ -76,6 +91,64 @@ namespace GameDevS
 
             #endregion
 
+            foreach (var tile in tilemap)
+            {
+                Rectangle dest = new Rectangle(
+                    (int)tile.Key.X * 48,
+                    (int)tile.Key.Y * 48,
+                    48,
+                    48
+                );
+
+                Rectangle source = textureStore[tile.Value];
+
+                spriteBatch.Draw(textureSwamp, dest, source, Color.White);
+            }
+
+        }
+
+        private Dictionary<Vector2, int> LoadMap(string filepath)
+        {
+            Dictionary<Vector2, int> result = new Dictionary<Vector2, int>();
+
+            StreamReader reader = new StreamReader(filepath);
+
+            int y = 0;
+            string line;
+            while ((line = reader.ReadLine()) != null)
+            {
+                string[] items = line.Split(',');
+
+                for (int x = 0; x < items.Length; x++)
+                {
+                    if (int.TryParse(items[x], out int value))
+                    {
+                        if (value >= 0)
+                        {
+                            result[new Vector2(x, y)] = value;
+                        }
+                    }
+                }
+
+                y++;
+            }
+
+            return result;
+        }
+
+        private List<Rectangle> loadTiles(int tileWidth, int tileHeight, int amountWidth, int amountHeight)
+        {
+            List<Rectangle> result = new List<Rectangle>();
+
+            for (int y = 0; y < amountHeight; y++)
+            {
+                for (int x = 0; x < amountWidth; x++)
+                {
+                    result.Add(new Rectangle(x * tileWidth, y * tileHeight, tileWidth, tileHeight));
+                }
+            }
+
+            return result;
         }
     }
 }
