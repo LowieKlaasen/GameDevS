@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 
 namespace GameDevS
@@ -26,10 +27,15 @@ namespace GameDevS
         private List<Rectangle> textureStore;
         private Texture2D textureSwamp;
 
+        private int TILESIZE = 48;
+        private List<Rectangle> intersections;
+
         public GameScene(ContentManager contentManager, SceneManager sceneManager)
         {
             this.contentManager = contentManager;
             this.sceneManager = sceneManager;
+
+            intersections = new List<Rectangle>();
         }
 
         public void Load()
@@ -53,12 +59,8 @@ namespace GameDevS
 
             textureSwamp = contentManager.Load<Texture2D>("map/swamp_tileset");
 
-            tilemap = LoadMap("../../../Data/Try_Fixed.csv");
-            //textureStore = new List<Rectangle>()
-            //{
-            //    new Rectangle(0,0,32,32),
-            //    new Rectangle(32,0,32,32)
-            //};
+            //tilemap = LoadMap("../../../Data/Try_Fixed.csv");
+            tilemap = LoadMap("../../../Data/simple.csv");
             textureStore = loadTiles(32, 32, 10, 6);
         }
 
@@ -73,10 +75,97 @@ namespace GameDevS
 
             #endregion
 
+            var horizontalTiles = GetIntersectingTilesHorizontal(player.Rectangle);
+            foreach (var index in horizontalTiles)
+            {
+                if (tilemap.TryGetValue(index, out int _value))
+                    Debug.WriteLine("intersecting horizontally");
+            }
+
+            var verticalTiles = GetIntersectingTilesVertical(player.Rectangle);
+            foreach (var index in verticalTiles)
+            {
+                if (tilemap.TryGetValue(index, out int _value))
+                    Debug.WriteLine("intersecting vertically");
+            }
+
+            //List<Vector2> intersectingTiles = GetIntersectingTileIndices(player.Rectangle);
+            //foreach (var index in intersectingTiles)
+            //{
+            //    if (tilemap.TryGetValue(index, out int _value))
+            //    {
+            //        Debug.WriteLine("intersecting");
+            //    }
+            //}
+
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
                 sceneManager.AddScene(new ExitScene(contentManager));
+            }    
+        }
+
+        //public List<Vector2> GetIntersectingTileIndices(Rectangle target)
+        //{
+        //    List<Vector2> indices = new List<Vector2>();
+
+        //    int startX = target.Left / TILESIZE;
+        //    int endX = (target.Right - 1) / TILESIZE;
+        //    int startY = target.Top / TILESIZE;
+        //    int endY = (target.Bottom - 1) / TILESIZE;
+
+        //    for (int x = startX; x <= endX; x++)
+        //    {
+        //        for (int y = startY; y <= endY; y++)
+        //        {
+        //            indices.Add(new Vector2(x, y));
+        //        }
+        //    }
+
+        //    return indices;
+        //}
+
+        public List<Vector2> GetIntersectingTilesHorizontal(Rectangle target)
+        {
+            List<Vector2> indices = new List<Vector2>();
+            int startX = target.Left / TILESIZE;
+            int endX = (target.Right - 1) / TILESIZE;
+            int topY = target.Top / TILESIZE;
+            int bottomY = (target.Bottom - 1) / TILESIZE;
+
+            // Top edge
+            for (int x = startX; x <= endX; x++)
+                indices.Add(new Vector2(x, topY));
+
+            // Bottom edge
+            if (bottomY != topY)
+            {
+                for (int x = startX; x <= endX; x++)
+                    indices.Add(new Vector2(x, bottomY));
             }
+
+            return indices;
+        }
+
+        public List<Vector2> GetIntersectingTilesVertical(Rectangle target)
+        {
+            List<Vector2> indices = new List<Vector2>();
+            int leftX = target.Left / TILESIZE;
+            int rightX = (target.Right - 1) / TILESIZE;
+            int startY = target.Top / TILESIZE;
+            int endY = (target.Bottom - 1) / TILESIZE;
+
+            // Left edge
+            for (int y = startY; y <= endY; y++)
+                indices.Add(new Vector2(leftX, y));
+
+            // Right edge
+            if (rightX != leftX)
+            {
+                for (int y = startY; y <= endY; y++)
+                    indices.Add(new Vector2(rightX, y));
+            }
+
+            return indices;
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -94,10 +183,10 @@ namespace GameDevS
             foreach (var tile in tilemap)
             {
                 Rectangle dest = new Rectangle(
-                    (int)tile.Key.X * 48,
-                    (int)tile.Key.Y * 48,
-                    48,
-                    48
+                    (int)tile.Key.X * TILESIZE,
+                    (int)tile.Key.Y * TILESIZE,
+                    TILESIZE,
+                    TILESIZE
                 );
 
                 Rectangle source = textureStore[tile.Value];
