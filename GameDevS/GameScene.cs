@@ -79,14 +79,18 @@ namespace GameDevS
             foreach (var index in horizontalTiles)
             {
                 if (tilemap.TryGetValue(index, out int _value))
+                {
                     Debug.WriteLine("intersecting horizontally");
+                }
             }
 
             var verticalTiles = GetIntersectingTilesVertical(player.Rectangle);
             foreach (var index in verticalTiles)
             {
                 if (tilemap.TryGetValue(index, out int _value))
+                {
                     Debug.WriteLine("intersecting vertically");
+                }
             }
 
             //List<Vector2> intersectingTiles = GetIntersectingTileIndices(player.Rectangle);
