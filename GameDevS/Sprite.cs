@@ -7,10 +7,10 @@ namespace GameDevS
     internal class Sprite : ICollidable
     {
         public Texture2D texture;
-        public Vector2 position;
+        public Vector2 Position;
 
-        private int hitboxStartX;
-        private int hitboxStartY;
+        public int hitboxStartX;
+        public int hitboxStartY;
         private int hitboxWidth;
         private int hitboxHeight;
 
@@ -36,8 +36,8 @@ namespace GameDevS
             get
             {
                 return new Rectangle(
-                    (int)position.X + hitboxStartX,
-                    (int)position.Y + hitboxStartY,
+                    (int)Position.X + hitboxStartX,
+                    (int)Position.Y + hitboxStartY,
                     hitboxWidth,
                     hitboxHeight
                 );
@@ -57,7 +57,7 @@ namespace GameDevS
         public Sprite(Texture2D texture, Vector2 position, float scale, int numberOfWidthSprites, int numberOfHeightSprites)
         {
             this.texture = texture;
-            this.position = position;
+            this.Position = position;
             Scale = scale;
 
             hitboxStartX = 0;
@@ -71,7 +71,7 @@ namespace GameDevS
         public Sprite(Texture2D texture, Vector2 position, float scale, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight, int numberOfWidthSprites, int numberOfHeightSprites)
         {
             this.texture = texture;
-            this.position = position;
+            this.Position = position;
             Scale = scale;
 
             this.hitboxStartX = hitboxStartX;
@@ -96,7 +96,7 @@ namespace GameDevS
             {
                 spriteBatch.Draw(
                     texture,
-                    position,
+                    Position,
                     animation.CurrentFrame.SourceRectangle,
                     Color.White,
                     0f,

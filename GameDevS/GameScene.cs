@@ -31,12 +31,15 @@ namespace GameDevS
         private int TILESIZE = 48;
         private List<Rectangle> intersections;
 
+        private CollisionManager collisionManager;
+
         public GameScene(ContentManager contentManager, SceneManager sceneManager)
         {
             this.contentManager = contentManager;
             this.sceneManager = sceneManager;
 
             intersections = new List<Rectangle>();
+            collisionManager = new CollisionManager();
         }
 
         public void Load()
@@ -80,6 +83,8 @@ namespace GameDevS
             }
 
             #endregion
+
+            collisionManager.ResolvePlayerTileCollision(player, map);
 
             //var horizontalTiles = GetIntersectingTilesHorizontal(player.Rectangle);
             //foreach (var index in horizontalTiles)

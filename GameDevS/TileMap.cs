@@ -71,5 +71,25 @@ namespace GameDevS
                 }
             }
         }
+
+        public bool IsSolidTile(int tileX, int tileY)
+        {
+            if (tileX < 0 || tileY < 0 || tileX >= Tiles.GetLength(1) || tileY >= Tiles.GetLength(0))
+            {
+                return false;
+            }
+
+            return Tiles[tileY, tileX] >= 0;
+        }
+
+        public Rectangle GetTileBounds(int tileX, int tileY)
+        {
+            return new Rectangle(
+                tileX * TILESIZE,
+                tileY * TILESIZE,
+                TILESIZE,
+                TILESIZE
+            );
+        }
     }
 }
