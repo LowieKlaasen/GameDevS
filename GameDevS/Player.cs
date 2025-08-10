@@ -31,38 +31,6 @@ namespace GameDevS
         {
             base.Update(gameTime);
 
-            //float changeX = 0;
-            //if (Keyboard.GetState().IsKeyDown(Keys.Right))
-            //{
-            //    changeX += Speed;
-            //    this.effect = SpriteEffects.None;
-            //}
-            //if (Keyboard.GetState().IsKeyDown(Keys.Left))
-            //{
-            //    changeX -= Speed;
-            //    this.effect = SpriteEffects.FlipHorizontally;
-            //}
-            //Position.X += changeX;
-
-            //foreach (var sprite in collisionGroup)
-            //{
-            //    if (sprite != this && sprite.Rectangle.Intersects(Rectangle))
-            //    {
-            //        Position.X -= changeX;
-            //    }
-            //}
-
-            //float changeY = gravity;
-            //if (Keyboard.GetState().IsKeyDown(Keys.Up))
-            //{
-            //    changeY -= Speed;
-            //}
-            //if (Keyboard.GetState().IsKeyDown(Keys.Down))
-            //{
-            //    changeY += Speed;
-            //}
-            //Position.Y += changeY;
-
             velocity = Vector2.Zero;
 
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
@@ -104,7 +72,6 @@ namespace GameDevS
             {
                 if (sprite != this && sprite.Rectangle.Intersects(Rectangle))
                 {
-                    //Position.Y -= changeY;
                     Position.Y -= velocity.Y;
                 }
             }

@@ -18,19 +18,6 @@ namespace GameDevS
 
         protected SpriteEffects effect = SpriteEffects.None;
 
-        //public Rectangle Rectangle 
-        //{ 
-        //    get
-        //    {
-        //        return new Rectangle(
-        //            (int)position.X, 
-        //            (int)position.Y, 
-        //            (int)(texture.Width * Scale), 
-        //            (int)(texture.Height * Scale)
-        //        );
-        //    }
-        //}
-
         public Rectangle Rectangle
         {
             get
@@ -90,8 +77,6 @@ namespace GameDevS
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            //spriteBatch.Draw(texture, Rectangle, Color.White);
-
             if (animation.CurrentFrame != null)
             {
                 spriteBatch.Draw(
@@ -102,7 +87,6 @@ namespace GameDevS
                     0f,
                     Vector2.Zero,
                     Scale,
-                    //SpriteEffects.None,
                     effect,
                     0f
                 );
