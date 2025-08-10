@@ -1,9 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace GameDevS
 {
-    internal class Sprite
+    internal class Sprite : ICollidable
     {
         public Texture2D texture;
         public Vector2 position;
@@ -44,6 +45,14 @@ namespace GameDevS
         }
 
         public Animation animation;
+
+        public Rectangle Bounds { get { return Rectangle; } }
+
+        public void OnCollision(ICollidable other)
+        {
+            // ToDo: Implement logic
+            throw new NotImplementedException();
+        }
 
         public Sprite(Texture2D texture, Vector2 position, float scale, int numberOfWidthSprites, int numberOfHeightSprites)
         {
