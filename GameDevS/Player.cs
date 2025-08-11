@@ -8,6 +8,7 @@ namespace GameDevS
     internal class Player : Sprite
     {
         private const int Speed = 4;
+        private const float JumpVelocity = -12f;
 
         public Vector2 velocity;
         public Vector2 Velocity 
@@ -19,6 +20,7 @@ namespace GameDevS
         private List<Sprite> collisionGroup;
 
         private float gravity = 1f;
+        private bool isGrounded = false;
 
         public Player(Texture2D texture, Vector2 position, float scale, List<Sprite> collisionGroup, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight, int numberOfWidthSprites, int numberOfHeightSprites) : base(texture, position, scale, hitboxStartX, hitboxStartY, hitboxWidth, hitboxHeight, numberOfWidthSprites, numberOfHeightSprites) 
         {
@@ -31,7 +33,8 @@ namespace GameDevS
         {
             base.Update(gameTime);
 
-            velocity = Vector2.Zero;
+            //velocity = Vector2.Zero;
+            velocity.X = 0;
 
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
@@ -44,35 +47,56 @@ namespace GameDevS
                 this.effect = SpriteEffects.FlipHorizontally;
             }
 
+            //foreach (var sprite in collisionGroup)
+            //{
+            //    if (sprite != this && sprite.Rectangle.Intersects(Rectangle))
+            //    {
+            //        Position.X -= velocity.X;
+            //    }
+            //}
+
+            //velocity.Y = 1;
+            //if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            //{
+            //    velocity.Y -= Speed;
+            //}
+            //if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            //{
+            //    velocity.Y += Speed;
+            //}
+
+            //if (velocity != Vector2.Zero)
+            //{
+            //    velocity = Vector2.Normalize(velocity) * Speed;
+            //    Position += velocity;
+            //}
+
+            velocity.Y += gravity;
+
+            if (isGrounded && Keyboard.GetState().IsKeyDown(Keys.Up))
+            {
+                velocity.Y = JumpVelocity;
+                isGrounded = false;
+            }
+
+            Position += velocity;
+
+            //foreach (var sprite in collisionGroup)
+            //{
+            //    if (sprite != this && sprite.Rectangle.Intersects(Rectangle))
+            //    {
+            //        Position.Y -= velocity.Y;
+            //    }
+            //}
+
             foreach (var sprite in collisionGroup)
             {
                 if (sprite != this && sprite.Rectangle.Intersects(Rectangle))
                 {
-                    Position.X -= velocity.X;
-                }
-            }
-
-            velocity.Y = 1;
-            if (Keyboard.GetState().IsKeyDown(Keys.Up))
-            {
-                velocity.Y -= Speed;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Down))
-            {
-                velocity.Y += Speed;
-            }
-
-            if (velocity != Vector2.Zero)
-            {
-                velocity = Vector2.Normalize(velocity) * Speed;
-                Position += velocity;
-            }
-
-            foreach (var sprite in collisionGroup)
-            {
-                if (sprite != this && sprite.Rectangle.Intersects(Rectangle))
-                {
-                    Position.Y -= velocity.Y;
+                    if (velocity.Y > 0)
+                    {
+                        //Position.Y = sprite.Rectangle.Top
+                    }
                 }
             }
         }

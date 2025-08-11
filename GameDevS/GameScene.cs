@@ -23,7 +23,8 @@ namespace GameDevS
 
         #endregion
 
-        private TileMap map;
+        private TileMap2 map;
+        //private TileMap map;
         private Texture2D textureSwamp;
 
         private CollisionManager collisionManager;
@@ -57,7 +58,9 @@ namespace GameDevS
 
             textureSwamp = contentManager.Load<Texture2D>("map/swamp_tileset");
 
-            map = new TileMap("../../../Data/simple.csv", textureSwamp, 32);
+            //map = new TileMap("../../../Data/simple.csv", textureSwamp, 32);
+            map = new TileMap2(textureSwamp, 48, 32, 10);
+            map.LoadMap("../../../Data/simple.csv");
         }
 
         public void Update(GameTime gameTime)
@@ -71,7 +74,7 @@ namespace GameDevS
 
             #endregion
 
-            collisionManager.ResolvePlayerTileCollision(player, map);
+            //collisionManager.ResolvePlayerTileCollision(player, map);
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
