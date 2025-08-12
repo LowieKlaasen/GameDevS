@@ -9,7 +9,6 @@ namespace GameDevS
         public Texture2D texture;
         public Vector2 Position { get; set; }
 
-        //public float Speed { get { return 4; } }
         protected float speed;
         public float Speed
         {
@@ -45,14 +44,6 @@ namespace GameDevS
         }
 
         public Animation animation;
-
-        public Rectangle Bounds { get { return Rectangle; } }
-
-        public void OnCollision(ICollidable other)
-        {
-            // ToDo: Implement logic
-            throw new NotImplementedException();
-        }
 
         public Sprite(Texture2D texture, Vector2 position, float scale, int numberOfWidthSprites, int numberOfHeightSprites)
         {

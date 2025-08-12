@@ -13,18 +13,13 @@ namespace GameDevS
         private ContentManager contentManager;
         private SceneManager sceneManager;
 
-        #region Game1
-
         private Texture2D _heroTexture;
         private Texture2D _enemyTexture;
 
         List<Sprite> sprites;
         Player player;
 
-        #endregion
-
         private TileMap2 map;
-        //private TileMap map;
         private Texture2D textureSwamp;
 
         private CollisionManager2 collisionManager;
@@ -34,8 +29,6 @@ namespace GameDevS
         {
             this.contentManager = contentManager;
             this.sceneManager = sceneManager;
-
-            //collisionManager = new CollisionManager(); (Moved to Load)
         }
 
         public void Load()
@@ -79,16 +72,10 @@ namespace GameDevS
 
         public void Update(GameTime gameTime)
         {
-            #region Game1
-
             foreach (var sprite in sprites)
             {
                 sprite.Update(gameTime);
             }
-
-            #endregion
-
-            //collisionManager.ResolvePlayerTileCollision(player, map);
 
             KeyboardState keyboardState = Keyboard.GetState();
             movementManager.Move(player, player, gameTime, keyboardState);
@@ -101,19 +88,17 @@ namespace GameDevS
 
         public void Draw(SpriteBatch spriteBatch)
         {
-
-            #region Game1
-
             foreach (var sprite in sprites)
             {
                 sprite.Draw(spriteBatch);
+
+                // ToDo: Remove draw hollow rectangle
                 DebugDraw.DrawHollowRectangle(spriteBatch, sprite.HitBox, Color.Red);
             }
 
-            #endregion
-
             map.Draw(spriteBatch);
 
+            // ToDo: Remove draw hollow rectangle
             foreach (var tile in map.GetCollidables())
             {
                 DebugDraw.DrawHollowRectangle(spriteBatch, tile.HitBox, Color.Green);

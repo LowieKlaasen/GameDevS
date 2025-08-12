@@ -47,12 +47,11 @@ namespace GameDevS
             //    movement.Normalize();         (Blijkbaar niet nodig in platformer)
             //}
 
-            Vector2 newPosition = movable.Position + movement * movable.Speed; /* (float)gameTime.ElapsedGameTime.TotalSeconds; */
+            Vector2 newPosition = movable.Position + movement * movable.Speed;
 
             if (!collisionService.WouldColide(collidable, newPosition))
             {
                 movable.Position = newPosition;
-                //Debug.WriteLine($"Player moved to {movable.Position}");
             }
         }
     }

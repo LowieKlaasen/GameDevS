@@ -40,18 +40,5 @@ namespace GameDevS
 
             return false;
         }
-
-        //public bool CheckTileMapCollisions(Player player, TileMap2 tileMap)
-        //{
-        //    foreach (Tile2 tile in tileMap.GetCollidables())
-        //    {
-        //        if (tile.HitBox.Intersects(player.HitBox))
-        //        {
-        //            return true;
-        //        }
-        //    }
-
-        //    return false;
-        //}
     }
 }
