@@ -5,9 +5,14 @@ using System.Collections.Generic;
 
 namespace GameDevS
 {
-    internal class Player : Sprite
+    internal class Player : Sprite, ICollidable2 /*IMovable (moven to Sprite)*/
     {
-        private const int Speed = 4;
+        //public Rectangle HitBox { get; } (Already in Sprite class)
+
+        //public Vector2 Position { get; set; }
+        //public float Speed { get; }
+
+        //private const int Speed = 4;
         private const float JumpVelocity = -12f;
 
         public Vector2 velocity;
@@ -27,78 +32,79 @@ namespace GameDevS
             this.collisionGroup = collisionGroup;
 
             velocity = Vector2.Zero;
+            speed = 4;
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
 
-            //velocity = Vector2.Zero;
-            velocity.X = 0;
+            ////velocity = Vector2.Zero;
+            //velocity.X = 0;
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
-            {
-                velocity.X += Speed;
-                this.effect = SpriteEffects.None;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
-            {
-                velocity.X -= Speed;
-                this.effect = SpriteEffects.FlipHorizontally;
-            }
+            //if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            //{
+            //    velocity.X += Speed;
+            //    this.effect = SpriteEffects.None;
+            //}
+            //if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            //{
+            //    velocity.X -= Speed;
+            //    this.effect = SpriteEffects.FlipHorizontally;
+            //}
+
+            ////foreach (var sprite in collisionGroup)
+            ////{
+            ////    if (sprite != this && sprite.Rectangle.Intersects(Rectangle))
+            ////    {
+            ////        Position.X -= velocity.X;
+            ////    }
+            ////}
+
+            ////velocity.Y = 1;
+            ////if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            ////{
+            ////    velocity.Y -= Speed;
+            ////}
+            ////if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            ////{
+            ////    velocity.Y += Speed;
+            ////}
+
+            ////if (velocity != Vector2.Zero)
+            ////{
+            ////    velocity = Vector2.Normalize(velocity) * Speed;
+            ////    Position += velocity;
+            ////}
+
+            //velocity.Y += gravity;
+
+            //if (isGrounded && Keyboard.GetState().IsKeyDown(Keys.Up))
+            //{
+            //    velocity.Y = JumpVelocity;
+            //    isGrounded = false;
+            //}
+
+            //Position += velocity;
+
+            ////foreach (var sprite in collisionGroup)
+            ////{
+            ////    if (sprite != this && sprite.Rectangle.Intersects(Rectangle))
+            ////    {
+            ////        Position.Y -= velocity.Y;
+            ////    }
+            ////}
 
             //foreach (var sprite in collisionGroup)
             //{
             //    if (sprite != this && sprite.Rectangle.Intersects(Rectangle))
             //    {
-            //        Position.X -= velocity.X;
+            //        if (velocity.Y > 0)
+            //        {
+            //            //Position.Y = sprite.Rectangle.Top
+            //        }
             //    }
             //}
-
-            //velocity.Y = 1;
-            //if (Keyboard.GetState().IsKeyDown(Keys.Up))
-            //{
-            //    velocity.Y -= Speed;
-            //}
-            //if (Keyboard.GetState().IsKeyDown(Keys.Down))
-            //{
-            //    velocity.Y += Speed;
-            //}
-
-            //if (velocity != Vector2.Zero)
-            //{
-            //    velocity = Vector2.Normalize(velocity) * Speed;
-            //    Position += velocity;
-            //}
-
-            velocity.Y += gravity;
-
-            if (isGrounded && Keyboard.GetState().IsKeyDown(Keys.Up))
-            {
-                velocity.Y = JumpVelocity;
-                isGrounded = false;
-            }
-
-            Position += velocity;
-
-            //foreach (var sprite in collisionGroup)
-            //{
-            //    if (sprite != this && sprite.Rectangle.Intersects(Rectangle))
-            //    {
-            //        Position.Y -= velocity.Y;
-            //    }
-            //}
-
-            foreach (var sprite in collisionGroup)
-            {
-                if (sprite != this && sprite.Rectangle.Intersects(Rectangle))
-                {
-                    if (velocity.Y > 0)
-                    {
-                        //Position.Y = sprite.Rectangle.Top
-                    }
-                }
-            }
         }
     }
 }

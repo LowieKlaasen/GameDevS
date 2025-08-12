@@ -4,10 +4,18 @@ using System;
 
 namespace GameDevS
 {
-    internal class Sprite : ICollidable
+    internal class Sprite : ICollidable2, IMovable
     {
         public Texture2D texture;
-        public Vector2 Position;
+        public Vector2 Position { get; set; }
+
+        //public float Speed { get { return 4; } }
+        protected float speed;
+        public float Speed
+        {
+            get { return speed; }
+        }
+
 
         public int hitboxStartX;
         public int hitboxStartY;
@@ -29,6 +37,11 @@ namespace GameDevS
                     hitboxHeight
                 );
             }
+        }
+
+        public Rectangle HitBox
+        {
+            get { return Rectangle; }
         }
 
         public Animation animation;
@@ -54,6 +67,8 @@ namespace GameDevS
 
             animation = new Animation();
             animation.GetFramesFromTextureProperties(texture.Width, texture.Height, numberOfWidthSprites, numberOfHeightSprites);
+
+            speed = 4;
         }
         public Sprite(Texture2D texture, Vector2 position, float scale, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight, int numberOfWidthSprites, int numberOfHeightSprites)
         {
@@ -68,6 +83,8 @@ namespace GameDevS
 
             animation = new Animation();
             animation.GetFramesFromTextureProperties(texture.Width, texture.Height, numberOfWidthSprites, numberOfHeightSprites);
+
+            speed = 4;
         }
 
         public virtual void Update(GameTime gameTime)

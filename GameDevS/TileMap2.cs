@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 
 namespace GameDevS
@@ -29,6 +28,11 @@ namespace GameDevS
             {
                 spriteBatch.Draw(tile.Texture, tile.DestRect, tile.SrcRect, Color.White);
             }
+        }
+
+        public List<Tile2> GetCollidables()
+        {
+            return map;
         }
 
         public void LoadMap(string filePath) 

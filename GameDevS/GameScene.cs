@@ -27,14 +27,15 @@ namespace GameDevS
         //private TileMap map;
         private Texture2D textureSwamp;
 
-        private CollisionManager collisionManager;
+        private CollisionManager2 collisionManager;
+        private MovementManager movementManager;
 
         public GameScene(ContentManager contentManager, SceneManager sceneManager)
         {
             this.contentManager = contentManager;
             this.sceneManager = sceneManager;
 
-            collisionManager = new CollisionManager();
+            //collisionManager = new CollisionManager(); (Moved to Load)
         }
 
         public void Load()
@@ -61,6 +62,19 @@ namespace GameDevS
             //map = new TileMap("../../../Data/simple.csv", textureSwamp, 32);
             map = new TileMap2(textureSwamp, 48, 32, 10);
             map.LoadMap("../../../Data/simple.csv");
+
+            collisionManager = new CollisionManager2();
+
+            foreach (var tile in map.GetCollidables())
+            {
+                collisionManager.Register(tile);
+            }
+            foreach (var sprite in sprites)
+            {
+                collisionManager.Register(sprite);
+            }
+
+            movementManager = new MovementManager(collisionManager);
         }
 
         public void Update(GameTime gameTime)
@@ -75,6 +89,9 @@ namespace GameDevS
             #endregion
 
             //collisionManager.ResolvePlayerTileCollision(player, map);
+
+            KeyboardState keyboardState = Keyboard.GetState();
+            movementManager.Move(player, player, gameTime, keyboardState);
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
