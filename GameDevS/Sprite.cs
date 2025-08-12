@@ -35,7 +35,7 @@ namespace GameDevS
 
         private float Scale;
 
-        protected SpriteEffects effect = SpriteEffects.None;
+        public SpriteEffects effect = SpriteEffects.None;
 
         public Rectangle Rectangle
         {

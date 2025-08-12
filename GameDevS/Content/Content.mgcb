@@ -123,6 +123,30 @@
 /processorParam:TextureFormat=Color
 /build:rogue_cropped.png
 
+#begin RogueHighJump_Cropped.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:RogueHighJump_Cropped.png
+
+#begin RogueIdle_Cropped.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:RogueIdle_Cropped.png
+
 #begin RogueRunning_Cropped.png
 /importer:TextureImporter
 /processor:TextureProcessor

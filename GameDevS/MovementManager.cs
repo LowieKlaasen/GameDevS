@@ -1,11 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace GameDevS
 {
@@ -67,8 +62,24 @@ namespace GameDevS
 
             // Horizontal input
             velocity.X = 0;
-            if (keyboardState.IsKeyDown(Keys.Right)) velocity.X = movable.Speed;
-            if (keyboardState.IsKeyDown(Keys.Left)) velocity.X = -movable.Speed;
+            if (keyboardState.IsKeyDown(Keys.Right)) 
+            { 
+                velocity.X = movable.Speed;
+
+                if (movable is Sprite sprite)
+                {
+                    sprite.effect = SpriteEffects.None;
+                }
+            }
+            if (keyboardState.IsKeyDown(Keys.Left)) 
+            { 
+                velocity.X = -movable.Speed;
+
+                if (movable is Sprite sprite)
+                {
+                    sprite.effect = SpriteEffects.FlipHorizontally;
+                }
+            }
 
             // Jump
             if (movable.IsGrounded && keyboardState.IsKeyDown(Keys.Up))

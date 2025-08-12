@@ -40,9 +40,9 @@ namespace GameDevS
 
             sprites = new List<Sprite>();
 
-            sprites.Add(new Sprite(_enemyTexture, new Vector2(100, 100), 0.1f, 23, 22, 41, 54, 1, 1));
-            sprites.Add(new Sprite(_enemyTexture, new Vector2(400, 200), 0.1f, 23, 22, 41, 54, 1, 1));
-            sprites.Add(new Sprite(_enemyTexture, new Vector2(700, 300), 0.1f, 23, 22, 41, 54, 1, 1));
+            //sprites.Add(new Sprite(_enemyTexture, new Vector2(100, 100), 0.1f, 23, 22, 41, 54, 1, 1));
+            //sprites.Add(new Sprite(_enemyTexture, new Vector2(400, 200), 0.1f, 23, 22, 41, 54, 1, 1));
+            //sprites.Add(new Sprite(_enemyTexture, new Vector2(700, 300), 0.1f, 23, 22, 41, 54, 1, 1));
 
             player = new Player(_heroTexture, Vector2.Zero, 1f, sprites, 22, 21, 48, 53, 4, 2);
 
@@ -54,7 +54,8 @@ namespace GameDevS
 
             //map = new TileMap("../../../Data/simple.csv", textureSwamp, 32);
             map = new TileMap2(textureSwamp, 48, 32, 10);
-            map.LoadMap("../../../Data/simple.csv");
+            //map.LoadMap("../../../Data/simple.csv");
+            map.LoadMap("../../../Data/Test_FullScreen.csv");
 
             collisionManager = new CollisionManager2();
 
