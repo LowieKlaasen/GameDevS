@@ -14,9 +14,18 @@ namespace GameDevS
 
         public bool WouldColide(ICollidable2 movingObject, Vector2 newPosition)
         {
+            int offsetX = 0;
+            int offsetY = 0;
+
+            if (movingObject is Sprite sprite)
+            {
+                offsetX = sprite.hitboxStartX;
+                offsetY = sprite.hitboxStartY;
+            }
+
             Rectangle newHitbox = new Rectangle(
-                (int)newPosition.X,
-                (int)newPosition.Y,
+                (int)newPosition.X + offsetX,
+                (int)newPosition.Y + offsetY,
                 movingObject.HitBox.Width,
                 movingObject.HitBox.Height
             );
