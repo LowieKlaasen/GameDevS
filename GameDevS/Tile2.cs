@@ -9,7 +9,6 @@ namespace GameDevS
         public Rectangle SrcRect;
         public Rectangle DestRect;
 
-        private int TILESIZE;
         // ToDo: Check if Solid property is used
         public bool Solid;
 

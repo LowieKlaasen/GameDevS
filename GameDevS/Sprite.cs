@@ -15,6 +15,18 @@ namespace GameDevS
             get { return speed; }
         }
 
+        protected float jumpSpeed;
+        public float JumpSpeed
+        {
+            get { return jumpSpeed; }
+        }
+
+        protected bool isGrounded;
+        public bool IsGrounded
+        {
+            get { return isGrounded; }
+            set { isGrounded = value; }
+        }
 
         public int hitboxStartX;
         public int hitboxStartY;
