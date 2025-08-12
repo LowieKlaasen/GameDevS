@@ -29,6 +29,8 @@ namespace GameDevS
 
         protected override void LoadContent()
         {
+            DebugDraw.Initialize(GraphicsDevice);
+
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here

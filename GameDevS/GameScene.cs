@@ -107,11 +107,17 @@ namespace GameDevS
             foreach (var sprite in sprites)
             {
                 sprite.Draw(spriteBatch);
+                DebugDraw.DrawHollowRectangle(spriteBatch, sprite.HitBox, Color.Red);
             }
 
             #endregion
 
             map.Draw(spriteBatch);
+
+            foreach (var tile in map.GetCollidables())
+            {
+                DebugDraw.DrawHollowRectangle(spriteBatch, tile.HitBox, Color.Green);
+            }
 
         }
     }
