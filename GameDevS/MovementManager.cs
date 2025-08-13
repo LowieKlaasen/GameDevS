@@ -86,6 +86,8 @@ namespace GameDevS
             {
                 velocity.Y = -movable.JumpSpeed;
                 movable.IsGrounded = false;
+
+                ServiceLocator.AudioService.Play("jump");
             }
 
             // Apply gravity

@@ -33,6 +33,8 @@ namespace GameDevS
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            ServiceLocator.AudioService = new AudioService(Content);
+
             // TODO: use this.Content to load your game content here
 
             // ToDo: Check wheter AddScene needs to be here or in Initialize()?
