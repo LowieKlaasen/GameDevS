@@ -116,6 +116,22 @@ namespace GameDevS
             }
 
             movable.Position = horizontalPosition;
+
+            if (movable is Sprite s)
+            {
+                if (!s.IsGrounded)
+                {
+                    s.SetAnimation(AnimationState.JUMPING);
+                }
+                else if (velocity.X != 0)
+                {
+                    s.SetAnimation(AnimationState.RUNNING);
+                }
+                else
+                {
+                    s.SetAnimation(AnimationState.IDLE);
+                }
+            }
         }
 
     }

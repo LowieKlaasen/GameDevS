@@ -22,12 +22,6 @@ namespace GameDevS
             GetFramesFromSpriteSheet();
         }
 
-        //private void AddFrame(AnimationFrame frame)
-        //{
-        //    frames.Add(frame);
-        //    CurrentFrame = frames[0];
-        //}
-
         public void Update(GameTime gameTime)
         {
             CurrentFrame = frames[counter];

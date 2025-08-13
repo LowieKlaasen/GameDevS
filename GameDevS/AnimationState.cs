@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameDevS
 {
-    public enum PlayerState
+    public enum AnimationState
     {
         IDLE,
         RUNNING,

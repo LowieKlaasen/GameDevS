@@ -48,7 +48,7 @@ namespace GameDevS
             _heroTextureJumping = contentManager.Load<Texture2D>("RogieJump_Cropped");
 
             SpriteSheet idleSheet = new SpriteSheet(_heroTextureIdle, 17, 1);
-            SpriteSheet runningSheet = new SpriteSheet(_heroTextureRunning, 4, 1);
+            SpriteSheet runningSheet = new SpriteSheet(_heroTextureRunning, 4, 2);
             SpriteSheet jumpSheet = new SpriteSheet(_heroTextureJumping, 7, 1);
 
             sprites = new List<Sprite>();
@@ -58,6 +58,15 @@ namespace GameDevS
             //sprites.Add(new Sprite(_enemyTexture, new Vector2(700, 300), 0.1f, 23, 22, 41, 54, 1, 1));
 
             player = new Player(_heroTexture, Vector2.Zero, 1f, sprites, 22, 21, 48, 53, 4, 2);
+
+            Animation2 idleAnimation = new Animation2(idleSheet);
+            player.AddAnimation(AnimationState.IDLE, idleAnimation);
+
+            Animation2 runningAnimation = new Animation2(runningSheet);
+            player.AddAnimation(AnimationState.RUNNING, runningAnimation);
+
+            Animation2 jumpAnimation = new Animation2(jumpSheet);
+            player.AddAnimation(AnimationState.JUMPING, jumpAnimation);
 
             sprites.Add(player);
 
