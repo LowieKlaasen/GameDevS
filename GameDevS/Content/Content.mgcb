@@ -111,6 +111,18 @@
 /processorParam:TextureFormat=Color
 /build:map/swamp_tileset.png
 
+#begin RogieJump_Cropped.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:RogieJump_Cropped.png
+
 #begin rogue_cropped.png
 /importer:TextureImporter
 /processor:TextureProcessor

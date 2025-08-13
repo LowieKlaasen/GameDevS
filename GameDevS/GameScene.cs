@@ -16,6 +16,11 @@ namespace GameDevS
         private Texture2D _heroTexture;
         private Texture2D _enemyTexture;
 
+        private Texture2D _heroTextureIdle;
+        private Texture2D _heroTextureRunning;
+        private Texture2D _heroTextureJumping;
+
+
         List<Sprite> sprites;
         Player player;
 
@@ -37,6 +42,14 @@ namespace GameDevS
 
             _heroTexture = contentManager.Load<Texture2D>("RogueRunning_Cropped");
             _enemyTexture = contentManager.Load<Texture2D>("goblin_single");
+
+            _heroTextureIdle = contentManager.Load<Texture2D>("RogueIdle_Cropped");
+            _heroTextureRunning = contentManager.Load<Texture2D>("RogueRunning_Cropped");
+            _heroTextureJumping = contentManager.Load<Texture2D>("RogieJump_Cropped");
+
+            SpriteSheet idleSheet = new SpriteSheet(_heroTextureIdle, 17, 1);
+            SpriteSheet runningSheet = new SpriteSheet(_heroTextureRunning, 4, 1);
+            SpriteSheet jumpSheet = new SpriteSheet(_heroTextureJumping, 7, 1);
 
             sprites = new List<Sprite>();
 
