@@ -30,10 +30,17 @@ namespace GameDevS
         private CollisionManager2 collisionManager;
         private MovementManager movementManager;
 
-        public GameScene(ContentManager contentManager, SceneManager sceneManager)
+        private GraphicsDevice graphicsDevice;
+        private Camera2D camera;
+
+        public GameScene(ContentManager contentManager, SceneManager sceneManager, GraphicsDevice graphicsDevice)
         {
             this.contentManager = contentManager;
             this.sceneManager = sceneManager;
+
+            this.graphicsDevice = graphicsDevice;
+
+            camera = new Camera2D(graphicsDevice.Viewport);
         }
 
         public void Load()
@@ -98,6 +105,8 @@ namespace GameDevS
 
         public void Update(GameTime gameTime)
         {
+            camera.Follow(player.Position, 0, 1440);
+
             foreach (var sprite in sprites)
             {
                 sprite.Update(gameTime);
@@ -114,6 +123,8 @@ namespace GameDevS
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Begin(transformMatrix: camera.Transform);
+
             foreach (var sprite in sprites)
             {
                 sprite.Draw(spriteBatch);
@@ -129,6 +140,8 @@ namespace GameDevS
             {
                 DebugDraw.DrawHollowRectangle(spriteBatch, tile.HitBox, Color.Green);
             }
+
+            spriteBatch.End();
 
         }
     }

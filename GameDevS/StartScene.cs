@@ -99,7 +99,7 @@ namespace GameDevS
                 switch (selectedOption)
                 {
                     case 0:
-                        sceneManager.AddScene(new GameScene(contentManager, sceneManager));
+                        sceneManager.AddScene(new GameScene(contentManager, sceneManager, graphicsDevice));
                         break;
                     case 1:
                         // ToDo: Add redirection to level 2
@@ -115,6 +115,8 @@ namespace GameDevS
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Begin();
+
             foreach (var bg in parallax)
             {
                 spriteBatch.Draw(bg, new Rectangle(0, 0, graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height), Color.White);
@@ -137,6 +139,8 @@ namespace GameDevS
             }
 
             #endregion
+
+            spriteBatch.End();
         }
     }
 }

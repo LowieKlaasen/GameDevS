@@ -57,11 +57,11 @@ namespace GameDevS
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            _spriteBatch.Begin();
+            //_spriteBatch.Begin();
 
             sceneManager.GetCurrentScene().Draw(_spriteBatch);
 
-            _spriteBatch.End();
+            //_spriteBatch.End();
 
             base.Draw(gameTime);
         }
