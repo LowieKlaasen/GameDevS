@@ -77,7 +77,8 @@ namespace GameDevS
             //map = new TileMap("../../../Data/simple.csv", textureSwamp, 32);
             map = new TileMap2(textureSwamp, 48, 32, 10);
             //map.LoadMap("../../../Data/simple.csv");
-            map.LoadMap("../../../Data/Test_FullScreen.csv");
+            //map.LoadMap("../../../Data/Test_FullScreen.csv");
+            map.LoadMap("../../../Data/Test_MovingMap.csv");
 
             collisionManager = new CollisionManager2();
 
@@ -92,7 +93,7 @@ namespace GameDevS
 
             movementManager = new MovementManager(collisionManager);
 
-            ServiceLocator.AudioService.PlayMusic("jungleBG");
+            //ServiceLocator.AudioService.PlayMusic("jungleBG");
         }
 
         public void Update(GameTime gameTime)
