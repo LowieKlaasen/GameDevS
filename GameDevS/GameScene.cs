@@ -3,8 +3,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 
 namespace GameDevS
 {
@@ -105,7 +103,7 @@ namespace GameDevS
 
         public void Update(GameTime gameTime)
         {
-            camera.Follow(player.Position, 0, 1440);
+            camera.Follow(player.Position, 0, 1440, 0, 15 * 48);
 
             foreach (var sprite in sprites)
             {
