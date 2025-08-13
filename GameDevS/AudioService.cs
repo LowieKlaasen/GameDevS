@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Media;
 using System.Collections.Generic;
 namespace GameDevS
 {
@@ -10,11 +11,15 @@ namespace GameDevS
         private readonly Dictionary<string, SoundEffect> sounds = new Dictionary<string, SoundEffect>();
         private readonly Dictionary<string, SoundEffectInstance> activeSounds = new Dictionary<string, SoundEffectInstance>();
 
+        private readonly Dictionary<string, Song> songs = new Dictionary<string, Song>();
+
         private float masterVolume = 1f;
 
         public AudioService(ContentManager contentManager)
         {
             sounds["jump"] = contentManager.Load<SoundEffect>("audio/action_jump");
+
+            songs["jungleBG"] = contentManager.Load<Song>("audio/jungleMusic");
         }
 
         public void Play(string soundName)
@@ -40,6 +45,21 @@ namespace GameDevS
         public void SetVolume(float volume)
         {
             masterVolume = MathHelper.Clamp(volume, 0f, 1f);
+        }
+
+        public void PlayMusic(string musicName, bool loop = true) 
+        {
+            if (songs.TryGetValue(musicName, out Song song))
+            {
+                MediaPlayer.Volume = masterVolume;
+                MediaPlayer.IsRepeating = loop;
+                MediaPlayer.Play(song);
+            }
+        }
+
+        public void StopMusic() 
+        {
+            MediaPlayer.Stop();
         }
     }
 }

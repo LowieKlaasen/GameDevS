@@ -91,6 +91,8 @@ namespace GameDevS
             }
 
             movementManager = new MovementManager(collisionManager);
+
+            ServiceLocator.AudioService.PlayMusic("jungleBG");
         }
 
         public void Update(GameTime gameTime)
