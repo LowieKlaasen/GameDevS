@@ -36,7 +36,7 @@ namespace GameDevS
 
         private float Scale;
 
-        public SpriteEffects effect = SpriteEffects.None;
+        public SpriteEffects Effect = SpriteEffects.None;
 
         public Rectangle Rectangle
         {
@@ -61,6 +61,8 @@ namespace GameDevS
         protected Dictionary<AnimationState, Animation2> animations = new Dictionary<AnimationState, Animation2>();
         protected AnimationState currentState;
 
+        public Vector2 Velocity { get; set; }
+
         public Sprite(Texture2D texture, Vector2 position, float scale, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight, int numberOfWidthSprites, int numberOfHeightSprites)
         {
             this.texture = texture;
@@ -82,8 +84,6 @@ namespace GameDevS
 
         public virtual void Update(GameTime gameTime)
         {
-            //animation.Update(gameTime);
-
             if (animations.ContainsKey(currentState))
             {
                 animations[currentState].Update(gameTime);
@@ -92,21 +92,6 @@ namespace GameDevS
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            //if (animation.CurrentFrame != null)
-            //{
-            //    spriteBatch.Draw(
-            //        texture,
-            //        Position,
-            //        animation.CurrentFrame.SourceRectangle,
-            //        Color.White,
-            //        0f,
-            //        Vector2.Zero,
-            //        Scale,
-            //        effect,
-            //        0f
-            //    );
-            //}
-
             if (animations.ContainsKey(currentState))
             {
                 Animation2 animation = animations[currentState];
@@ -120,7 +105,7 @@ namespace GameDevS
                         0f,
                         Vector2.Zero,
                         Scale,
-                        effect,
+                        Effect,
                         0f
                     );
                 }

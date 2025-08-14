@@ -31,6 +31,10 @@ namespace GameDevS
         private GraphicsDevice graphicsDevice;
         private Camera2D camera;
 
+        private PlayerController playerController;
+
+        private AnimationUpdater animationUpdater;
+
         public GameScene(ContentManager contentManager, SceneManager sceneManager, GraphicsDevice graphicsDevice)
         {
             this.contentManager = contentManager;
@@ -39,6 +43,8 @@ namespace GameDevS
             this.graphicsDevice = graphicsDevice;
 
             camera = new Camera2D(graphicsDevice.Viewport);
+
+            playerController = new PlayerController();
         }
 
         public void Load()
@@ -98,6 +104,8 @@ namespace GameDevS
 
             movementManager = new MovementManager(collisionManager);
 
+            animationUpdater = new AnimationUpdater();
+
             //ServiceLocator.AudioService.PlayMusic("jungleBG");
         }
 
@@ -111,7 +119,12 @@ namespace GameDevS
             }
 
             KeyboardState keyboardState = Keyboard.GetState();
-            movementManager.Move(player, player, gameTime, keyboardState);
+
+            playerController.UpdateKeyboard(keyboardState);
+
+            movementManager.Move(player, playerController, gameTime);
+
+            animationUpdater.UpdateAnimation(player);
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
