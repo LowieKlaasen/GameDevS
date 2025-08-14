@@ -70,7 +70,7 @@ namespace GameDevS
             //sprites.Add(new Sprite(_enemyTexture, new Vector2(400, 200), 0.1f, 23, 22, 41, 54, 1, 1));
             //sprites.Add(new Sprite(_enemyTexture, new Vector2(700, 300), 0.1f, 23, 22, 41, 54, 1, 1));
 
-            CreatePassivePatrolEnemy(new Vector2(100, 100));
+            CreatePassivePatrolEnemy(new Vector2(16 * 54, 7 * 54));
 
             player = new Player(_heroTexture, Vector2.Zero, 1f, sprites, 22, 21, 48, 53, 4, 2);
 
@@ -91,7 +91,8 @@ namespace GameDevS
             map = new TileMap2(textureSwamp, 54, 32, 10);
             //map.LoadMap("../../../Data/simple.csv");
             //map.LoadMap("../../../Data/Test_FullScreen.csv");
-            map.LoadMap("../../../Data/Test_MovingMap.csv");
+            //map.LoadMap("../../../Data/Test_MovingMap.csv");
+            map.LoadMap("../../../Data/Level1_TempEnding.csv");
 
             collisionManager = new CollisionManager2();
 
@@ -113,7 +114,8 @@ namespace GameDevS
 
         public void Update(GameTime gameTime)
         {
-            camera.Follow(player.Position, 0, 30 * 54, 0, 15 * 54);
+            //camera.Follow(player.Position, 0, 30 * 54, 0, 15 * 54);
+            camera.Follow(player.Position, 0, 200 * 54, 0, 15 * 54);
 
             foreach (var sprite in sprites)
             {
