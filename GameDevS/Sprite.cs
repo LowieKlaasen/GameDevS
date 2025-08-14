@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
 
 namespace GameDevS
@@ -77,7 +76,7 @@ namespace GameDevS
             animation = new Animation();
             animation.GetFramesFromTextureProperties(texture.Width, texture.Height, numberOfWidthSprites, numberOfHeightSprites);
 
-            speed = 4;
+            //speed = 4;
 
             currentState = AnimationState.IDLE;
         }

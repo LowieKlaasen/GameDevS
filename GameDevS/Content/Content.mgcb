@@ -85,6 +85,30 @@
 /processorParam:TextureFormat=Color
 /build:background/Jungle/plx-5.png
 
+#begin enemies/goblin/goblin_idle.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:enemies/goblin/goblin_idle.png
+
+#begin enemies/goblin/golem_walking.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:enemies/goblin/golem_walking.png
+
 #begin fonts/Jacquard24.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor

@@ -2,7 +2,7 @@
 
 namespace GameDevS
 {
-    internal class PatrolController : IMovementController
+    internal class PassivePatrolController : IMovementController
     {
         private int direction = 1;
 
@@ -11,6 +11,6 @@ namespace GameDevS
             return new Vector2(direction * movable.Speed, 0);
         }
 
-        public void ReverseDirection() => direction += -1;
+        public void ReverseDirection() => direction *= -1;
     }
 }

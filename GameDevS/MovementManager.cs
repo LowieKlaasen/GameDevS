@@ -68,7 +68,7 @@ namespace GameDevS
                 velocity.X = 0;
                 horizontalPosition.X = movable.Position.X;
 
-                if (movementController is PatrolController patrolController)
+                if (movementController is PassivePatrolController patrolController)
                 { 
                     patrolController.ReverseDirection(); 
                 }
