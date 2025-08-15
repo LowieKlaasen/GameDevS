@@ -142,7 +142,24 @@ namespace GameDevS
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
                 sceneManager.AddScene(new ExitScene(contentManager));
-            }    
+            }
+
+            List<Sprite> toRemove = new List<Sprite>();
+            foreach(var sprite in sprites)
+            {
+                if (sprite is Enemy enemy && !enemy.IsAlive)
+                {
+                    collisionManager.Remove(enemy);
+                    //sprites.Remove(sprite);
+                    toRemove.Add(sprite);
+                }
+            }
+            foreach (var sprite in toRemove)
+            {
+                sprites.Remove(sprite);
+            }
+
+            //sprites.RemoveAll(sprite => sprite is Enemy enemy && !enemy.IsAlive);
         }
 
         public void Draw(SpriteBatch spriteBatch)

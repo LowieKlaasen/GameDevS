@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
 
 namespace GameDevS
 {
@@ -18,7 +19,30 @@ namespace GameDevS
 
         public override void Update(GameTime gameTime)
         {
+            if (!IsAlive)
+            {
+                return;
+            }
+
             base.Update(gameTime);
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            if (!IsAlive)
+            {
+                return;
+            }
+
+            base.Draw(spriteBatch);
+        }
+
+        public void Die()
+        {
+            // ToDo: add die animation (+ sound)
+            Debug.WriteLine("Enemy died");
+
+            IsAlive = false;
         }
     }
 }
