@@ -124,7 +124,7 @@ namespace GameDevS
                 }
 
                 if (movementController is PassivePatrolController patrolController)
-                    patrolController.ReverseDirection();
+                    patrolController.ReverseDirection(movable);
             }
 
             movable.Position = endHorizontal;
