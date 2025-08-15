@@ -120,7 +120,11 @@ namespace GameDevS
                 if (horizontalResult.Collidable is Enemy enemy)
                 {
                     // ToDo: player damage
-                    System.Diagnostics.Debug.WriteLine($"{movable.GetType()} took side damage");
+                    if (movable is Player player)
+                    {
+                        
+                        Debug.WriteLine($"{movable.GetType()} took side damage");
+                    }
                 }
 
                 if (movementController is PassivePatrolController patrolController)
