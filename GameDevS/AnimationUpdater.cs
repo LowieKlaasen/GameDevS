@@ -8,7 +8,7 @@ namespace GameDevS
     {
         public void UpdateAnimation(Sprite sprite)
         {
-            if (sprite is Enemy enemy && enemy.IsDying)
+            if (sprite is Enemy enemy && enemy.IsDying || sprite is Player player && player.IsDying)
             {
                 return;
             }

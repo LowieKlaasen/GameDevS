@@ -122,13 +122,23 @@ namespace GameDevS
                     // ToDo: player damage
                     if (movable is Player player)
                     {
-                        
                         Debug.WriteLine($"{movable.GetType()} took side damage");
+
+                        player.Health.TakeDamage(1);
                     }
                 }
 
-                if (movementController is PassivePatrolController patrolController)
+                if (movementController is PassivePatrolController patrolController) 
+                {
+                    if (horizontalResult.Collidable is Player player)
+                    {
+                        Debug.WriteLine($"{movable.GetType()} took side damage");
+
+                        player.Health.TakeDamage(1);
+                    }
+
                     patrolController.ReverseDirection(movable);
+                }
             }
 
             movable.Position = endHorizontal;
