@@ -60,7 +60,7 @@ namespace GameDevS
             ServiceLocator.AudioService.Play("monsterDeath");
 
             deathTimer = deathAnimationDuration;
-            speed /= 2;
+            speed /= 3;
         }
     }
 }
