@@ -18,6 +18,7 @@ namespace GameDevS
         public AudioService(ContentManager contentManager)
         {
             sounds["jump"] = contentManager.Load<SoundEffect>("audio/action_jump");
+            sounds["monsterDeath"] = contentManager.Load<SoundEffect>("audio/death_squish");
 
             songs["jungleBG"] = contentManager.Load<Song>("audio/jungleMusic");
         }

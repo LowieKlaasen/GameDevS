@@ -71,7 +71,7 @@ namespace GameDevS
             //sprites.Add(new Sprite(_enemyTexture, new Vector2(700, 300), 0.1f, 23, 22, 41, 54, 1, 1));
 
             CreatePassivePatrolEnemy(new Vector2(16 * 54, 7 * 54));
-            CreatePassivePatrolEnemy(new Vector2(18 * 54, 7 * 54));
+            //CreatePassivePatrolEnemy(new Vector2(18 * 54, 7 * 54));
 
             player = new Player(_heroTexture, Vector2.Zero, 1f, sprites, 22, 21, 48, 53, 4, 2);
 
@@ -199,10 +199,15 @@ namespace GameDevS
             SpriteSheet idleSheet = new SpriteSheet(idleTexture, 6, 3);
             Animation2 idleAnimation = new Animation2(idleSheet);
 
+            Texture2D dyingTexture = contentManager.Load<Texture2D>("enemies/goblin/goblin_dying");
+            SpriteSheet dyingSheet = new SpriteSheet(dyingTexture, 5, 3);
+            Animation2 dyingAnimatoin = new Animation2(dyingSheet);
+
             PassivePatrolEnemy patrolEnemy = new PassivePatrolEnemy(idleTexture, startPosition, 0.1f, 23, 22, 41, 54, 6, 3);
 
             patrolEnemy.AddAnimation(AnimationState.IDLE, idleAnimation);
             patrolEnemy.AddAnimation(AnimationState.RUNNING, walkAnimation);
+            patrolEnemy.AddAnimation(AnimationState.DYING, dyingAnimatoin);
 
             sprites.Add(patrolEnemy);
         }

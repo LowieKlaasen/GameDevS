@@ -10,6 +10,7 @@ namespace GameDevS
     {
         IDLE,
         RUNNING,
-        JUMPING
+        JUMPING,
+        DYING
     }
 }

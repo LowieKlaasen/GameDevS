@@ -4,11 +4,15 @@ using System.Diagnostics;
 
 namespace GameDevS
 {
-    internal class Enemy : Sprite
+    internal abstract class Enemy : Sprite
     {
         public bool IsAlive;
+        public bool IsDying => currentState == AnimationState.DYING;
 
         public int Damage;
+
+        public float deathTimer = 0f;
+        protected abstract float deathAnimationDuration { get; }
 
         public Enemy(Texture2D texture, Vector2 position, float scale, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight, int numberOfWidthSprites, int numberOfHeightSprites) 
             : base(texture, position, scale, hitboxStartX, hitboxStartY, hitboxWidth, hitboxHeight, numberOfWidthSprites, numberOfHeightSprites)
@@ -19,9 +23,15 @@ namespace GameDevS
 
         public override void Update(GameTime gameTime)
         {
-            if (!IsAlive)
+            float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (IsDying)
             {
-                return;
+                deathTimer -= dt;
+                if (deathTimer < 0f)
+                {
+                    IsAlive = false;
+                }
             }
 
             base.Update(gameTime);
@@ -39,10 +49,18 @@ namespace GameDevS
 
         public void Die()
         {
-            // ToDo: add die animation (+ sound)
+            if (IsDying)
+            {
+                return;
+            }
+
             Debug.WriteLine("Enemy died");
 
-            IsAlive = false;
+            currentState = AnimationState.DYING;
+            ServiceLocator.AudioService.Play("monsterDeath");
+
+            deathTimer = deathAnimationDuration;
+            speed /= 2;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Reflection.Metadata.Ecma335;
 
 namespace GameDevS
 {
@@ -7,6 +8,11 @@ namespace GameDevS
     {
         public void UpdateAnimation(Sprite sprite)
         {
+            if (sprite is Enemy enemy && enemy.IsDying)
+            {
+                return;
+            }
+
             if (sprite.Velocity.X > 0)
             {
                 sprite.Effect = SpriteEffects.None;
