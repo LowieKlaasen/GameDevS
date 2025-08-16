@@ -40,7 +40,9 @@ namespace GameDevS
 
         private PassivePatrolController passivePatrolController;
 
-        private bool isPaused;
+        public bool IsPaused;
+
+        private PauseMenu pauseMenu;
 
         public GameScene(ContentManager contentManager, SceneManager sceneManager, GraphicsDevice graphicsDevice)
         {
@@ -54,6 +56,8 @@ namespace GameDevS
             playerController = new PlayerController();
 
             passivePatrolController = new PassivePatrolController();
+
+            pauseMenu = new PauseMenu(graphicsDevice, this, contentManager);
         }
 
         public void Load()
@@ -134,20 +138,21 @@ namespace GameDevS
 
         public void Update(GameTime gameTime)
         {
-            if (!isPaused && Keyboard.GetState().IsKeyDown(Keys.P))
+            if (!IsPaused && Keyboard.GetState().IsKeyDown(Keys.P))
             {
                 Debug.WriteLine("Pause pressed");
-                isPaused = true;
-
-                // ToDo: Pause scene
-
+                IsPaused = true;
+                Debug.WriteLine("IsPaused = " + IsPaused);
             }
 
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (isPaused)
+            if (IsPaused)
             {
                 dt = 0;
+
+                pauseMenu.Update(gameTime);
+                return;
             }
 
             //camera.Follow(player.Position, 0, 30 * 54, 0, 15 * 54);
@@ -220,6 +225,20 @@ namespace GameDevS
 
             spriteBatch.End();
 
+            if (IsPaused)
+            {
+                spriteBatch.Begin();
+                pauseMenu.Draw(spriteBatch);
+                spriteBatch.End();
+            }
+
+        }
+
+        public void Restart()
+        {
+            Load();
+
+            IsPaused = false;
         }
 
         #region Private Methods

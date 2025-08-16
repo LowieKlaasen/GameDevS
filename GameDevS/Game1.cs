@@ -34,6 +34,7 @@ namespace GameDevS
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             ServiceLocator.AudioService = new AudioService(Content);
+            ServiceLocator.GameExitService = new GameExitService(this);
 
             // TODO: use this.Content to load your game content here
 
