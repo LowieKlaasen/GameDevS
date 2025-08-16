@@ -157,6 +157,11 @@ namespace GameDevS
 
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+            if (dt > 1 && !player.Health.IsAlive)
+            {
+                GameOver = true;
+            }
+
             if (IsPaused)
             {
                 dt = 0;
@@ -164,12 +169,12 @@ namespace GameDevS
                 pauseMenu.Update(gameTime);
                 return;
             }
-            //if (GameOver)
-            //{
-            //    dt = 0;
-            //    gameOverMenu.Update(gameTime);
-            //    return;
-            //}
+            if (GameOver)
+            {
+                dt = 0;
+                gameOverMenu.Update(gameTime);
+                return;
+            }
 
             camera.Follow(player.Position, 0, 200 * 54, 0, 15 * 54);
 
@@ -213,6 +218,11 @@ namespace GameDevS
             foreach (var sprite in toRemove)
             {
                 sprites.Remove(sprite);
+            }
+
+            if (playerController.CheckDeathByFalling(player, camera, graphicsDevice.Viewport.Height))
+            {
+                GameOver = true;
             }
 
             //sprites.RemoveAll(sprite => sprite is Enemy enemy && !enemy.IsAlive);

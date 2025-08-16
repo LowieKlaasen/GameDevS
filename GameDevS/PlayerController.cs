@@ -33,5 +33,15 @@ namespace GameDevS
 
             return velocity;
         }
+
+        public bool CheckDeathByFalling(Player player, Camera2D camera, int viewportHeight)
+        {
+            if (player.Position.Y > camera.Position.Y + viewportHeight)
+            {
+                Debug.WriteLine("player fell under the map");
+                return true;
+            }
+            return false;
+        }
     }
 }
