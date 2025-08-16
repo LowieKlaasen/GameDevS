@@ -11,10 +11,11 @@ namespace GameDevS
         public GameOverMenu(GraphicsDevice graphicsDevice, GameScene gameScene, ContentManager contentManager)
             : base(graphicsDevice, gameScene, contentManager)
         {
-            options = new Option[2];
+            options = new Option[3];
 
             options[0] = new Option(optionFont, "Restart", new Color(64, 48, 22), Color.Gold);
-            options[1] = new Option(optionFont, "Quit", new Color(64, 48, 22), Color.Gold);
+            options[1] = new Option(optionFont, "Main Menu", new Color(64, 48, 22), Color.Gold);
+            options[2] = new Option(optionFont, "Quit", new Color(64, 48, 22), Color.Gold);
 
             options[0].Selected = true;
             selectedOption = 0;
@@ -52,6 +53,9 @@ namespace GameDevS
                     options[this.selectedOption].Selected = true;
                     break;
                 case 1:
+                    gameScene.sceneManager.AddScene(new StartScene(gameScene.contentManager, gameScene.sceneManager, gameScene.graphicsDevice));
+                    break;
+                case 2:
                     ServiceLocator.GameExitService.Exit();
                     break;
             }

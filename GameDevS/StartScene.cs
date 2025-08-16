@@ -24,6 +24,7 @@ namespace GameDevS
 
         private bool selectionKeyLifted;
 
+        private bool enterKeyLifted;
         public StartScene(ContentManager contentManager, SceneManager sceneManager, GraphicsDevice graphicsDevice)
         {
             this.contentManager = contentManager;
@@ -59,6 +60,11 @@ namespace GameDevS
 
         public void Update(GameTime gameTime)
         {
+            if (Keyboard.GetState().IsKeyUp(Keys.Enter))
+            {
+                enterKeyLifted = true;
+            }
+
             if (selectionKeyLifted && Keyboard.GetState().IsKeyDown(Keys.Down))
             {
                 menuOptions[selectedOption].Selected = false;
@@ -94,7 +100,7 @@ namespace GameDevS
                 selectionKeyLifted = true;
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+            if (enterKeyLifted && Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
                 switch (selectedOption)
                 {

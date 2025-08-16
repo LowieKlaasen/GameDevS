@@ -9,7 +9,7 @@ namespace GameDevS
 {
     public class GameScene : IScene
     {
-        private ContentManager contentManager;
+        public ContentManager contentManager;
         public SceneManager sceneManager;
 
         private Texture2D _heroTexture;
@@ -31,7 +31,7 @@ namespace GameDevS
         private CollisionManager2 collisionManager;
         private MovementManager movementManager;
 
-        private GraphicsDevice graphicsDevice;
+        public GraphicsDevice graphicsDevice;
         private Camera2D camera;
 
         private PlayerController playerController;
