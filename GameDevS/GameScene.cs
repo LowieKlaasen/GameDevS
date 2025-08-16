@@ -46,6 +46,8 @@ namespace GameDevS
         public bool GameOver;
         private GameOverMenu gameOverMenu;
 
+        private ScrollingBackground scrollingBackground;
+
         public GameScene(ContentManager contentManager, SceneManager sceneManager, GraphicsDevice graphicsDevice)
         {
             this.contentManager = contentManager;
@@ -138,6 +140,9 @@ namespace GameDevS
             animationUpdater = new AnimationUpdater();
 
             //ServiceLocator.AudioService.PlayMusic("jungleBG");
+
+            Texture2D bgTexture = contentManager.Load<Texture2D>("background/jungle/plx-5");
+            scrollingBackground = new ScrollingBackground(bgTexture, camera, 0.5f);
         }
 
         public void Update(GameTime gameTime)
@@ -230,6 +235,8 @@ namespace GameDevS
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            scrollingBackground.Draw(spriteBatch);
+
             spriteBatch.Begin(transformMatrix: camera.Transform);
 
             foreach (var sprite in sprites)

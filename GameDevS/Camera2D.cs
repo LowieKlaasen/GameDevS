@@ -8,23 +8,23 @@ namespace GameDevS
         public Matrix Transform { get; private set; }
         public Vector2 Position { get; private set; }
 
-        private readonly Viewport _viewport;
+        public readonly Viewport Viewport;
 
         public Camera2D(Viewport viewport)
         {
-            _viewport = viewport;
+            Viewport = viewport;
         }
 
         public void Follow(Vector2 target, 
             float leftBoundary, float rightBoundary,
             float topBoundary, float bottomBoundary)
         {
-            float cameraX = target.X - _viewport.Width / 3f;
+            float cameraX = target.X - Viewport.Width / 3f;
             //float cameraY = target.Y - _viewport.Height / 1.5f;
-            float cameraY = target.Y - _viewport.Height / 2f;
+            float cameraY = target.Y - Viewport.Height / 2f;
 
-            cameraX = MathHelper.Clamp(cameraX, leftBoundary, rightBoundary - _viewport.Width);
-            cameraY = MathHelper.Clamp(cameraY, topBoundary, bottomBoundary - _viewport.Height);
+            cameraX = MathHelper.Clamp(cameraX, leftBoundary, rightBoundary - Viewport.Width);
+            cameraY = MathHelper.Clamp(cameraY, topBoundary, bottomBoundary - Viewport.Height);
 
             Position = new Vector2(cameraX, cameraY);
 
