@@ -19,6 +19,7 @@ namespace GameDevS
         {
             sounds["jump"] = contentManager.Load<SoundEffect>("audio/action_jump");
             sounds["monsterDeath"] = contentManager.Load<SoundEffect>("audio/death_squish_quieter");
+            sounds["playerHurt"] = contentManager.Load<SoundEffect>("audio/LSW_GuardHurt_quieter");
 
             songs["jungleBG"] = contentManager.Load<Song>("audio/jungleMusic");
         }

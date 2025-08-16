@@ -13,6 +13,7 @@ namespace GameDevS
                 return;
             }
 
+
             if (sprite.Velocity.X > 0)
             {
                 sprite.Effect = SpriteEffects.None;

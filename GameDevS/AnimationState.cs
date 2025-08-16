@@ -11,6 +11,7 @@ namespace GameDevS
         IDLE,
         RUNNING,
         JUMPING,
-        DYING
+        DYING,
+        HURTING
     }
 }

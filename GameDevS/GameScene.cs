@@ -18,6 +18,7 @@ namespace GameDevS
         private Texture2D _heroTextureRunning;
         private Texture2D _heroTextureJumping;
         private Texture2D _heroTextureDying;
+        private Texture2D _heroTextureHurting;
 
 
         List<Sprite> sprites;
@@ -61,11 +62,13 @@ namespace GameDevS
             _heroTextureRunning = contentManager.Load<Texture2D>("RogueRunning_Cropped");
             _heroTextureJumping = contentManager.Load<Texture2D>("RogieJump_Cropped");
             _heroTextureDying = contentManager.Load<Texture2D>("RogueDying_Cropped");
+            _heroTextureHurting = contentManager.Load<Texture2D>("RogueHurt_Cropped");
 
             SpriteSheet idleSheet = new SpriteSheet(_heroTextureIdle, 17, 1);
             SpriteSheet runningSheet = new SpriteSheet(_heroTextureRunning, 4, 2);
             SpriteSheet jumpSheet = new SpriteSheet(_heroTextureJumping, 7, 1);
             SpriteSheet dieSheet = new SpriteSheet(_heroTextureDying, 5, 2);
+            SpriteSheet hurtSheet = new SpriteSheet(_heroTextureHurting, 4, 1);
 
             sprites = new List<Sprite>();
 
@@ -93,6 +96,9 @@ namespace GameDevS
 
             Animation2 dieAnimation = new Animation2(dieSheet);
             player.AddAnimation(AnimationState.DYING, dieAnimation);
+
+            Animation2 hurtAnimation = new Animation2(hurtSheet);
+            player.AddAnimation(AnimationState.HURTING, hurtAnimation);
 
             sprites.Add(player);
 

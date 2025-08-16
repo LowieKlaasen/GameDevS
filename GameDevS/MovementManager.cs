@@ -124,7 +124,7 @@ namespace GameDevS
                     {
                         Debug.WriteLine($"{movable.GetType()} took side damage");
 
-                        player.Health.TakeDamage(1);
+                        player.TakeDamage(1);
                     }
                 }
 
@@ -132,9 +132,9 @@ namespace GameDevS
                 {
                     if (horizontalResult.Collidable is Player player)
                     {
-                        Debug.WriteLine($"{movable.GetType()} took side damage");
+                        Debug.WriteLine($"Player took damage from patrolenemy");
 
-                        player.Health.TakeDamage(1);
+                        player.TakeDamage(1);
                     }
 
                     patrolController.ReverseDirection(movable);

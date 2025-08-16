@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -17,6 +17,10 @@ namespace GameDevS
         public float deathAnimationDuration = 1f;
 
         public bool IsDying => currentState == AnimationState.DYING;
+
+        public Vector2 KnockbackVelocity { get; private set; } = Vector2.Zero;
+        private float knockbackDuration = 0.2f;
+        private float knockbackTimer = 0f;
 
         public Player(Texture2D texture, Vector2 position, float scale, List<Sprite> collisionGroup, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight, int numberOfWidthSprites, int numberOfHeightSprites) : base(texture, position, scale, hitboxStartX, hitboxStartY, hitboxWidth, hitboxHeight, numberOfWidthSprites, numberOfHeightSprites) 
         {
@@ -47,6 +51,19 @@ namespace GameDevS
             }
 
             base.Update(gameTime);
+        }
+
+        public void TakeDamage(int amount)
+        {
+            Health.TakeDamage(amount);
+
+            currentState = AnimationState.HURTING;
+            ServiceLocator.AudioService.Play("playerHurt");
+
+            if (Health.Current <= 0)
+            {
+                Die();
+            }
         }
 
         private void Die() 
