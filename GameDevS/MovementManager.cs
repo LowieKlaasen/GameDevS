@@ -18,9 +18,10 @@ namespace GameDevS
             gravity = 2200f;
         }
 
-        public void Move(IMovable movable, IMovementController movementController, GameTime gameTime)
+        //public void Move(IMovable movable, IMovementController movementController, GameTime gameTime)
+        public void Move(IMovable movable, IMovementController movementController, float dt)
         {
-            float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            //float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
             float groundSnap = 2f;
 
             var collidableMovable = (ICollidable2)movable;
@@ -38,7 +39,7 @@ namespace GameDevS
             }
 
             Vector2 velocity = movable.Velocity;
-            Vector2 desired = movementController.GetDesiredVelocity(movable, gameTime);
+            Vector2 desired = movementController.GetDesiredVelocity(movable, dt);
 
             velocity.X = desired.X;
             if (desired.Y != 0) velocity.Y = desired.Y;

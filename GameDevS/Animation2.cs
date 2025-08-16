@@ -22,11 +22,12 @@ namespace GameDevS
             GetFramesFromSpriteSheet();
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(float dt)
         {
             CurrentFrame = frames[counter];
 
-            secondCounter += gameTime.ElapsedGameTime.TotalSeconds;
+            //secondCounter += gameTime.ElapsedGameTime.TotalSeconds;
+            secondCounter += dt;
             int fps = 15;
 
             if (secondCounter >= 1d / fps)

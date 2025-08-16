@@ -6,7 +6,7 @@ namespace GameDevS
     {
         //private int direction = 1;
 
-        public Vector2 GetDesiredVelocity(IMovable movable, GameTime gameTime)
+        public Vector2 GetDesiredVelocity(IMovable movable, float dt)
         {
             if (movable is PassivePatrolEnemy enemy)
             {

@@ -12,7 +12,7 @@ namespace GameDevS
             _keyboardState = state;
         }
 
-        public Vector2 GetDesiredVelocity(IMovable movable, GameTime gameTime)
+        public Vector2 GetDesiredVelocity(IMovable movable, float dt)
         {
             Vector2 velocity = Vector2.Zero;
 

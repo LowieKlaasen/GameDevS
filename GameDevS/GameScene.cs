@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace GameDevS
 {
@@ -38,6 +39,8 @@ namespace GameDevS
         private AnimationUpdater animationUpdater;
 
         private PassivePatrolController passivePatrolController;
+
+        private bool isPaused;
 
         public GameScene(ContentManager contentManager, SceneManager sceneManager, GraphicsDevice graphicsDevice)
         {
@@ -131,16 +134,32 @@ namespace GameDevS
 
         public void Update(GameTime gameTime)
         {
+            if (!isPaused && Keyboard.GetState().IsKeyDown(Keys.P))
+            {
+                Debug.WriteLine("Pause pressed");
+                isPaused = true;
+
+                // ToDo: Pause scene
+
+            }
+
+            float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (isPaused)
+            {
+                dt = 0;
+            }
+
             //camera.Follow(player.Position, 0, 30 * 54, 0, 15 * 54);
             camera.Follow(player.Position, 0, 200 * 54, 0, 15 * 54);
 
             foreach (var sprite in sprites)
             {
-                sprite.Update(gameTime);
+                sprite.Update(dt);
 
                 if (sprite is not Player)
                 {
-                    movementManager.Move(sprite, passivePatrolController, gameTime);
+                    movementManager.Move(sprite, passivePatrolController, dt);
                 }
             }
 
@@ -148,7 +167,7 @@ namespace GameDevS
 
             playerController.UpdateKeyboard(keyboardState);
 
-            movementManager.Move(player, playerController, gameTime);
+            movementManager.Move(player, playerController, dt);
 
             //animationUpdater.UpdateAnimation(player);
             foreach (var sprite in sprites)

@@ -21,9 +21,9 @@ namespace GameDevS
             Damage = 10;
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(float dt)
         {
-            float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            //float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (IsDying)
             {
@@ -34,7 +34,7 @@ namespace GameDevS
                 }
             }
 
-            base.Update(gameTime);
+            base.Update(dt);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

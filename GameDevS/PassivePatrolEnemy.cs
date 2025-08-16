@@ -17,9 +17,9 @@ namespace GameDevS
             Direction = 1;
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(float dt)
         {
-            base.Update(gameTime);
+            base.Update(dt);
         }
     }
 }

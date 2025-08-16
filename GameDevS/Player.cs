@@ -32,9 +32,9 @@ namespace GameDevS
             Health = new Health(5);
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(float dt)
         {
-            float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            //float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (!Health.IsAlive)
             {
@@ -50,7 +50,7 @@ namespace GameDevS
                 }
             }
 
-            base.Update(gameTime);
+            base.Update(dt);
         }
 
         public void TakeDamage(int amount)

@@ -81,11 +81,11 @@ namespace GameDevS
             currentState = AnimationState.IDLE;
         }
 
-        public virtual void Update(GameTime gameTime)
+        public virtual void Update(float dt)
         {
             if (animations.ContainsKey(currentState))
             {
-                animations[currentState].Update(gameTime);
+                animations[currentState].Update(dt);
             }
         }
 
