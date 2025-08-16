@@ -142,7 +142,16 @@ namespace GameDevS
             //ServiceLocator.AudioService.PlayMusic("jungleBG");
 
             Texture2D bgTexture = contentManager.Load<Texture2D>("background/jungle/plx-5");
-            scrollingBackground = new ScrollingBackground(bgTexture, camera, 0.5f);
+            scrollingBackground = new ScrollingBackground(camera);
+
+            float parallaxCounter = 0.1f;
+            for (int i = 1; i < 6; i++) 
+            { 
+                string fileName = "background/jungle/plx-" + i.ToString();
+
+                scrollingBackground.AddLayer(contentManager.Load<Texture2D>(fileName), parallaxCounter);
+                parallaxCounter += 0.2f;
+            }
         }
 
         public void Update(GameTime gameTime)

@@ -1,19 +1,22 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace GameDevS
 {
     internal class ScrollingBackground
     {
-        private Texture2D texture;
         private Camera2D camera;
-        private float parallaxFactor;
+        private readonly List<BackgroundLayer> backgroundLayers = new List<BackgroundLayer>();
 
-        public ScrollingBackground(Texture2D texture, Camera2D camera, float parallaxFactor)
+        public ScrollingBackground(Camera2D camera)
         {
-            this.texture = texture;
             this.camera = camera;
-            this.parallaxFactor = parallaxFactor;
+        }
+
+        public void AddLayer(Texture2D texture, float parallaxFactor) 
+        { 
+            backgroundLayers.Add(new BackgroundLayer(texture, parallaxFactor));
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -21,32 +24,46 @@ namespace GameDevS
             int screenWidth = camera.Viewport.Width;
             int screenHeight = camera.Viewport.Height;
 
-            float offsetX = (camera.Position.X * parallaxFactor) % screenWidth;
-            if (offsetX < 0)
-            {
-                offsetX += screenWidth;
-            }
-
-            // First copy
-            var destRect1 = new Rectangle(
-                (int)(-offsetX),
-                0,
-                screenWidth,
-                screenHeight
-            );
-
-            // Second copy (to the right)
-            var destRect2 = new Rectangle(
-                (int)(-offsetX + screenWidth),
-                0,
-                screenWidth,
-                screenHeight
-            );
-
             spriteBatch.Begin();
-            spriteBatch.Draw(texture, destRect1, Color.White);
-            spriteBatch.Draw(texture, destRect2, Color.White);
+            foreach (var backgroundLayer in backgroundLayers)
+            {
+                float offsetX = (camera.Position.X * backgroundLayer.ParallaxFactor) % screenWidth;
+                if (offsetX < 0)
+                {
+                    offsetX += screenWidth;
+                }
+
+                var destRect1 = new Rectangle(
+                    (int)(-offsetX),
+                    0,
+                    screenWidth,
+                    screenHeight
+                );
+
+                var destRect2 = new Rectangle(
+                    (int)(-offsetX + screenWidth),
+                    0,
+                    screenWidth,
+                    screenHeight
+                );
+
+                spriteBatch.Draw(backgroundLayer.Texture, destRect1, Color.White);
+                spriteBatch.Draw(backgroundLayer.Texture, destRect2, Color.White);
+            }
             spriteBatch.End();
+        }
+    }
+
+
+    class BackgroundLayer
+    {
+        public Texture2D Texture { get; }
+        public float ParallaxFactor { get; }
+
+        public BackgroundLayer(Texture2D texture, float parallaxFactor)
+        {
+            Texture = texture;
+            ParallaxFactor = parallaxFactor;
         }
     }
 }
