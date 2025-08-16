@@ -10,7 +10,7 @@ namespace GameDevS
     public class GameScene : IScene
     {
         private ContentManager contentManager;
-        private SceneManager sceneManager;
+        public SceneManager sceneManager;
 
         private Texture2D _heroTexture;
         private Texture2D _enemyTexture;
@@ -41,8 +41,10 @@ namespace GameDevS
         private PassivePatrolController passivePatrolController;
 
         public bool IsPaused;
-
         private PauseMenu pauseMenu;
+
+        public bool GameOver;
+        private GameOverMenu gameOverMenu;
 
         public GameScene(ContentManager contentManager, SceneManager sceneManager, GraphicsDevice graphicsDevice)
         {
@@ -58,6 +60,8 @@ namespace GameDevS
             passivePatrolController = new PassivePatrolController();
 
             pauseMenu = new PauseMenu(graphicsDevice, this, contentManager);
+
+            gameOverMenu = new GameOverMenu(graphicsDevice, this, contentManager);
         }
 
         public void Load()
@@ -144,6 +148,12 @@ namespace GameDevS
                 IsPaused = true;
                 Debug.WriteLine("IsPaused = " + IsPaused);
             }
+            //if (!GameOver && Keyboard.GetState().IsKeyDown(Keys.G))
+            //{
+            //    Debug.WriteLine("Game over pressed");
+            //    GameOver = true;
+            //    Debug.WriteLine("GameOver = " + GameOver);
+            //}
 
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -154,8 +164,13 @@ namespace GameDevS
                 pauseMenu.Update(gameTime);
                 return;
             }
+            //if (GameOver)
+            //{
+            //    dt = 0;
+            //    gameOverMenu.Update(gameTime);
+            //    return;
+            //}
 
-            //camera.Follow(player.Position, 0, 30 * 54, 0, 15 * 54);
             camera.Follow(player.Position, 0, 200 * 54, 0, 15 * 54);
 
             foreach (var sprite in sprites)
@@ -232,6 +247,13 @@ namespace GameDevS
                 spriteBatch.End();
             }
 
+            if (GameOver) 
+            {
+                spriteBatch.Begin();
+                gameOverMenu.Draw(spriteBatch);
+                spriteBatch.End();
+            }
+
         }
 
         public void Restart()
@@ -239,6 +261,7 @@ namespace GameDevS
             Load();
 
             IsPaused = false;
+            GameOver = false;
         }
 
         #region Private Methods
