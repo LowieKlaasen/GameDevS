@@ -18,7 +18,7 @@ namespace GameDevS
         );
 
         public Coin(Vector2 position, float scale, int width, int height)
-            : base(position, scale)
+            : base(new Vector2(position.X + 8, position.Y + 8), scale)
         {
             this.width = width;
             this.height = height;

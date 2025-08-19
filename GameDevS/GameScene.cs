@@ -153,6 +153,16 @@ namespace GameDevS
             CreateCoin(new Vector2(10 * 54, 6 * 54));
             CreateCoin(new Vector2(11 * 54, 6 * 54));
 
+            CreateCoin(new Vector2(24 * 54, 6 * 54));
+            CreateCoin(new Vector2(25 * 54, 6 * 54));
+            CreateCoin(new Vector2(26 * 54, 6 * 54));
+
+            CreateCoin(new Vector2(72 * 54, 1 * 54));
+            CreateCoin(new Vector2(73 * 54, 1 * 54));
+            CreateCoin(new Vector2(74 * 54, 1 * 54));
+            CreateCoin(new Vector2(75 * 54, 1 * 54));
+            CreateCoin(new Vector2(76 * 54, 1 * 54));
+
             SpriteFont hudFont = contentManager.Load<SpriteFont>("fonts/PixelEmulator");
             Texture2D coinTexture = contentManager.Load<Texture2D>("hud/Gold_2");
 
