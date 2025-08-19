@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Media;
 using System.Collections.Generic;
+using System.Diagnostics;
+
 namespace GameDevS
 {
     public class AudioService : IAudioService
@@ -12,7 +14,8 @@ namespace GameDevS
 
         private readonly Dictionary<string, Song> songs = new Dictionary<string, Song>();
 
-        private float masterVolume = 1f;
+        private float soundEffectVolume = 1f;
+        private float musicVolume = 1f;
 
         public AudioService(ContentManager contentManager)
         {
@@ -29,7 +32,7 @@ namespace GameDevS
             if (sounds.TryGetValue(soundName, out var sound))
             {
                 SoundEffectInstance instance = sound.CreateInstance();
-                instance.Volume = masterVolume;
+                instance.Volume = soundEffectVolume;
                 instance.Play();
                 activeSounds[soundName] = instance;
             }
@@ -44,16 +47,34 @@ namespace GameDevS
             }
         }
 
-        public void SetVolume(float volume)
+        public float GetVolume(VolumeType volumeType)
         {
-            masterVolume = MathHelper.Clamp(volume, 0f, 1f);
+            if (volumeType == VolumeType.MUSIC)
+            {
+                return musicVolume;
+            }
+            return soundEffectVolume;
+        }
+
+        public void SetVolume(VolumeType volumeType, float volume)
+        {
+            if (volumeType == VolumeType.MUSIC)
+            {
+                musicVolume = MathHelper.Clamp(volume, 0f, 1f);
+                MediaPlayer.Volume = musicVolume;
+                Debug.WriteLine(volumeType + ": " + volume);
+                return;
+            }
+            soundEffectVolume = volume;
+
+            Debug.WriteLine(volumeType + ": " + volume);
         }
 
         public void PlayMusic(string musicName, bool loop = true) 
         {
             if (songs.TryGetValue(musicName, out Song song))
             {
-                MediaPlayer.Volume = masterVolume;
+                MediaPlayer.Volume = musicVolume;
                 MediaPlayer.IsRepeating = loop;
                 MediaPlayer.Play(song);
             }

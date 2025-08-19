@@ -10,8 +10,10 @@ namespace GameDevS
     {
         void Play(string soundName);
         void Stop(string soundName);
-        void SetVolume(float volume);
-
+        public float GetVolume(VolumeType volumeType);
+        //void SetSoundEffectVolume(float volume);
+        //void SetMusicVolume(float volume);
+        public void SetVolume(VolumeType volumeType, float volume);
         void PlayMusic(string musicName, bool loop = true);
         void StopMusic();
     }
