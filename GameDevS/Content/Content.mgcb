@@ -170,6 +170,13 @@
 /processorParam:TextureFormat=Compressed
 /build:fonts/Jacquard24.spritefont
 
+#begin fonts/PixelEmulator.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fonts/PixelEmulator.spritefont
+
 #begin fonts/UnifrakturCook.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor

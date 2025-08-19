@@ -47,6 +47,8 @@ namespace GameDevS
 
         private List<ICollectible> collectibles;
 
+        private GameOverlay hud;
+
         public GameScene(ContentManager contentManager, SceneManager sceneManager, GraphicsDevice graphicsDevice)
         {
             this.contentManager = contentManager;
@@ -148,6 +150,10 @@ namespace GameDevS
             collectibles = new List<ICollectible>();
 
             CreateCoin(new Vector2(9 * 54, 6 * 54));
+
+            SpriteFont hudFont = contentManager.Load<SpriteFont>("fonts/PixelEmulator");
+
+            hud = new GameOverlay(hudFont, player);
         }
 
         public void Update(GameTime gameTime)
@@ -288,6 +294,8 @@ namespace GameDevS
             }
 
             spriteBatch.End();
+
+            hud.Draw(spriteBatch);
 
             if (IsPaused)
             {
