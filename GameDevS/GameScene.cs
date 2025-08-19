@@ -152,8 +152,9 @@ namespace GameDevS
             CreateCoin(new Vector2(9 * 54, 6 * 54));
 
             SpriteFont hudFont = contentManager.Load<SpriteFont>("fonts/PixelEmulator");
+            Texture2D coinTexture = contentManager.Load<Texture2D>("hud/Gold_2");
 
-            hud = new GameOverlay(hudFont, player);
+            hud = new GameOverlay(hudFont, player, coinTexture);
         }
 
         public void Update(GameTime gameTime)
