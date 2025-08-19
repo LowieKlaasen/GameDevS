@@ -32,7 +32,7 @@ namespace GameDevS
 
             spriteBatch.Begin();
             spriteBatch.Draw(coinIcon, coinDestRect, Color.White);
-            spriteBatch.DrawString(font, $"x {player.Score}", coinTextPosition, Color.Gold);
+            spriteBatch.DrawString(font, $"x {player.Score:000}", coinTextPosition, Color.Gold);
             spriteBatch.End();
         }
     }
