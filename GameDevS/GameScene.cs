@@ -85,10 +85,6 @@ namespace GameDevS
 
             sprites = new List<Sprite>();
 
-            //sprites.Add(new Sprite(_enemyTexture, new Vector2(100, 100), 0.1f, 23, 22, 41, 54, 1, 1));
-            //sprites.Add(new Sprite(_enemyTexture, new Vector2(400, 200), 0.1f, 23, 22, 41, 54, 1, 1));
-            //sprites.Add(new Sprite(_enemyTexture, new Vector2(700, 300), 0.1f, 23, 22, 41, 54, 1, 1));
-
             CreatePassivePatrolEnemy(new Vector2(16 * 54, 7 * 54));
 
             CreatePassivePatrolEnemy(new Vector2(46 * 54, 9 * 54));
@@ -96,7 +92,7 @@ namespace GameDevS
             CreatePassivePatrolEnemy(new Vector2(54 * 54, 9 * 54));
             CreatePassivePatrolEnemy(new Vector2(60 * 54, 9 * 54));
 
-            player = new Player(_heroTexture, Vector2.Zero, 1f, sprites, 22, 21, 48, 53, 4, 2);
+            player = new Player(Vector2.Zero, 1f, sprites, 22, 21, 48, 53);
 
             Animation2 idleAnimation = new Animation2(idleSheet);
             player.AddAnimation(AnimationState.IDLE, idleAnimation);
@@ -238,8 +234,6 @@ namespace GameDevS
             {
                 GameOver = true;
             }
-
-            //sprites.RemoveAll(sprite => sprite is Enemy enemy && !enemy.IsAlive);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -306,7 +300,7 @@ namespace GameDevS
             SpriteSheet dyingSheet = new SpriteSheet(dyingTexture, 5, 3);
             Animation2 dyingAnimatoin = new Animation2(dyingSheet);
 
-            PassivePatrolEnemy patrolEnemy = new PassivePatrolEnemy(idleTexture, startPosition, 0.1f, 23, 22, 41, 54, 6, 3);
+            PassivePatrolEnemy patrolEnemy = new PassivePatrolEnemy(startPosition, 0.1f, 23, 22, 41, 54);
 
             patrolEnemy.AddAnimation(AnimationState.IDLE, idleAnimation);
             patrolEnemy.AddAnimation(AnimationState.RUNNING, walkAnimation);

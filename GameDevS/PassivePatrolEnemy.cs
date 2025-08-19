@@ -9,8 +9,8 @@ namespace GameDevS
 
         protected override float deathAnimationDuration { get { return 1f; } }
 
-        public PassivePatrolEnemy(Texture2D texture, Vector2 position, float scale, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight, int numberOfWidthSprites, int numberOfHeightSprites) 
-            : base(texture, position, scale, hitboxStartX, hitboxStartY, hitboxWidth, hitboxHeight, numberOfWidthSprites, numberOfHeightSprites)
+        public PassivePatrolEnemy(Vector2 position, float scale, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight) 
+            : base(position, scale, hitboxStartX, hitboxStartY, hitboxWidth, hitboxHeight)
         {
             speed = 75f;
 

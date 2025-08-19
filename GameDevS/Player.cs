@@ -22,7 +22,8 @@ namespace GameDevS
         private float knockbackDuration = 0.2f;
         private float knockbackTimer = 0f;
 
-        public Player(Texture2D texture, Vector2 position, float scale, List<Sprite> collisionGroup, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight, int numberOfWidthSprites, int numberOfHeightSprites) : base(texture, position, scale, hitboxStartX, hitboxStartY, hitboxWidth, hitboxHeight, numberOfWidthSprites, numberOfHeightSprites) 
+        public Player(Vector2 position, float scale, List<Sprite> collisionGroup, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight) 
+            : base(position, scale, hitboxStartX, hitboxStartY, hitboxWidth, hitboxHeight) 
         {
             this.collisionGroup = collisionGroup;
 
