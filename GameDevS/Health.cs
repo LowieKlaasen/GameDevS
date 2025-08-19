@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System.Diagnostics;
 
 namespace GameDevS
 {
@@ -23,6 +24,7 @@ namespace GameDevS
             {
                 Current = 0;
             }
+            Debug.WriteLine("Player Health: " + Current);
         }
 
         public void Heal(int amount)

@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 
 namespace GameDevS
 {
@@ -165,8 +164,10 @@ namespace GameDevS
 
             SpriteFont hudFont = contentManager.Load<SpriteFont>("fonts/PixelEmulator");
             Texture2D coinTexture = contentManager.Load<Texture2D>("hud/Gold_2");
+            Texture2D fullHeart = contentManager.Load<Texture2D>("hud/hearts/hearth_full");
+            Texture2D emptyHeart = contentManager.Load<Texture2D>("hud/hearts/hearth_darkRed");
 
-            hud = new GameOverlay(hudFont, player, coinTexture);
+            hud = new GameOverlay(hudFont, player, coinTexture, fullHeart, emptyHeart);
         }
 
         public void Update(GameTime gameTime)
