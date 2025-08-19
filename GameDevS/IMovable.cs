@@ -12,5 +12,7 @@ namespace GameDevS
         public float JumpSpeed { get; }
 
         public bool IsGrounded { get; set; }
+
+        public IMovementController MovementController { get; set; }
     }
 }

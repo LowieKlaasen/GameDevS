@@ -24,8 +24,8 @@ namespace GameDevS
 
         public int Score;
 
-        public Player(Vector2 position, float scale, List<Sprite> collisionGroup, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight) 
-            : base(position, scale, hitboxStartX, hitboxStartY, hitboxWidth, hitboxHeight) 
+        public Player(Vector2 position, float scale, List<Sprite> collisionGroup, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight, IMovementController movementController) 
+            : base(position, scale, hitboxStartX, hitboxStartY, hitboxWidth, hitboxHeight, movementController) 
         {
             this.collisionGroup = collisionGroup;
 

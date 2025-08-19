@@ -4,23 +4,25 @@ namespace GameDevS
 {
     internal class PassivePatrolController : IMovementController
     {
-        //private int direction = 1;
+        private int direction = 1;
 
         public Vector2 GetDesiredVelocity(IMovable movable, float dt)
         {
-            if (movable is PassivePatrolEnemy enemy)
-            {
-                return new Vector2(enemy.Direction * movable.Speed, 0);
-            }
+            //if (movable is PassivePatrolEnemy enemy)
+            //{
+            //    return new Vector2(direction * movable.Speed, 0);
+            //}
 
-            return Vector2.Zero;
+            //return Vector2.Zero;
+
+            return new Vector2(direction * movable.Speed, 0);
         }
 
         public void ReverseDirection(IMovable movable)
         {
             if (movable is PassivePatrolEnemy enemy)
             {
-                enemy.Direction *= -1;
+                direction *= -1;
             }
         }
     }

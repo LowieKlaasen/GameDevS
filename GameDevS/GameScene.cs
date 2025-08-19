@@ -30,11 +30,11 @@ namespace GameDevS
         public GraphicsDevice graphicsDevice;
         private Camera2D camera;
 
-        private PlayerController playerController;
+        //private PlayerController playerController;
 
         private AnimationUpdater animationUpdater;
 
-        private PassivePatrolController passivePatrolController;
+        //private PassivePatrolController passivePatrolController;
 
         public bool IsPaused;
         private PauseMenu pauseMenu;
@@ -57,9 +57,9 @@ namespace GameDevS
 
             camera = new Camera2D(graphicsDevice.Viewport);
 
-            playerController = new PlayerController();
+            //playerController = new PlayerController();
 
-            passivePatrolController = new PassivePatrolController();
+            //passivePatrolController = new PassivePatrolController();
 
             pauseMenu = new PauseMenu(graphicsDevice, this, contentManager);
 
@@ -89,7 +89,7 @@ namespace GameDevS
             CreatePassivePatrolEnemy(new Vector2(54 * 54, 9 * 54));
             CreatePassivePatrolEnemy(new Vector2(60 * 54, 9 * 54));
 
-            player = new Player(Vector2.Zero, 1f, sprites, 22, 21, 48, 53);
+            player = new Player(Vector2.Zero, 1f, sprites, 22, 21, 48, 53, new PlayerController());
 
             Animation2 idleAnimation = new Animation2(idleSheet);
             player.AddAnimation(AnimationState.IDLE, idleAnimation);
@@ -212,17 +212,18 @@ namespace GameDevS
             {
                 sprite.Update(dt);
 
-                if (sprite is not Player)
-                {
-                    movementManager.Move(sprite, passivePatrolController, dt);
-                }
+                //if (sprite is not Player)
+                //{
+                //    movementManager.Move(sprite, sprite.MovementController, dt);
+                //}
+                movementManager.Move(sprite, dt);
             }
 
-            KeyboardState keyboardState = Keyboard.GetState();
+            //KeyboardState keyboardState = Keyboard.GetState();
 
-            playerController.UpdateKeyboard(keyboardState);
+            //player.MovementController.UpdateKeyboard(keyboardState);
 
-            movementManager.Move(player, playerController, dt);
+            //movementManager.Move(player, dt);
 
             //animationUpdater.UpdateAnimation(player);
             foreach (var sprite in sprites)
@@ -266,7 +267,7 @@ namespace GameDevS
                 }
             }
 
-            if (playerController.CheckDeathByFalling(player, camera, graphicsDevice.Viewport.Height))
+            if (player.MovementController is PlayerController playerController && playerController.CheckDeathByFalling(player, camera, graphicsDevice.Viewport.Height))
             {
                 GameOver = true;
             }
@@ -353,7 +354,7 @@ namespace GameDevS
             SpriteSheet dyingSheet = new SpriteSheet(dyingTexture, 5, 3);
             Animation2 dyingAnimatoin = new Animation2(dyingSheet);
 
-            PassivePatrolEnemy patrolEnemy = new PassivePatrolEnemy(startPosition, 0.1f, 23, 22, 41, 54);
+            PassivePatrolEnemy patrolEnemy = new PassivePatrolEnemy(startPosition, 0.1f, 23, 22, 41, 54, new PassivePatrolController());
 
             patrolEnemy.AddAnimation(AnimationState.IDLE, idleAnimation);
             patrolEnemy.AddAnimation(AnimationState.RUNNING, walkAnimation);

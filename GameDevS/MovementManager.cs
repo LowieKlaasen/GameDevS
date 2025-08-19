@@ -18,8 +18,8 @@ namespace GameDevS
             gravity = 2200f;
         }
 
-        //public void Move(IMovable movable, IMovementController movementController, GameTime gameTime)
-        public void Move(IMovable movable, IMovementController movementController, float dt)
+        //public void Move(IMovable movable, IMovementController movementController, float dt)
+        public void Move(IMovable movable, float dt)
         {
             //float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
             float groundSnap = 2f;
@@ -39,7 +39,7 @@ namespace GameDevS
             }
 
             Vector2 velocity = movable.Velocity;
-            Vector2 desired = movementController.GetDesiredVelocity(movable, dt);
+            Vector2 desired = movable.MovementController.GetDesiredVelocity(movable, dt);
 
             velocity.X = desired.X;
             if (desired.Y != 0) velocity.Y = desired.Y;
@@ -129,16 +129,24 @@ namespace GameDevS
                     }
                 }
 
-                if (movementController is PassivePatrolController patrolController) 
+                //if (movementController is PassivePatrolController patrolController) 
+                //{
+                //    if (horizontalResult.Collidable is Player player)
+                //    {
+                //        Debug.WriteLine($"Player took damage from patrolenemy");
+
+                //        player.TakeDamage(1);
+                //    }
+
+                //    patrolController.ReverseDirection(movable);
+                //}
+
+                if (movable is PassivePatrolEnemy passivePatrolEnemy)
                 {
-                    if (horizontalResult.Collidable is Player player)
+                    if (passivePatrolEnemy.MovementController is PassivePatrolController controller)
                     {
-                        Debug.WriteLine($"Player took damage from patrolenemy");
-
-                        player.TakeDamage(1);
+                        controller.ReverseDirection(movable);
                     }
-
-                    patrolController.ReverseDirection(movable);
                 }
             }
 

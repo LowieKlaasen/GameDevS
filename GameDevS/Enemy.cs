@@ -14,8 +14,8 @@ namespace GameDevS
         public float deathTimer = 0f;
         protected abstract float deathAnimationDuration { get; }
 
-        public Enemy(Vector2 position, float scale, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight) 
-            : base(position, scale, hitboxStartX, hitboxStartY, hitboxWidth, hitboxHeight)
+        public Enemy(Vector2 position, float scale, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight, IMovementController movementController) 
+            : base(position, scale, hitboxStartX, hitboxStartY, hitboxWidth, hitboxHeight, movementController)
         {
             IsAlive = true;
             Damage = 10;

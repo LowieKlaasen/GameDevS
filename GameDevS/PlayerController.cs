@@ -7,13 +7,15 @@ namespace GameDevS
     internal class PlayerController : IMovementController
     {
         private KeyboardState _keyboardState;
-        public void UpdateKeyboard(KeyboardState state)
-        {
-            _keyboardState = state;
-        }
+        //public void UpdateKeyboard(KeyboardState state)
+        //{
+        //    _keyboardState = state;
+        //}
 
         public Vector2 GetDesiredVelocity(IMovable movable, float dt)
         {
+            _keyboardState = Keyboard.GetState();
+
             Vector2 velocity = Vector2.Zero;
 
             if (_keyboardState.IsKeyDown(Keys.Right))

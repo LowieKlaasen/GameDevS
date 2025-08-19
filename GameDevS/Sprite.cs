@@ -37,13 +37,16 @@ namespace GameDevS
 
         public Vector2 Velocity { get; set; }
 
-        public Sprite(Vector2 position, float scale, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight)
+        public IMovementController MovementController { get; set; }
+
+        public Sprite(Vector2 position, float scale, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight, IMovementController movementController)
             : base(position, scale)
         {
             this.hitboxStartX = hitboxStartX;
             this.hitboxStartY = hitboxStartY;
             this.hitboxWidth = hitboxWidth;
             this.hitboxHeight = hitboxHeight;
+            MovementController = movementController;
         }
 
         public override void Update(float dt)
