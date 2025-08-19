@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Diagnostics;
+using System;
 
 namespace GameDevS
 {
@@ -18,7 +18,7 @@ namespace GameDevS
 
             jumpSpeed = 500;
 
-            JumpDelay = 1f;
+            JumpDelay = 2f;
         }
 
         public override void Update(float dt)
@@ -34,6 +34,27 @@ namespace GameDevS
         public bool CanJump()
         {
             return IsGrounded && JumpCooldown <= 0f;
+        }
+
+        public bool IsGroundAhead(CollisionManager2 collisionManager, PassivePatrolEnemy enemy)
+        {
+            if (enemy.MovementController is ActivePatrolController controller)
+            {
+                Vector2 start = new Vector2(
+                    enemy.Position.X + controller.Direction * (enemy.HitBox.Width / 2 + 2),
+                    enemy.Position.Y + enemy.HitBox.Height + 1 // 1 pixel below feet
+                );
+
+                Vector2 end = start + new Vector2(0, 1);
+
+                var collisionResult = collisionManager.CheckCollision(enemy, start, end);
+                if (collisionResult.Collidable is Tile2)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

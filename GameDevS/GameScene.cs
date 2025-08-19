@@ -68,6 +68,8 @@ namespace GameDevS
 
         public void Load()
         {
+            collisionManager = new CollisionManager2();
+
             _heroTextureIdle = contentManager.Load<Texture2D>("RogueIdle_Cropped");
             _heroTextureRunning = contentManager.Load<Texture2D>("RogueRunning_Cropped");
             _heroTextureJumping = contentManager.Load<Texture2D>("RogieJump_Cropped");
@@ -106,7 +108,9 @@ namespace GameDevS
             CreatePassivePatrolEnemy(new Vector2(54 * 54, 9 * 54));
             CreatePassivePatrolEnemy(new Vector2(60 * 54, 9 * 54));
 
-            CreateActivePatrolEnemy(new Vector2(11 * 54, 6 * 54), player);
+            CreateActivePatrolEnemy(new Vector2(22 * 54, 6 * 54), player);
+            CreateActivePatrolEnemy(new Vector2(59 * 54, 3 * 54), player);
+            CreateActivePatrolEnemy(new Vector2(88 * 54, 4 * 54), player);
 
             sprites.Add(player);
 
@@ -119,7 +123,6 @@ namespace GameDevS
             //map.LoadMap("../../../Data/Test_MovingMap.csv");
             map.LoadMap("../../../Data/Level1_TempEnding.csv");
 
-            collisionManager = new CollisionManager2();
 
             foreach (var tile in map.GetCollidables())
             {
@@ -383,7 +386,7 @@ namespace GameDevS
             SpriteSheet jumpSheet = new SpriteSheet(jumpTexture, 6, 2);
             Animation2 jumpAnimation = new Animation2(jumpSheet);
 
-            PassivePatrolEnemy patrolEnemy = new PassivePatrolEnemy(startPosition, 0.1f, 23, 22, 41, 54, new ActivePatrolController(player));
+            PassivePatrolEnemy patrolEnemy = new PassivePatrolEnemy(startPosition, 0.1f, 23, 22, 41, 54, new ActivePatrolController(player, collisionManager));
 
             patrolEnemy.AddAnimation(AnimationState.IDLE, idleAnimation);
             patrolEnemy.AddAnimation(AnimationState.RUNNING, walkAnimation);

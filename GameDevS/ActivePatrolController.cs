@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using System.Diagnostics;
 
 namespace GameDevS
 {
@@ -9,11 +10,16 @@ namespace GameDevS
         private readonly float detectionRadius;
 
         private int direction = -1;
+        public int Direction { get { return direction; } }
 
-        public ActivePatrolController(Player player, float detectionRadius = 400f)
+        private CollisionManager2 collisionManager;
+
+        public ActivePatrolController(Player player, CollisionManager2 collisionManager, float detectionRadius = 250f)
         {
             this.player = player;
             this.detectionRadius = detectionRadius;
+
+            this.collisionManager = collisionManager;
         }
         public Vector2 GetDesiredVelocity(IMovable movable, float dt)
         {
@@ -39,6 +45,12 @@ namespace GameDevS
                 }
                 else
                 {
+                    if (!enemy.IsGroundAhead(collisionManager, enemy))
+                    {
+                        ReverseDirection(enemy);
+                        return Vector2.Zero;
+                    }
+
                     return new Vector2 (direction * enemy.Speed, enemy.Velocity.Y);
                 }
             }
