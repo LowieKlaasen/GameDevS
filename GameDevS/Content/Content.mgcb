@@ -49,6 +49,12 @@
 /processorParam:Quality=Best
 /build:audio/LSW_GuardHurt.mp3
 
+#begin audio/neoGeoCoin.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/neoGeoCoin.mp3
+
 #begin background/Jungle/plx-1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -108,6 +114,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:background/Jungle/plx-5.png
+
+#begin collectibles/goldenCoin_one.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:collectibles/goldenCoin_one.png
 
 #begin enemies/goblin/goblin_dying.png
 /importer:TextureImporter

@@ -22,6 +22,8 @@ namespace GameDevS
         private float knockbackDuration = 0.2f;
         private float knockbackTimer = 0f;
 
+        public int Score;
+
         public Player(Vector2 position, float scale, List<Sprite> collisionGroup, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight) 
             : base(position, scale, hitboxStartX, hitboxStartY, hitboxWidth, hitboxHeight) 
         {
@@ -31,6 +33,7 @@ namespace GameDevS
             jumpSpeed = 680f;
 
             Health = new Health(5);
+            Score = 0;
         }
 
         public override void Update(float dt)

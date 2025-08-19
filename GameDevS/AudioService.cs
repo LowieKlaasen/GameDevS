@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualBasic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Media;
@@ -20,6 +19,7 @@ namespace GameDevS
             sounds["jump"] = contentManager.Load<SoundEffect>("audio/action_jump");
             sounds["monsterDeath"] = contentManager.Load<SoundEffect>("audio/death_squish_quieter");
             sounds["playerHurt"] = contentManager.Load<SoundEffect>("audio/LSW_GuardHurt_quieter");
+            sounds["coinCollected"] = contentManager.Load<SoundEffect>("audio/neoGeoCoin");
 
             songs["jungleBG"] = contentManager.Load<Song>("audio/jungleMusic");
         }

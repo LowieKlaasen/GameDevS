@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace GameDevS
 {
@@ -17,7 +18,6 @@ namespace GameDevS
         private Texture2D _heroTextureJumping;
         private Texture2D _heroTextureDying;
         private Texture2D _heroTextureHurting;
-
 
         List<Sprite> sprites;
         Player player;
@@ -44,6 +44,8 @@ namespace GameDevS
         private GameOverMenu gameOverMenu;
 
         private ScrollingBackground scrollingBackground;
+
+        private List<ICollectible> collectibles;
 
         public GameScene(ContentManager contentManager, SceneManager sceneManager, GraphicsDevice graphicsDevice)
         {
@@ -142,6 +144,10 @@ namespace GameDevS
                 scrollingBackground.AddLayer(contentManager.Load<Texture2D>(fileName), parallaxCounter);
                 parallaxCounter += 0.2f;
             }
+
+            collectibles = new List<ICollectible>();
+
+            CreateCoin(new Vector2(9 * 54, 6 * 54));
         }
 
         public void Update(GameTime gameTime)
@@ -224,6 +230,22 @@ namespace GameDevS
                 sprites.Remove(sprite);
             }
 
+            foreach (ICollectible collectible in collectibles)
+            {
+                if (collectible is Coin coin && !coin.Collected)
+                {
+                    if (collectible is AnimatedEntity animatedEntity)
+                    {
+                        animatedEntity.Update(dt);
+                    }
+
+                    if (collectible.Bounds.Intersects(player.HitBox))
+                    {
+                        collectible.OnCollect(player);
+                    }
+                }
+            }
+
             if (playerController.CheckDeathByFalling(player, camera, graphicsDevice.Viewport.Height))
             {
                 GameOver = true;
@@ -250,6 +272,19 @@ namespace GameDevS
             foreach (var tile in map.GetCollidables())
             {
                 DebugDraw.DrawHollowRectangle(spriteBatch, tile.HitBox, Color.Green);
+            }
+
+            foreach (ICollectible collectible in collectibles)
+            {
+                if (collectible is Coin coin && coin.Collected)
+                {
+                    continue;
+                }
+
+                if (collectible is AnimatedEntity animatedEntity) 
+                {
+                    animatedEntity.Draw(spriteBatch);
+                }
             }
 
             spriteBatch.End();
@@ -301,6 +336,19 @@ namespace GameDevS
             patrolEnemy.AddAnimation(AnimationState.DYING, dyingAnimatoin);
 
             sprites.Add(patrolEnemy);
+        }
+
+        private void CreateCoin(Vector2 position)
+        {
+            Texture2D texture = contentManager.Load<Texture2D>("collectibles/goldenCoin_one");
+            SpriteSheet spriteSheet = new SpriteSheet(texture, 5, 2);
+            Animation2 animation = new Animation2(spriteSheet);
+
+            Coin coin = new Coin(position, 0.08f, 48, 48);
+
+            coin.AddAnimation(AnimationState.IDLE, animation);
+
+            collectibles.Add(coin);
         }
 
         #endregion
