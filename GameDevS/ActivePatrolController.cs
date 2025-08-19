@@ -8,9 +8,9 @@ namespace GameDevS
         private readonly Player player;
         private readonly float detectionRadius;
 
-        private int direction = 1;
+        private int direction = -1;
 
-        public ActivePatrolController(Player player, float detectionRadius = 200f)
+        public ActivePatrolController(Player player, float detectionRadius = 400f)
         {
             this.player = player;
             this.detectionRadius = detectionRadius;
@@ -23,12 +23,23 @@ namespace GameDevS
 
                 if (distance <= detectionRadius)
                 {
-                    float direction = MathF.Sign(player.Position.X - enemy.Position.X);
-                    return new Vector2(direction * movable.Speed, 0);
+                    float moveDirection = MathF.Sign(player.Position.X - enemy.Position.X);
+                    
+                    Vector2 velocity = new Vector2(moveDirection * enemy.Speed, enemy.Velocity.Y);
+
+                    if (player.Position.Y + 50 < enemy.Position.Y && enemy.IsGrounded)
+                    {
+                        if (enemy.CanJump())
+                        {
+                            velocity.Y = -enemy.JumpSpeed;
+                            enemy.JumpCooldown = enemy.JumpDelay;
+                        }
+                    }
+                    return velocity;
                 }
                 else
                 {
-                    return new Vector2 (direction * movable.Speed, 0);
+                    return new Vector2 (direction * enemy.Speed, enemy.Velocity.Y);
                 }
             }
 

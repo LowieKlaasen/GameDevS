@@ -82,13 +82,6 @@ namespace GameDevS
 
             sprites = new List<Sprite>();
 
-            CreatePassivePatrolEnemy(new Vector2(16 * 54, 7 * 54));
-
-            CreatePassivePatrolEnemy(new Vector2(46 * 54, 9 * 54));
-            CreatePassivePatrolEnemy(new Vector2(50 * 54, 9 * 54));
-            CreatePassivePatrolEnemy(new Vector2(54 * 54, 9 * 54));
-            CreatePassivePatrolEnemy(new Vector2(60 * 54, 9 * 54));
-
             player = new Player(Vector2.Zero, 1f, sprites, 22, 21, 48, 53, new PlayerController());
 
             Animation2 idleAnimation = new Animation2(idleSheet);
@@ -105,6 +98,15 @@ namespace GameDevS
 
             Animation2 hurtAnimation = new Animation2(hurtSheet);
             player.AddAnimation(AnimationState.HURTING, hurtAnimation);
+
+            CreatePassivePatrolEnemy(new Vector2(16 * 54, 7 * 54));
+
+            CreatePassivePatrolEnemy(new Vector2(46 * 54, 9 * 54));
+            CreatePassivePatrolEnemy(new Vector2(50 * 54, 9 * 54));
+            CreatePassivePatrolEnemy(new Vector2(54 * 54, 9 * 54));
+            CreatePassivePatrolEnemy(new Vector2(60 * 54, 9 * 54));
+
+            CreateActivePatrolEnemy(new Vector2(11 * 54, 6 * 54), player);
 
             sprites.Add(player);
 
@@ -343,8 +345,8 @@ namespace GameDevS
         private void CreatePassivePatrolEnemy(Vector2 startPosition)
         {
             Texture2D walkTexture = contentManager.Load<Texture2D>("enemies/goblin/golem_walking");
-            SpriteSheet walkSprite = new SpriteSheet(walkTexture, 8, 3);
-            Animation2 walkAnimation = new Animation2(walkSprite);
+            SpriteSheet walkSheet = new SpriteSheet(walkTexture, 8, 3);
+            Animation2 walkAnimation = new Animation2(walkSheet);
 
             Texture2D idleTexture = contentManager.Load<Texture2D>("enemies/goblin/goblin_idle");
             SpriteSheet idleSheet = new SpriteSheet(idleTexture, 6, 3);
@@ -359,6 +361,34 @@ namespace GameDevS
             patrolEnemy.AddAnimation(AnimationState.IDLE, idleAnimation);
             patrolEnemy.AddAnimation(AnimationState.RUNNING, walkAnimation);
             patrolEnemy.AddAnimation(AnimationState.DYING, dyingAnimatoin);
+
+            sprites.Add(patrolEnemy);
+        }
+
+        private void CreateActivePatrolEnemy(Vector2 startPosition, Player player)
+        {
+            Texture2D walkTexture = contentManager.Load<Texture2D>("enemies/ogre/ogre_walking");
+            SpriteSheet walkSheet = new SpriteSheet(walkTexture, 8, 3);
+            Animation2 walkAnimation = new Animation2(walkSheet);
+
+            Texture2D idleTexture = contentManager.Load<Texture2D>("enemies/ogre/ogre_idle");
+            SpriteSheet idleSheet = new SpriteSheet(idleTexture, 6, 3);
+            Animation2 idleAnimation = new Animation2(idleSheet);
+
+            Texture2D dyingTexture = contentManager.Load<Texture2D>("enemies/ogre/ogre_dying");
+            SpriteSheet dyingSheet = new SpriteSheet(dyingTexture, 5, 3);
+            Animation2 dyingAnimation = new Animation2(dyingSheet);
+
+            Texture2D jumpTexture = contentManager.Load<Texture2D>("enemies/ogre/ogre_jumpSequene");
+            SpriteSheet jumpSheet = new SpriteSheet(jumpTexture, 6, 2);
+            Animation2 jumpAnimation = new Animation2(jumpSheet);
+
+            PassivePatrolEnemy patrolEnemy = new PassivePatrolEnemy(startPosition, 0.1f, 23, 22, 41, 54, new ActivePatrolController(player));
+
+            patrolEnemy.AddAnimation(AnimationState.IDLE, idleAnimation);
+            patrolEnemy.AddAnimation(AnimationState.RUNNING, walkAnimation);
+            patrolEnemy.AddAnimation(AnimationState.DYING, dyingAnimation);
+            patrolEnemy.AddAnimation(AnimationState.JUMPING, jumpAnimation);
 
             sprites.Add(patrolEnemy);
         }

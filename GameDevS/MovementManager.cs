@@ -129,24 +129,13 @@ namespace GameDevS
                     }
                 }
 
-                //if (movementController is PassivePatrolController patrolController) 
-                //{
-                //    if (horizontalResult.Collidable is Player player)
-                //    {
-                //        Debug.WriteLine($"Player took damage from patrolenemy");
-
-                //        player.TakeDamage(1);
-                //    }
-
-                //    patrolController.ReverseDirection(movable);
-                //}
-
-                if (movable is PassivePatrolEnemy passivePatrolEnemy)
+                if (movable.MovementController is PassivePatrolController passiveController)
                 {
-                    if (passivePatrolEnemy.MovementController is PassivePatrolController controller)
-                    {
-                        controller.ReverseDirection(movable);
-                    }
+                    passiveController.ReverseDirection(movable);
+                }
+                if (movable.MovementController is ActivePatrolController activeController)
+                {
+                    activeController.ReverseDirection(movable);
                 }
             }
 

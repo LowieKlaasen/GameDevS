@@ -1,11 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
 
 namespace GameDevS
 {
     internal class PassivePatrolEnemy : Enemy
     {
-        //public int Direction { get; set; }
+        public float JumpCooldown;
+        public readonly float JumpDelay;
 
         protected override float deathAnimationDuration { get { return 1f; } }
 
@@ -14,12 +16,24 @@ namespace GameDevS
         {
             speed = 75f;
 
-            //Direction = 1;
+            jumpSpeed = 500;
+
+            JumpDelay = 1f;
         }
 
         public override void Update(float dt)
         {
+            if (JumpCooldown > 0)
+            {
+                JumpCooldown -= dt;
+            }
+
             base.Update(dt);
+        }
+
+        public bool CanJump()
+        {
+            return IsGrounded && JumpCooldown <= 0f;
         }
     }
 }
