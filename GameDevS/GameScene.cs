@@ -150,6 +150,8 @@ namespace GameDevS
             collectibles = new List<ICollectible>();
 
             CreateCoin(new Vector2(9 * 54, 6 * 54));
+            CreateCoin(new Vector2(10 * 54, 6 * 54));
+            CreateCoin(new Vector2(11 * 54, 6 * 54));
 
             SpriteFont hudFont = contentManager.Load<SpriteFont>("fonts/PixelEmulator");
             Texture2D coinTexture = contentManager.Load<Texture2D>("hud/Gold_2");
@@ -292,6 +294,8 @@ namespace GameDevS
                 {
                     animatedEntity.Draw(spriteBatch);
                 }
+
+                DebugDraw.DrawHollowRectangle(spriteBatch, collectible.Bounds, Color.Purple);
             }
 
             spriteBatch.End();
@@ -353,7 +357,7 @@ namespace GameDevS
             SpriteSheet spriteSheet = new SpriteSheet(texture, 5, 2);
             Animation2 animation = new Animation2(spriteSheet);
 
-            Coin coin = new Coin(position, 0.08f, 48, 48);
+            Coin coin = new Coin(position, 0.06f, 36, 36);
 
             coin.AddAnimation(AnimationState.IDLE, animation);
 
