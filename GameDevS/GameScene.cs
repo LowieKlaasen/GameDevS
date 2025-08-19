@@ -12,9 +12,6 @@ namespace GameDevS
         public ContentManager contentManager;
         public SceneManager sceneManager;
 
-        private Texture2D _heroTexture;
-        private Texture2D _enemyTexture;
-
         private Texture2D _heroTextureIdle;
         private Texture2D _heroTextureRunning;
         private Texture2D _heroTextureJumping;
@@ -68,9 +65,6 @@ namespace GameDevS
 
         public void Load()
         {
-            _heroTexture = contentManager.Load<Texture2D>("RogueRunning_Cropped");
-            _enemyTexture = contentManager.Load<Texture2D>("goblin_single");
-
             _heroTextureIdle = contentManager.Load<Texture2D>("RogueIdle_Cropped");
             _heroTextureRunning = contentManager.Load<Texture2D>("RogueRunning_Cropped");
             _heroTextureJumping = contentManager.Load<Texture2D>("RogieJump_Cropped");
