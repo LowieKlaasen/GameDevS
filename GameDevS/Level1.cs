@@ -50,7 +50,7 @@ namespace GameDevS
 
             map = new TileMap2(textureSwamp, TILESIZE, 32, 10);
             //map.LoadMap("../../../Data/Level1_TempEnding.csv");
-            map.LoadMap("../../../Data/Level1.csv");
+            map.LoadMap("../../../Data/Level1_v2.csv");
 
             foreach (var tile in map.GetCollidables())
             {
@@ -89,11 +89,24 @@ namespace GameDevS
             CreateCoin(new Vector2(25, 6));
             CreateCoin(new Vector2(26, 6));
 
-            CreateCoin(new Vector2(72, 1));
-            CreateCoin(new Vector2(73, 1));
-            CreateCoin(new Vector2(74, 1));
-            CreateCoin(new Vector2(75, 1));
-            CreateCoin(new Vector2(76, 1));
+            for (int x = 72; x <= 76; x++)
+            {
+                CreateCoin(new Vector2(x, 1));
+            }
+
+            for (int y = 11; y <= 12; y++)
+            {
+                for (int x = 137; x <= 151; x++)
+                {
+                    CreateCoin(new Vector2(x, y));
+                }
+            }
+
+            CreateCoin(new Vector2(163, 0));
+            CreateCoin(new Vector2(165, 0));
+            CreateCoin(new Vector2(162, 1));
+            CreateCoin(new Vector2(164, 1));
+            CreateCoin(new Vector2(166, 1));
         }
 
         protected override void LoadBackground()
