@@ -119,6 +119,11 @@ namespace GameDevS
             hud = new GameOverlay(hudFont, player, coinTexture, fullHeart, emptyHeart);
         }
 
+        protected override void LoadMusic()
+        {
+            ServiceLocator.AudioService.PlayMusic("jungleBG");
+        }
+
 
         #region Private Methods
 

@@ -37,6 +37,8 @@ namespace GameDevS
                     options[this.selectedOption].Selected = true;
                     break;
                 case 2:
+                    ServiceLocator.AudioService.StopMusic();
+                    ServiceLocator.AudioService.PlayMusic("introMusic");
                     gameScene.SceneManager.RemoveScene();
                     break;
                 case 3:

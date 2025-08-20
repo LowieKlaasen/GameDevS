@@ -60,6 +60,7 @@ namespace GameDevS
             LoadCollectibles();
             LoadBackground();
             LoadHUD();
+            LoadMusic();
         }
 
         protected abstract void LoadPlayer();
@@ -68,6 +69,7 @@ namespace GameDevS
         protected abstract void LoadCollectibles();
         protected abstract void LoadBackground();
         protected abstract void LoadHUD();
+        protected abstract void LoadMusic();
 
         public virtual void Update(GameTime gameTime)
         {

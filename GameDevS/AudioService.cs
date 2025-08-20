@@ -25,6 +25,7 @@ namespace GameDevS
             sounds["coinCollected"] = contentManager.Load<SoundEffect>("audio/neoGeoCoin");
 
             songs["jungleBG"] = contentManager.Load<Song>("audio/jungleMusic");
+            songs["introMusic"] = contentManager.Load<Song>("audio/hidden_tombs");
         }
 
         public void Play(string soundName)

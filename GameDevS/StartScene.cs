@@ -56,6 +56,8 @@ namespace GameDevS
             selectedOption = 0;
 
             selectionKeyLifted = true;
+
+            ServiceLocator.AudioService.PlayMusic("introMusic");
         }
 
         public void Update(GameTime gameTime)
@@ -106,9 +108,11 @@ namespace GameDevS
                 {
                     case 0:
                         enterKeyLifted = false;
+                        ServiceLocator.AudioService.StopMusic();
                         sceneManager.AddScene(new Level1(contentManager, sceneManager, graphicsDevice));
                         break;
                     case 1:
+                        ServiceLocator.AudioService.StopMusic();
                         // ToDo: Add redirection to level 2
                         throw new NotImplementedException();
                         break;
