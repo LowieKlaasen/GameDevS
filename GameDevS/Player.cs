@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -18,14 +17,20 @@ namespace GameDevS
 
         public bool IsDying => currentState == AnimationState.DYING;
 
-        public Vector2 KnockbackVelocity { get; private set; } = Vector2.Zero;
-        private float knockbackDuration = 0.2f;
-        private float knockbackTimer = 0f;
-
         public int Score;
 
         private float hurtTimer = 0f;
         private float hurtDuration = 0.3f;
+
+        public Vector2 KnockbackVelocity { get; private set; } = Vector2.Zero;
+        private float knockbackDuration = 0.2f;
+        private float knockbackTimer = 0f;
+
+        private bool isInvincible = false;
+        private float invincibleTimer = 0f;
+        private float invincibleDuration = 1f;
+
+        private bool isVisible = true;
 
         public Player(Vector2 position, float scale, List<Sprite> collisionGroup, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight, IMovementController movementController) 
             : base(position, scale, hitboxStartX, hitboxStartY, hitboxWidth, hitboxHeight, movementController) 
@@ -44,18 +49,48 @@ namespace GameDevS
             if (hurtTimer > 0f)
             {
                 hurtTimer -= dt;
-                if (hurtTimer < 0f)
+                if (hurtTimer <= 0f && !IsDying)
                 {
                     SetAnimation(AnimationState.IDLE);
                 }
             }
 
+            if (knockbackTimer > 0f)
+            {
+                knockbackTimer -= dt;
+                Position += KnockbackVelocity * dt;
+            }
+
+            if (isInvincible)
+            {
+                invincibleTimer -= dt;
+                if (invincibleTimer <= 0f)
+                {
+                    isInvincible = false;
+                }
+                else
+                {
+                    if ((int)(invincibleTimer * 10) % 2 == 0)
+                    {
+                        isVisible = false;
+                    }
+                    else
+                    {
+                        isVisible = true;
+                    }
+                }
+            }
+            else
+            {
+                isVisible = true;
+            }
+
             base.Update(dt);
         }
 
-        public void TakeDamage(int amount)
+        public void TakeDamage(int amount, CollisionDirection collisionDirection)
         {
-            if (Health.Current <= 0)
+            if (isInvincible || Health.Current <= 0)
             {
                 return;
             }
@@ -63,14 +98,45 @@ namespace GameDevS
             Health.TakeDamage(amount);
 
             SetAnimation(AnimationState.HURTING);
-            //currentState = AnimationState.HURTING;
             hurtTimer = hurtDuration;
+
             ServiceLocator.AudioService.Play("playerHurt");
+
+            float horizontalForce = 300f;
+            float verticalForce = -200f;
+
+            if (collisionDirection == CollisionDirection.LEFT)
+            {
+                KnockbackVelocity = new Vector2(-horizontalForce, verticalForce);
+            }
+            else if (collisionDirection == CollisionDirection.RIGHT)
+            {
+                KnockbackVelocity = new Vector2(horizontalForce, verticalForce);
+            }
+            else
+            {
+                KnockbackVelocity = new Vector2(0, verticalForce);
+            }
+
+            knockbackTimer = knockbackDuration;
+
+            isInvincible = true;
+            invincibleTimer = invincibleDuration;
 
             if (Health.Current <= 0)
             {
                 Die();
             }
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            if (!isVisible)
+            {
+                return;
+            }
+
+            base.Draw(spriteBatch);
         }
 
         private void Die() 

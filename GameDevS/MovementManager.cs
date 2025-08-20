@@ -125,7 +125,7 @@ namespace GameDevS
                     {
                         Debug.WriteLine($"{movable.GetType()} took side damage");
 
-                        player.TakeDamage(1);
+                        player.TakeDamage(1, horizontalResult.Direction);
                     }
                 }
 
@@ -134,7 +134,7 @@ namespace GameDevS
                     if (horizontalResult.Collidable is Player player)
                     {
                         Debug.WriteLine("Player took damage from passive patrol enemy");
-                        player.TakeDamage(1);
+                        player.TakeDamage(1, horizontalResult.Direction);
                     }
 
                     passiveController.ReverseDirection(movable);
@@ -144,7 +144,7 @@ namespace GameDevS
                     if (horizontalResult.Collidable is Player player)
                     {
                         Debug.WriteLine("Player took damage from active patrol enemy");
-                        player.TakeDamage(1);
+                        player.TakeDamage(1, horizontalResult.Direction);
                     }
 
                     activeController.ReverseDirection(movable);
