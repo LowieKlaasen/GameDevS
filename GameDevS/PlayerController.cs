@@ -6,39 +6,48 @@ namespace GameDevS
 {
     internal class PlayerController : IMovementController
     {
-        private KeyboardState _keyboardState;
-        //public void UpdateKeyboard(KeyboardState state)
+        //private KeyboardState _keyboardState;
+
+        //public Vector2 GetDesiredVelocity(IMovable movable, float dt)
         //{
-        //    _keyboardState = state;
+        //    if (movable is Player player && player.IsKnockBackActive)
+        //    {
+        //        return player.KnockbackVelocity;
+        //    }
+
+        //    _keyboardState = Keyboard.GetState();
+
+        //    Vector2 velocity = Vector2.Zero;
+
+        //    if (_keyboardState.IsKeyDown(Keys.Right))
+        //    { 
+        //        velocity.X = movable.Speed; 
+        //    }
+        //    else if (_keyboardState.IsKeyDown(Keys.Left))
+        //    { 
+        //        velocity.X = -movable.Speed; 
+        //    }
+
+        //    if (movable.IsGrounded && _keyboardState.IsKeyDown(Keys.Up))
+        //    {
+        //        velocity.Y = -movable.JumpSpeed;
+        //        ServiceLocator.AudioService.Play("jump");
+        //    }
+
+        //    return velocity;
         //}
+
+        private InputHandler inputHandler = new InputHandler();
 
         public Vector2 GetDesiredVelocity(IMovable movable, float dt)
         {
-            if (movable is Player player && player.IsKnockBackActive)
+            if (movable is Player player && !player.IsKnockBackActive)
             {
-                return player.KnockbackVelocity;
+                inputHandler.HandleInput(movable, dt);
+                return movable.Velocity;
             }
 
-            _keyboardState = Keyboard.GetState();
-
-            Vector2 velocity = Vector2.Zero;
-
-            if (_keyboardState.IsKeyDown(Keys.Right))
-            { 
-                velocity.X = movable.Speed; 
-            }
-            else if (_keyboardState.IsKeyDown(Keys.Left))
-            { 
-                velocity.X = -movable.Speed; 
-            }
-
-            if (movable.IsGrounded && _keyboardState.IsKeyDown(Keys.Up))
-            {
-                velocity.Y = -movable.JumpSpeed;
-                ServiceLocator.AudioService.Play("jump");
-            }
-
-            return velocity;
+            return Vector2.Zero;
         }
 
         public bool CheckDeathByFalling(Player player, Camera2D camera, int viewportHeight)
