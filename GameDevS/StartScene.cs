@@ -112,6 +112,7 @@ namespace GameDevS
                         sceneManager.AddScene(new Level1(contentManager, sceneManager, graphicsDevice));
                         break;
                     case 1:
+                        enterKeyLifted = false;
                         ServiceLocator.AudioService.StopMusic();
                         sceneManager.AddScene(new Level2(contentManager, sceneManager, graphicsDevice));
                         break;
@@ -137,8 +138,6 @@ namespace GameDevS
                 spriteBatch.Draw(bg, new Rectangle(0, 0, graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height), Color.White);
             }
 
-            #region woodenBoard
-
             int startingpointX = (graphicsDevice.Viewport.Width - woodenBoard.Width) / 2;
             int startingpointY = (graphicsDevice.Viewport.Height - woodenBoard.Height) / 2;
 
@@ -152,8 +151,6 @@ namespace GameDevS
                 spriteBatch.DrawString(option.Font, option.Text, new Vector2(woodenBoard.Width/2, startingpointY + spacer), option.GetColor());
                 spacer += 40;
             }
-
-            #endregion
 
             spriteBatch.End();
         }

@@ -66,6 +66,9 @@ namespace GameDevS
         protected override void LoadEnemies()
         {
             // ToDo: add enemies
+            CreateActivePatrolEnemy(new Vector2(13, 9), player);
+
+            //CreatePassivePatrolEnemy(new Vector2(54, 4));
 
             foreach (var sprite in sprites)
             {
@@ -76,6 +79,9 @@ namespace GameDevS
         protected override void LoadCollectibles()
         {
             // ToDo: add coins
+            CreateCoin(new Vector2(20, 9));
+            CreateCoin(new Vector2(22, 8));
+            CreateCoin(new Vector2(25, 7));
         }
 
         protected override void LoadBackground()
@@ -120,15 +126,15 @@ namespace GameDevS
                 startCoordinates.Y * TILESIZE
             );
 
-            Texture2D walkTexture = ContentManager.Load<Texture2D>("enemies/goblin/golem_walking");
-            SpriteSheet walkSheet = new SpriteSheet(walkTexture, 8, 3);
+            Texture2D walkTexture = ContentManager.Load<Texture2D>("enemies/golems/golem2_walking");
+            SpriteSheet walkSheet = new SpriteSheet(walkTexture, 6, 4);
             Animation2 walkAnimation = new Animation2(walkSheet);
 
-            Texture2D idleTexture = ContentManager.Load<Texture2D>("enemies/goblin/goblin_idle");
+            Texture2D idleTexture = ContentManager.Load<Texture2D>("enemies/golems/golem2_idle");
             SpriteSheet idleSheet = new SpriteSheet(idleTexture, 6, 3);
             Animation2 idleAnimation = new Animation2(idleSheet);
 
-            Texture2D dyingTexture = ContentManager.Load<Texture2D>("enemies/goblin/goblin_dying");
+            Texture2D dyingTexture = ContentManager.Load<Texture2D>("enemies/golems/golem2_dying");
             SpriteSheet dyingSheet = new SpriteSheet(dyingTexture, 5, 3);
             Animation2 dyingAnimatoin = new Animation2(dyingSheet);
 
@@ -148,20 +154,20 @@ namespace GameDevS
                 startCoordinates.Y * TILESIZE
             );
 
-            Texture2D walkTexture = ContentManager.Load<Texture2D>("enemies/ogre/ogre_walking");
-            SpriteSheet walkSheet = new SpriteSheet(walkTexture, 8, 3);
+            Texture2D walkTexture = ContentManager.Load<Texture2D>("enemies/golems/golem3_walking");
+            SpriteSheet walkSheet = new SpriteSheet(walkTexture, 6, 4);
             Animation2 walkAnimation = new Animation2(walkSheet);
 
-            Texture2D idleTexture = ContentManager.Load<Texture2D>("enemies/ogre/ogre_idle");
+            Texture2D idleTexture = ContentManager.Load<Texture2D>("enemies/golems/golem3_idle");
             SpriteSheet idleSheet = new SpriteSheet(idleTexture, 6, 3);
             Animation2 idleAnimation = new Animation2(idleSheet);
 
-            Texture2D dyingTexture = ContentManager.Load<Texture2D>("enemies/ogre/ogre_dying");
+            Texture2D dyingTexture = ContentManager.Load<Texture2D>("enemies/golems/golem3_dying");
             SpriteSheet dyingSheet = new SpriteSheet(dyingTexture, 5, 3);
             Animation2 dyingAnimation = new Animation2(dyingSheet);
 
-            Texture2D jumpTexture = ContentManager.Load<Texture2D>("enemies/ogre/ogre_jumpSequene");
-            SpriteSheet jumpSheet = new SpriteSheet(jumpTexture, 6, 2);
+            Texture2D jumpTexture = ContentManager.Load<Texture2D>("enemies/golems/golem3_jumping");
+            SpriteSheet jumpSheet = new SpriteSheet(jumpTexture, 4, 3);
             Animation2 jumpAnimation = new Animation2(jumpSheet);
 
             PassivePatrolEnemy patrolEnemy = new PassivePatrolEnemy(startPosition, 0.1f, 23, 22, 41, 54, new ActivePatrolController(player, collisionManager));
@@ -181,26 +187,17 @@ namespace GameDevS
                 startCoordinates.Y * TILESIZE
             );
 
-            Texture2D walkTexture = ContentManager.Load<Texture2D>("enemies/orc/orc_walking");
-            SpriteSheet walkSheet = new SpriteSheet(walkTexture, 8, 3);
-            Animation2 walkAnimation = new Animation2(walkSheet);
-
-            Texture2D idleTexture = ContentManager.Load<Texture2D>("enemies/orc/orc_idle");
+            Texture2D idleTexture = ContentManager.Load<Texture2D>("enemies/golems/golem1_idle");
             SpriteSheet idleSheet = new SpriteSheet(idleTexture, 6, 3);
             Animation2 idleAnimation = new Animation2(idleSheet);
 
-            Texture2D dyingTexture = ContentManager.Load<Texture2D>("enemies/orc/orc_dying");
+            Texture2D dyingTexture = ContentManager.Load<Texture2D>("enemies/golems/golem1_dying");
             SpriteSheet dyingSheet = new SpriteSheet(dyingTexture, 5, 3);
             Animation2 dyingAnimation = new Animation2(dyingSheet);
-
-            Texture2D chargingTexture = ContentManager.Load<Texture2D>("enemies/orc/orc_running");
-            SpriteSheet chargingSheet = new SpriteSheet(chargingTexture, 4, 3);
-            Animation2 chargingAnimation = new Animation2(chargingSheet);
 
             StationaryEnemy stationaryEnemy = new StationaryEnemy(startPosition, 0.1f, 23, 22, 41, 54, new StationaryController());
 
             stationaryEnemy.AddAnimation(AnimationState.IDLE, idleAnimation);
-            stationaryEnemy.AddAnimation(AnimationState.RUNNING, walkAnimation);
             stationaryEnemy.AddAnimation(AnimationState.DYING, dyingAnimation);
 
             sprites.Add(stationaryEnemy);
