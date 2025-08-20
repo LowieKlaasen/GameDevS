@@ -12,6 +12,7 @@ namespace GameDevS
 
         protected Dictionary<AnimationState, Animation2> animations = new Dictionary<AnimationState, Animation2>();
         protected AnimationState currentState;
+        public AnimationState CurrentState { get { return currentState; } }
 
         protected AnimatedEntity(Vector2 position, float scale)
         {

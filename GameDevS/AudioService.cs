@@ -65,7 +65,7 @@ namespace GameDevS
                 Debug.WriteLine(volumeType + ": " + volume);
                 return;
             }
-            soundEffectVolume = volume;
+            soundEffectVolume = MathHelper.Clamp(volume, 0f, 1f);
 
             Debug.WriteLine(volumeType + ": " + volume);
         }

@@ -8,11 +8,16 @@ namespace GameDevS
     {
         public void UpdateAnimation(Sprite sprite)
         {
-            if (sprite is Enemy enemy && enemy.IsDying || sprite is Player player && player.IsDying)
+            if (sprite is Enemy enemy && enemy.IsDying 
+                || sprite is Player player && player.IsDying)
             {
                 return;
             }
 
+            if (sprite is Player playerB && playerB.CurrentState == AnimationState.HURTING)
+            {
+                return;
+            }
 
             if (sprite.Velocity.X > 0)
             {

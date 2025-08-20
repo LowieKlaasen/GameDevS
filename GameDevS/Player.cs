@@ -24,6 +24,9 @@ namespace GameDevS
 
         public int Score;
 
+        private float hurtTimer = 0f;
+        private float hurtDuration = 0.3f;
+
         public Player(Vector2 position, float scale, List<Sprite> collisionGroup, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight, IMovementController movementController) 
             : base(position, scale, hitboxStartX, hitboxStartY, hitboxWidth, hitboxHeight, movementController) 
         {
@@ -38,30 +41,30 @@ namespace GameDevS
 
         public override void Update(float dt)
         {
-            //float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            //if (!Health.IsAlive)
-            //{
-            //    Die();
-            //}
-
-            //if (IsDying)
-            //{
-            //    deathTimer -= dt;
-            //    if (deathTimer < 0f)
-            //    {
-            //        // ToDo: Die
-            //    }
-            //}
+            if (hurtTimer > 0f)
+            {
+                hurtTimer -= dt;
+                if (hurtTimer < 0f)
+                {
+                    SetAnimation(AnimationState.IDLE);
+                }
+            }
 
             base.Update(dt);
         }
 
         public void TakeDamage(int amount)
         {
+            if (Health.Current <= 0)
+            {
+                return;
+            }
+
             Health.TakeDamage(amount);
 
-            currentState = AnimationState.HURTING;
+            SetAnimation(AnimationState.HURTING);
+            //currentState = AnimationState.HURTING;
+            hurtTimer = hurtDuration;
             ServiceLocator.AudioService.Play("playerHurt");
 
             if (Health.Current <= 0)
