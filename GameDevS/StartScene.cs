@@ -113,8 +113,7 @@ namespace GameDevS
                         break;
                     case 1:
                         ServiceLocator.AudioService.StopMusic();
-                        // ToDo: Add redirection to level 2
-                        throw new NotImplementedException();
+                        sceneManager.AddScene(new Level2(contentManager, sceneManager, graphicsDevice));
                         break;
                     case 2:
                         enterKeyLifted = false;

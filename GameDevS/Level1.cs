@@ -49,7 +49,8 @@ namespace GameDevS
             Texture2D textureSwamp = ContentManager.Load<Texture2D>("map/swamp_tileset");
 
             map = new TileMap2(textureSwamp, TILESIZE, 32, 10);
-            map.LoadMap("../../../Data/Level1_TempEnding.csv");
+            //map.LoadMap("../../../Data/Level1_TempEnding.csv");
+            map.LoadMap("../../../Data/Level1.csv");
 
             foreach (var tile in map.GetCollidables())
             {

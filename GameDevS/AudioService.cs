@@ -26,6 +26,7 @@ namespace GameDevS
 
             songs["jungleBG"] = contentManager.Load<Song>("audio/jungleMusic");
             songs["introMusic"] = contentManager.Load<Song>("audio/hidden_tombs");
+            songs["templeBG"] = contentManager.Load<Song>("audio/AztecTemple");
         }
 
         public void Play(string soundName)
