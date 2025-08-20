@@ -101,6 +101,8 @@ namespace GameDevS
             Animation2 hurtAnimation = new Animation2(hurtSheet);
             player.AddAnimation(AnimationState.HURTING, hurtAnimation);
 
+            CreateStationaryEnemy(new Vector2(33 * 54, 3 * 54));
+
             CreatePassivePatrolEnemy(new Vector2(16 * 54, 7 * 54));
 
             CreatePassivePatrolEnemy(new Vector2(46 * 54, 9 * 54));
@@ -408,6 +410,33 @@ namespace GameDevS
             patrolEnemy.AddAnimation(AnimationState.JUMPING, jumpAnimation);
 
             sprites.Add(patrolEnemy);
+        }
+
+        private void CreateStationaryEnemy(Vector2 startPosition)
+        {
+            Texture2D walkTexture = contentManager.Load<Texture2D>("enemies/orc/orc_walking");
+            SpriteSheet walkSheet = new SpriteSheet(walkTexture, 8, 3);
+            Animation2 walkAnimation = new Animation2(walkSheet);
+
+            Texture2D idleTexture = contentManager.Load<Texture2D>("enemies/orc/orc_idle");
+            SpriteSheet idleSheet = new SpriteSheet(idleTexture, 6, 3);
+            Animation2 idleAnimation = new Animation2(idleSheet);
+
+            Texture2D dyingTexture = contentManager.Load<Texture2D>("enemies/orc/orc_dying");
+            SpriteSheet dyingSheet = new SpriteSheet(dyingTexture, 5, 3);
+            Animation2 dyingAnimation = new Animation2(dyingSheet);
+
+            Texture2D chargingTexture = contentManager.Load<Texture2D>("enemies/orc/orc_running");
+            SpriteSheet chargingSheet = new SpriteSheet(chargingTexture, 4, 3);
+            Animation2 chargingAnimation = new Animation2(chargingSheet);
+
+            StationaryEnemy stationaryEnemy = new StationaryEnemy(startPosition, 0.1f, 23, 22, 41, 54, new StationaryController());
+
+            stationaryEnemy.AddAnimation(AnimationState.IDLE, idleAnimation);
+            stationaryEnemy.AddAnimation(AnimationState.RUNNING, walkAnimation);
+            stationaryEnemy.AddAnimation(AnimationState.DYING, dyingAnimation);
+
+            sprites.Add(stationaryEnemy);
         }
 
         private void CreateCoin(Vector2 position)
