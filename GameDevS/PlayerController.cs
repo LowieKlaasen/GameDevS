@@ -14,6 +14,11 @@ namespace GameDevS
 
         public Vector2 GetDesiredVelocity(IMovable movable, float dt)
         {
+            if (movable is Player player && player.IsKnockBackActive)
+            {
+                return player.KnockbackVelocity;
+            }
+
             _keyboardState = Keyboard.GetState();
 
             Vector2 velocity = Vector2.Zero;

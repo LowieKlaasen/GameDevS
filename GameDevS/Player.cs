@@ -32,6 +32,8 @@ namespace GameDevS
 
         private bool isVisible = true;
 
+        public bool IsKnockBackActive => knockbackTimer > 0f;
+
         public Player(Vector2 position, float scale, List<Sprite> collisionGroup, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight, IMovementController movementController) 
             : base(position, scale, hitboxStartX, hitboxStartY, hitboxWidth, hitboxHeight, movementController) 
         {
@@ -42,6 +44,8 @@ namespace GameDevS
 
             Health = new Health(5);
             Score = 0;
+
+            //Health.TakeDamage(4);
         }
 
         public override void Update(float dt)
@@ -58,7 +62,6 @@ namespace GameDevS
             if (knockbackTimer > 0f)
             {
                 knockbackTimer -= dt;
-                Position += KnockbackVelocity * dt;
             }
 
             if (isInvincible)
@@ -102,8 +105,8 @@ namespace GameDevS
 
             ServiceLocator.AudioService.Play("playerHurt");
 
-            float horizontalForce = 300f;
-            float verticalForce = -200f;
+            float horizontalForce = 350f;
+            float verticalForce = -150f;
 
             if (collisionDirection == CollisionDirection.LEFT)
             {
