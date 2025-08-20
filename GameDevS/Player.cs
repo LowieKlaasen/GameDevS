@@ -40,19 +40,19 @@ namespace GameDevS
         {
             //float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (!Health.IsAlive)
-            {
-                Die();
-            }
+            //if (!Health.IsAlive)
+            //{
+            //    Die();
+            //}
 
-            if (IsDying)
-            {
-                deathTimer -= dt;
-                if (deathTimer < 0f)
-                {
-                    // ToDo: Die
-                }
-            }
+            //if (IsDying)
+            //{
+            //    deathTimer -= dt;
+            //    if (deathTimer < 0f)
+            //    {
+            //        // ToDo: Die
+            //    }
+            //}
 
             base.Update(dt);
         }

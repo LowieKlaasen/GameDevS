@@ -33,7 +33,7 @@ namespace GameDevS
 
         public bool CanJump()
         {
-            return IsGrounded && JumpCooldown <= 0f;
+            return IsGrounded && JumpCooldown <= 0f && currentState != AnimationState.DYING;
         }
 
         public bool IsGroundAhead(CollisionManager2 collisionManager, PassivePatrolEnemy enemy)
@@ -42,7 +42,7 @@ namespace GameDevS
             {
                 Vector2 start = new Vector2(
                     enemy.Position.X + controller.Direction * (enemy.HitBox.Width / 2 + 2),
-                    enemy.Position.Y + enemy.HitBox.Height + 1 // 1 pixel below feet
+                    enemy.Position.Y + enemy.HitBox.Height + 1
                 );
 
                 Vector2 end = start + new Vector2(0, 1);

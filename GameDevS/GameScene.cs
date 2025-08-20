@@ -189,6 +189,10 @@ namespace GameDevS
             //    GameOver = true;
             //    Debug.WriteLine("GameOver = " + GameOver);
             //}
+            if (!player.Health.IsAlive)
+            {
+                GameOver = true;
+            }
 
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 

@@ -131,10 +131,22 @@ namespace GameDevS
 
                 if (movable.MovementController is PassivePatrolController passiveController)
                 {
+                    if (horizontalResult.Collidable is Player player)
+                    {
+                        Debug.WriteLine("Player took damage from passive patrol enemy");
+                        player.TakeDamage(1);
+                    }
+
                     passiveController.ReverseDirection(movable);
                 }
                 if (movable.MovementController is ActivePatrolController activeController)
                 {
+                    if (horizontalResult.Collidable is Player player)
+                    {
+                        Debug.WriteLine("Player took damage from active patrol enemy");
+                        player.TakeDamage(1);
+                    }
+
                     activeController.ReverseDirection(movable);
                 }
             }
