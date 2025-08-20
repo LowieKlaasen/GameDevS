@@ -30,11 +30,7 @@ namespace GameDevS
         public GraphicsDevice graphicsDevice;
         private Camera2D camera;
 
-        //private PlayerController playerController;
-
         private AnimationUpdater animationUpdater;
-
-        //private PassivePatrolController passivePatrolController;
 
         public bool IsPaused;
         private PauseMenu pauseMenu;
@@ -48,6 +44,8 @@ namespace GameDevS
 
         private GameOverlay hud;
 
+        private int TILESIZE = 54;
+
         public GameScene(ContentManager contentManager, SceneManager sceneManager, GraphicsDevice graphicsDevice)
         {
             this.contentManager = contentManager;
@@ -56,10 +54,6 @@ namespace GameDevS
             this.graphicsDevice = graphicsDevice;
 
             camera = new Camera2D(graphicsDevice.Viewport);
-
-            //playerController = new PlayerController();
-
-            //passivePatrolController = new PassivePatrolController();
 
             pauseMenu = new PauseMenu(graphicsDevice, this, contentManager);
 
@@ -101,25 +95,25 @@ namespace GameDevS
             Animation2 hurtAnimation = new Animation2(hurtSheet);
             player.AddAnimation(AnimationState.HURTING, hurtAnimation);
 
-            CreateStationaryEnemy(new Vector2(33 * 54, 3 * 54));
+            CreateStationaryEnemy(new Vector2(33, 3));
 
-            CreatePassivePatrolEnemy(new Vector2(16 * 54, 7 * 54));
+            CreatePassivePatrolEnemy(new Vector2(16, 7));
 
-            CreatePassivePatrolEnemy(new Vector2(46 * 54, 9 * 54));
-            CreatePassivePatrolEnemy(new Vector2(50 * 54, 9 * 54));
-            CreatePassivePatrolEnemy(new Vector2(54 * 54, 9 * 54));
-            CreatePassivePatrolEnemy(new Vector2(60 * 54, 9 * 54));
+            CreatePassivePatrolEnemy(new Vector2(46, 9));
+            CreatePassivePatrolEnemy(new Vector2(50, 9));
+            CreatePassivePatrolEnemy(new Vector2(54, 9));
+            CreatePassivePatrolEnemy(new Vector2(60, 9));
 
-            CreateActivePatrolEnemy(new Vector2(22 * 54, 6 * 54), player);
-            CreateActivePatrolEnemy(new Vector2(59 * 54, 3 * 54), player);
-            CreateActivePatrolEnemy(new Vector2(88 * 54, 4 * 54), player);
+            CreateActivePatrolEnemy(new Vector2(22, 6), player);
+            CreateActivePatrolEnemy(new Vector2(59, 3), player);
+            CreateActivePatrolEnemy(new Vector2(88, 4), player);
 
             sprites.Add(player);
 
             textureSwamp = contentManager.Load<Texture2D>("map/swamp_tileset");
 
             //map = new TileMap("../../../Data/simple.csv", textureSwamp, 32);
-            map = new TileMap2(textureSwamp, 54, 32, 10);
+            map = new TileMap2(textureSwamp, TILESIZE, 32, 10);
             //map.LoadMap("../../../Data/simple.csv");
             //map.LoadMap("../../../Data/Test_FullScreen.csv");
             //map.LoadMap("../../../Data/Test_MovingMap.csv");
@@ -155,19 +149,19 @@ namespace GameDevS
 
             collectibles = new List<ICollectible>();
 
-            CreateCoin(new Vector2(9 * 54, 6 * 54));
-            CreateCoin(new Vector2(10 * 54, 6 * 54));
-            CreateCoin(new Vector2(11 * 54, 6 * 54));
+            CreateCoin(new Vector2(9, 6));
+            CreateCoin(new Vector2(10, 6));
+            CreateCoin(new Vector2(11, 6));
 
-            CreateCoin(new Vector2(24 * 54, 6 * 54));
-            CreateCoin(new Vector2(25 * 54, 6 * 54));
-            CreateCoin(new Vector2(26 * 54, 6 * 54));
+            CreateCoin(new Vector2(24, 6));
+            CreateCoin(new Vector2(25, 6));
+            CreateCoin(new Vector2(26, 6));
 
-            CreateCoin(new Vector2(72 * 54, 1 * 54));
-            CreateCoin(new Vector2(73 * 54, 1 * 54));
-            CreateCoin(new Vector2(74 * 54, 1 * 54));
-            CreateCoin(new Vector2(75 * 54, 1 * 54));
-            CreateCoin(new Vector2(76 * 54, 1 * 54));
+            CreateCoin(new Vector2(72, 1));
+            CreateCoin(new Vector2(73, 1));
+            CreateCoin(new Vector2(74, 1));
+            CreateCoin(new Vector2(75, 1));
+            CreateCoin(new Vector2(76, 1));
 
             SpriteFont hudFont = contentManager.Load<SpriteFont>("fonts/PixelEmulator");
             Texture2D coinTexture = contentManager.Load<Texture2D>("hud/Gold_2");
@@ -185,17 +179,6 @@ namespace GameDevS
                 IsPaused = true;
                 Debug.WriteLine("IsPaused = " + IsPaused);
             }
-            //if (!GameOver && Keyboard.GetState().IsKeyDown(Keys.G))
-            //{
-            //    Debug.WriteLine("Game over pressed");
-            //    GameOver = true;
-            //    Debug.WriteLine("GameOver = " + GameOver);
-            //}
-
-            //if (!player.Health.IsAlive)
-            //{
-            //    GameOver = true;
-            //}
             player.OnDeathAnimationFinished += () =>
             {
                 GameOver = true;
@@ -227,7 +210,7 @@ namespace GameDevS
                 return;
             }
 
-            camera.Follow(player.Position, 0, 200 * 54, 0, 15 * 54);
+            camera.Follow(player.Position, 0, 200 * TILESIZE, 0, 15 * TILESIZE);
 
             foreach (var sprite in sprites)
             {
@@ -361,8 +344,13 @@ namespace GameDevS
 
         #region Private Methods
 
-        private void CreatePassivePatrolEnemy(Vector2 startPosition)
+        private void CreatePassivePatrolEnemy(Vector2 startCoordinates)
         {
+            Vector2 startPosition = new Vector2(
+                startCoordinates.X * TILESIZE,
+                startCoordinates.Y * TILESIZE
+            );
+
             Texture2D walkTexture = contentManager.Load<Texture2D>("enemies/goblin/golem_walking");
             SpriteSheet walkSheet = new SpriteSheet(walkTexture, 8, 3);
             Animation2 walkAnimation = new Animation2(walkSheet);
@@ -384,8 +372,13 @@ namespace GameDevS
             sprites.Add(patrolEnemy);
         }
 
-        private void CreateActivePatrolEnemy(Vector2 startPosition, Player player)
+        private void CreateActivePatrolEnemy(Vector2 startCoordinates, Player player)
         {
+            Vector2 startPosition = new Vector2(
+                startCoordinates.X * TILESIZE,
+                startCoordinates.Y * TILESIZE
+            );
+
             Texture2D walkTexture = contentManager.Load<Texture2D>("enemies/ogre/ogre_walking");
             SpriteSheet walkSheet = new SpriteSheet(walkTexture, 8, 3);
             Animation2 walkAnimation = new Animation2(walkSheet);
@@ -412,8 +405,13 @@ namespace GameDevS
             sprites.Add(patrolEnemy);
         }
 
-        private void CreateStationaryEnemy(Vector2 startPosition)
+        private void CreateStationaryEnemy(Vector2 startCoordinates)
         {
+            Vector2 startPosition = new Vector2(
+                startCoordinates.X * TILESIZE,
+                startCoordinates.Y * TILESIZE
+            );
+
             Texture2D walkTexture = contentManager.Load<Texture2D>("enemies/orc/orc_walking");
             SpriteSheet walkSheet = new SpriteSheet(walkTexture, 8, 3);
             Animation2 walkAnimation = new Animation2(walkSheet);
@@ -439,8 +437,13 @@ namespace GameDevS
             sprites.Add(stationaryEnemy);
         }
 
-        private void CreateCoin(Vector2 position)
+        private void CreateCoin(Vector2 coordinates)
         {
+            Vector2 position = new Vector2(
+                coordinates.X * TILESIZE,
+                coordinates.Y * TILESIZE
+            );
+
             Texture2D texture = contentManager.Load<Texture2D>("collectibles/goldenCoin_one");
             SpriteSheet spriteSheet = new SpriteSheet(texture, 5, 2);
             Animation2 animation = new Animation2(spriteSheet);
