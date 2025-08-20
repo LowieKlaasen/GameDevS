@@ -21,6 +21,8 @@ namespace GameDevS
 
         protected bool selectionKeyLifted;
 
+        protected bool enterKeyLifted;
+
         protected OverlayMenu(GraphicsDevice graphicsDevice, GameScene gameScene, ContentManager contentManager)
         {
             overlay = new Texture2D(graphicsDevice, 1, 1);
@@ -40,6 +42,11 @@ namespace GameDevS
         public virtual void Update(GameTime gameTime)
         {
             KeyboardState state = Keyboard.GetState();
+
+            if (!enterKeyLifted && state.IsKeyUp(Keys.Enter))
+            {
+                enterKeyLifted = true;
+            }
 
             if (selectionKeyLifted && state.IsKeyDown(Keys.Down))
             {
@@ -72,7 +79,7 @@ namespace GameDevS
                 selectionKeyLifted = true;
             }
 
-            if (state.IsKeyDown(Keys.Enter))
+            if (enterKeyLifted && state.IsKeyDown(Keys.Enter))
             {
                 OnOptionSelected(selectedOption);
             }

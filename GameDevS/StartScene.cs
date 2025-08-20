@@ -46,10 +46,11 @@ namespace GameDevS
 
             titleFont = contentManager.Load<SpriteFont>("fonts/UnifrakturCook");
 
-            menuOptions = new Option[3];
+            menuOptions = new Option[4];
             menuOptions[0] = new Option(contentManager.Load<SpriteFont>("fonts/Jacquard24"), "Level 1", new Color(64, 48, 22), Color.Gold);
             menuOptions[1] = new Option(contentManager.Load<SpriteFont>("fonts/Jacquard24"), "Level 2", new Color(64, 48, 22), Color.Gold);
             menuOptions[2] = new Option(contentManager.Load<SpriteFont>("fonts/Jacquard24"), "Settings", new Color(64, 48, 22), Color.Gold);
+            menuOptions[3] = new Option(contentManager.Load<SpriteFont>("fonts/Jacquard24"), "Quit", new Color(64, 48, 22), Color.Gold);
 
             menuOptions[0].Selected = true;
             selectedOption = 0;
@@ -104,6 +105,7 @@ namespace GameDevS
                 switch (selectedOption)
                 {
                     case 0:
+                        enterKeyLifted = false;
                         sceneManager.AddScene(new GameScene(contentManager, sceneManager, graphicsDevice));
                         break;
                     case 1:
@@ -113,6 +115,9 @@ namespace GameDevS
                     case 2:
                         enterKeyLifted = false;
                         sceneManager.AddScene(new SettingsScene(contentManager, sceneManager, graphicsDevice));
+                        break;
+                    case 3:
+                        ServiceLocator.GameExitService.Exit();
                         break;
                     default:
                         throw new IndexOutOfRangeException();

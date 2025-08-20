@@ -53,7 +53,7 @@ namespace GameDevS
                     options[this.selectedOption].Selected = true;
                     break;
                 case 1:
-                    gameScene.sceneManager.AddScene(new StartScene(gameScene.contentManager, gameScene.sceneManager, gameScene.graphicsDevice));
+                    gameScene.sceneManager.RemoveScene();
                     break;
                 case 2:
                     ServiceLocator.GameExitService.Exit();

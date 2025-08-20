@@ -12,11 +12,12 @@ namespace GameDevS
             : base(graphicsDevice, gameScene, contentManager)
         {
 
-            options = new Option[3];
+            options = new Option[4];
 
             options[0] = new Option(optionFont, "Continue", new Color(64, 48, 22), Color.Gold);
             options[1] = new Option(optionFont, "Restart", new Color(64, 48, 22), Color.Gold);
-            options[2] = new Option(optionFont, "Quit", new Color(64, 48, 22), Color.Gold);
+            options[2] = new Option(optionFont, "Main Menu", new Color(64, 48, 22), Color.Gold);
+            options[3] = new Option(optionFont, "Settings", new Color(64, 48, 22), Color.Gold);
 
             options[0].Selected = true;
             selectedOption = 0;
@@ -36,7 +37,11 @@ namespace GameDevS
                     options[this.selectedOption].Selected = true;
                     break;
                 case 2:
-                    ServiceLocator.GameExitService.Exit();
+                    gameScene.sceneManager.RemoveScene();
+                    break;
+                case 3:
+                    enterKeyLifted = false;
+                    gameScene.sceneManager.AddScene(new SettingsScene(gameScene.contentManager, gameScene.sceneManager, gameScene.graphicsDevice));
                     break;
             }
         }
