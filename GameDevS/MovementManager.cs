@@ -4,7 +4,7 @@ using static GameDevS.CollisionManager2;
 
 namespace GameDevS
 {
-    internal class MovementManager
+    public class MovementManager
     {
         //private readonly float speed; (speed is a property of a movable | If not, speed should be set via ctor)
         private readonly ICollisionService2 collisionService;

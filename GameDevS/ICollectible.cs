@@ -2,7 +2,7 @@
 
 namespace GameDevS
 {
-    internal interface ICollectible
+    public interface ICollectible
     {
             Rectangle Bounds { get; }
             void OnCollect(Player player);

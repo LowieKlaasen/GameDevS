@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameDevS
 {
-    internal class GameOverlay
+    public class GameOverlay
     {
         private SpriteFont font;
         private Player player;

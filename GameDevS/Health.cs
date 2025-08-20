@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace GameDevS
 {
-    internal class Health
+    public class Health
     {
         public int Max { get; private set; }
 

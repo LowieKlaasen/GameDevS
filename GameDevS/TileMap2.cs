@@ -5,7 +5,7 @@ using System.IO;
 
 namespace GameDevS
 {
-    internal class TileMap2
+    public class TileMap2
     {
         private List<Tile2> map;
         private int displayTileSize;

@@ -2,7 +2,7 @@
 
 namespace GameDevS
 {
-    internal class Sprite : AnimatedEntity, ICollidable2, IMovable
+    public class Sprite : AnimatedEntity, ICollidable2, IMovable
     {
         protected float speed;
         public float Speed

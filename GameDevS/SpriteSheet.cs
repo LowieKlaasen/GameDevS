@@ -2,7 +2,7 @@
 
 namespace GameDevS
 {
-    internal class SpriteSheet
+    public class SpriteSheet
     {
         public Texture2D Texture;
         public int NumberOfWidthSprites;

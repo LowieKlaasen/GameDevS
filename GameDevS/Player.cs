@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace GameDevS
 {
-    internal class Player : Sprite, ICollidable2
+    public class Player : Sprite, ICollidable2
     {
         // ToDo: Check if this is necessery (& remove)
         private List<Sprite> collisionGroup;

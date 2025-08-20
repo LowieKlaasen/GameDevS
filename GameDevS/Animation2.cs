@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GameDevS
 {
-    internal class Animation2
+    public class Animation2
     {
         public AnimationFrame CurrentFrame { get; set; }
         private List<AnimationFrame> frames { get; set; }

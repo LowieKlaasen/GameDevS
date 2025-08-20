@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameDevS
 {
-    internal class Tile2 : ICollidable2
+    public class Tile2 : ICollidable2
     {
         public Texture2D Texture;
         public Rectangle SrcRect;

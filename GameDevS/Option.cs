@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameDevS
 {
-    internal class Option
+    public class Option
     {
         public SpriteFont Font;
         public bool Selected;

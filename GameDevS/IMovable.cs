@@ -2,7 +2,7 @@
 
 namespace GameDevS
 {
-    internal interface IMovable
+    public interface IMovable
     {
         public Vector2 Position { get; set; }
         public float Speed { get; }

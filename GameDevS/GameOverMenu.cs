@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameDevS
 {
-    internal class GameOverMenu : OverlayMenu
+    public class GameOverMenu : OverlayMenu
     {
         protected override Option[] options { get; set; }
 
@@ -53,7 +53,7 @@ namespace GameDevS
                     options[this.selectedOption].Selected = true;
                     break;
                 case 1:
-                    gameScene.sceneManager.RemoveScene();
+                    gameScene.SceneManager.RemoveScene();
                     break;
                 case 2:
                     ServiceLocator.GameExitService.Exit();

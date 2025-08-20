@@ -2,7 +2,7 @@
 
 namespace GameDevS
 {
-    internal interface ICollidable2
+    public interface ICollidable2
     {
         public Rectangle HitBox { get; }
     }

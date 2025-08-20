@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace GameDevS
 {
-    internal class CollisionManager2 : ICollisionService2
+    public class CollisionManager2 : ICollisionService2
     {
         private readonly List<ICollidable2> collidables = new List<ICollidable2>();
 

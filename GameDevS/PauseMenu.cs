@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameDevS
 {
-    internal class PauseMenu : OverlayMenu
+    public class PauseMenu : OverlayMenu
     {
         protected override Option[] options { get; set; }
 
@@ -37,11 +37,11 @@ namespace GameDevS
                     options[this.selectedOption].Selected = true;
                     break;
                 case 2:
-                    gameScene.sceneManager.RemoveScene();
+                    gameScene.SceneManager.RemoveScene();
                     break;
                 case 3:
                     enterKeyLifted = false;
-                    gameScene.sceneManager.AddScene(new SettingsScene(gameScene.contentManager, gameScene.sceneManager, gameScene.graphicsDevice));
+                    gameScene.SceneManager.AddScene(new SettingsScene(gameScene.ContentManager, gameScene.SceneManager, gameScene.GraphicsDevice));
                     break;
             }
         }

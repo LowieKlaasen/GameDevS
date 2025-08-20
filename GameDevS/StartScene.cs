@@ -106,7 +106,7 @@ namespace GameDevS
                 {
                     case 0:
                         enterKeyLifted = false;
-                        sceneManager.AddScene(new GameScene(contentManager, sceneManager, graphicsDevice));
+                        sceneManager.AddScene(new Level1(contentManager, sceneManager, graphicsDevice));
                         break;
                     case 1:
                         // ToDo: Add redirection to level 2

@@ -4,7 +4,7 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace GameDevS
 {
-    internal class AnimationUpdater
+    public class AnimationUpdater
     {
         public void UpdateAnimation(Sprite sprite)
         {

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameDevS
 {
-    internal class Camera2D
+    public class Camera2D
     {
         public Matrix Transform { get; private set; }
         public Vector2 Position { get; private set; }

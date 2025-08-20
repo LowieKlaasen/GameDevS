@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameDevS
 {
-    internal abstract class OverlayMenu
+    public abstract class OverlayMenu
     {
         protected Texture2D overlay;
         protected Texture2D woodenBoard;

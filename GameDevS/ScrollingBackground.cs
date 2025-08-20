@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace GameDevS
 {
-    internal class ScrollingBackground
+    public class ScrollingBackground
     {
         private Camera2D camera;
         private readonly List<BackgroundLayer> backgroundLayers = new List<BackgroundLayer>();

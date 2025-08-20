@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace GameDevS
 {
-    internal abstract class AnimatedEntity
+    public abstract class AnimatedEntity
     {
         public Vector2 Position { get; set; }
         protected float Scale;
