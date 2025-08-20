@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -13,7 +14,7 @@ namespace GameDevS
         public Health Health { get; private set; }
 
         public float deathTimer = 0f;
-        public float deathAnimationDuration = 1f;
+        public float deathAnimationDuration = 0.6f;
 
         public bool IsDying => currentState == AnimationState.DYING;
 
@@ -34,6 +35,8 @@ namespace GameDevS
 
         public bool IsKnockBackActive => knockbackTimer > 0f;
 
+        public Action OnDeathAnimationFinished;
+
         public Player(Vector2 position, float scale, List<Sprite> collisionGroup, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight, IMovementController movementController) 
             : base(position, scale, hitboxStartX, hitboxStartY, hitboxWidth, hitboxHeight, movementController) 
         {
@@ -44,8 +47,6 @@ namespace GameDevS
 
             Health = new Health(5);
             Score = 0;
-
-            //Health.TakeDamage(4);
         }
 
         public override void Update(float dt)
@@ -86,6 +87,15 @@ namespace GameDevS
             else
             {
                 isVisible = true;
+            }
+
+            if (IsDying)
+            {
+                deathTimer -= dt;
+                if (deathTimer <= 0f)
+                {
+                    OnDeathAnimationFinished?.Invoke();
+                }
             }
 
             base.Update(dt);
@@ -155,7 +165,9 @@ namespace GameDevS
             //ServiceLocator.AudioService.Play("");
 
             deathTimer = deathAnimationDuration;
-            speed /= 2;
+            speed = 0f;
+            KnockbackVelocity /= 2;
         }
     }
+
 }

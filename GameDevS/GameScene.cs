@@ -189,12 +189,22 @@ namespace GameDevS
             //    GameOver = true;
             //    Debug.WriteLine("GameOver = " + GameOver);
             //}
-            if (!player.Health.IsAlive)
+
+            //if (!player.Health.IsAlive)
+            //{
+            //    GameOver = true;
+            //}
+            player.OnDeathAnimationFinished += () =>
             {
                 GameOver = true;
-            }
+            };
 
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (player.IsDying)
+            {
+                dt /= 3;
+            }
 
             if (dt > 1 && !player.Health.IsAlive)
             {
