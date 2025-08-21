@@ -147,11 +147,6 @@ namespace GameDevS.Scenes
                 animationUpdater.UpdateAnimation(sprite);
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
-            {
-                SceneManager.AddScene(new ExitScene(ContentManager));
-            }
-
             List<Sprite> toRemove = new List<Sprite>();
             foreach (var sprite in sprites)
             {
