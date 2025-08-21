@@ -580,6 +580,30 @@
 /processorParam:TextureFormat=Color
 /build:map/ExclusionZone.png
 
+#begin map/goalZone/Ancient_Bas_Relief.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:map/goalZone/Ancient_Bas_Relief.png
+
+#begin map/goalZone/ddoor.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:map/goalZone/ddoor.png
+
 #begin map/swamp_tileset.png
 /importer:TextureImporter
 /processor:TextureProcessor

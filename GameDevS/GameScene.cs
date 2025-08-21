@@ -37,7 +37,8 @@ namespace GameDevS
 
         protected int TILESIZE = 54;
 
-        protected Rectangle goalZone;
+        //protected Rectangle goalZone;
+        protected GoalZone goalZone;
 
         public GameScene(ContentManager contentManager, SceneManager sceneManager, GraphicsDevice graphicsDevice)
         {
@@ -169,6 +170,8 @@ namespace GameDevS
                 }
             }
 
+            goalZone.Update(dt);
+
             if (player.MovementController is PlayerController playerController && playerController.CheckDeathByFalling(player, camera, GraphicsDevice.Viewport.Height))
             {
                 GameOver = true;
@@ -183,13 +186,7 @@ namespace GameDevS
 
             spriteBatch.Begin(transformMatrix: camera.Transform);
 
-            foreach (var sprite in sprites)
-            {
-                sprite.Draw(spriteBatch);
-
-                // ToDo: Remove draw hollow rectangle
-                DebugDraw.DrawHollowRectangle(spriteBatch, sprite.HitBox, Color.Red);
-            }
+            goalZone.Draw(spriteBatch);
 
             map.Draw(spriteBatch);
 
@@ -197,6 +194,14 @@ namespace GameDevS
             foreach (var tile in map.GetCollidables())
             {
                 DebugDraw.DrawHollowRectangle(spriteBatch, tile.HitBox, Color.Green);
+            }
+
+            foreach (var sprite in sprites)
+            {
+                sprite.Draw(spriteBatch);
+
+                // ToDo: Remove draw hollow rectangle
+                DebugDraw.DrawHollowRectangle(spriteBatch, sprite.HitBox, Color.Red);
             }
 
             foreach (ICollectible collectible in collectibles)
@@ -213,6 +218,8 @@ namespace GameDevS
 
                 DebugDraw.DrawHollowRectangle(spriteBatch, collectible.Bounds, Color.Purple);
             }
+
+            DebugDraw.DrawHollowRectangle(spriteBatch, goalZone.Rectangle, Color.HotPink);
 
             spriteBatch.End();
 
@@ -250,7 +257,7 @@ namespace GameDevS
 
         protected void CheckGoalReached()
         {
-            if (player != null && goalZone.Contains(player.HitBox))
+            if (player != null && goalZone.Rectangle.Contains(player.HitBox))
             {
                 OnGoalReached();
             }

@@ -64,12 +64,11 @@ namespace GameDevS
                 collisionManager.Register(tile);
             }
 
-            goalZone = new Rectangle(
-                195 * TILESIZE,
-                0,
-                5 * TILESIZE,
-                15 * TILESIZE
-            );
+            goalZone = new GoalZone(new Vector2(194 * TILESIZE, 6 * TILESIZE), 2f, 3 * TILESIZE, 3 * TILESIZE);
+            Texture2D goalTexture = ContentManager.Load<Texture2D>("map/goalZone/ddoor");
+            SpriteSheet goalSheet = new SpriteSheet(goalTexture, 1, 1);
+            Animation2 goalAnimation = new Animation2(goalSheet);
+            goalZone.AddAnimation(AnimationState.IDLE, goalAnimation);
         }
 
         protected override void LoadEnemies()
