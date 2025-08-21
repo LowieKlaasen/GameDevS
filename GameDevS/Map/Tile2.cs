@@ -10,7 +10,6 @@ namespace GameDevS.Map
         public Rectangle SrcRect;
         public Rectangle DestRect;
 
-        // ToDo: Check if Solid property is used
         public bool Solid;
 
         public Rectangle HitBox

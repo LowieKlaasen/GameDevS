@@ -61,6 +61,12 @@
 /processorParam:Quality=Best
 /build:audio/LSW_GuardHurt.mp3
 
+#begin audio/mega-man-out.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/mega-man-out.mp3
+
 #begin audio/neoGeoCoin.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor

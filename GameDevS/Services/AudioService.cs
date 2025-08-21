@@ -23,6 +23,7 @@ namespace GameDevS.Services
             sounds["monsterDeath"] = contentManager.Load<SoundEffect>("audio/death_squish_quieter");
             sounds["playerHurt"] = contentManager.Load<SoundEffect>("audio/LSW_GuardHurt_quieter");
             sounds["coinCollected"] = contentManager.Load<SoundEffect>("audio/neoGeoCoin");
+            sounds["playerDeath"] = contentManager.Load<SoundEffect>("audio/mega-man-out");
 
             songs["jungleBG"] = contentManager.Load<Song>("audio/jungleMusic");
             songs["introMusic"] = contentManager.Load<Song>("audio/hidden_tombs");

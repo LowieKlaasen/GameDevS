@@ -163,7 +163,7 @@ namespace GameDevS.Entities.PlayerMap
             System.Diagnostics.Debug.WriteLine("Player died");
 
             currentState = AnimationState.DYING;
-            // ToDo: ServiceLocator.AudioService.Play("");
+            ServiceLocator.AudioService.Play("playerDeath");
 
             deathTimer = deathAnimationDuration;
             speed = 0f;

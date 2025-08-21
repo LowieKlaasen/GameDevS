@@ -29,11 +29,7 @@ namespace GameDevS.Entities.Collectibles
 
         public void OnCollect(Player player)
         {
-            // ToDo: Implement score
-            System.Diagnostics.Debug.WriteLine("Coin collected");
             player.Score += 1;
-
-            System.Diagnostics.Debug.WriteLine("Player score: " +  player.Score);
 
             ServiceLocator.AudioService.Play("coinCollected");
             Collected = true;
