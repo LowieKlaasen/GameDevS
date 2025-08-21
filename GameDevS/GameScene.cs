@@ -29,6 +29,9 @@ namespace GameDevS
         public bool GameOver;
         protected GameOverMenu gameOverMenu;
 
+        public bool Won;
+        protected WinMenu winMenu;
+
         protected List<ICollectible> collectibles;
         protected ScrollingBackground scrollingBackground;
 
@@ -46,6 +49,7 @@ namespace GameDevS
 
             pauseMenu = new PauseMenu(GraphicsDevice, this, contentManager);
             gameOverMenu = new GameOverMenu(GraphicsDevice, this, contentManager);
+            winMenu = new WinMenu(GraphicsDevice, this, contentManager);
         }
 
         public virtual void Load()
@@ -108,6 +112,13 @@ namespace GameDevS
             {
                 dt = 0;
                 gameOverMenu.Update(gameTime);
+                return;
+            }
+            if (Won)
+            {
+                dt = 0;
+
+                winMenu.Update(gameTime);
                 return;
             }
 
@@ -220,6 +231,12 @@ namespace GameDevS
                 gameOverMenu.Draw(spriteBatch);
                 spriteBatch.End();
             }
+            if (Won)
+            {
+                spriteBatch.Begin();
+                winMenu.Draw(spriteBatch);
+                spriteBatch.End();
+            }
         }
 
         public void Restart()
@@ -228,6 +245,7 @@ namespace GameDevS
 
             IsPaused = false;
             GameOver = false;
+            Won = false;
         }
 
         protected void CheckGoalReached()
@@ -241,6 +259,7 @@ namespace GameDevS
         protected virtual void OnGoalReached()
         {
             Debug.WriteLine("GoalZone reached");
+            Won = true;
         }
         
     }
