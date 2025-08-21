@@ -1,4 +1,5 @@
-﻿using GameDevS.Enemies.Factories;
+﻿using GameDevS.Collectibles.Factories;
+using GameDevS.Enemies.Factories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -89,9 +90,12 @@ namespace GameDevS
         protected override void LoadCollectibles()
         {
             // ToDo: add coins
-            CreateCoin(new Vector2(20, 9));
-            CreateCoin(new Vector2(22, 8));
-            CreateCoin(new Vector2(25, 7));
+
+            ICollectibleFactory collectibleFactory = new CollectibleFactory(ContentManager, TILESIZE);
+
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(20, 9)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(22, 8)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(25, 7)));
         }
 
         protected override void LoadBackground()
@@ -122,30 +126,6 @@ namespace GameDevS
         {
             ServiceLocator.AudioService.PlayMusic("templeBG");
         }
-
-
-
-        #region Private Methods
-
-        private void CreateCoin(Vector2 coordinates)
-        {
-            Vector2 position = new Vector2(
-                coordinates.X * TILESIZE,
-                coordinates.Y * TILESIZE
-            );
-
-            Texture2D texture = ContentManager.Load<Texture2D>("collectibles/goldenCoin_one");
-            SpriteSheet spriteSheet = new SpriteSheet(texture, 5, 2);
-            Animation2 animation = new Animation2(spriteSheet);
-
-            Coin coin = new Coin(position, 0.06f, 36, 36);
-
-            coin.AddAnimation(AnimationState.IDLE, animation);
-
-            collectibles.Add(coin);
-        }
-
-        #endregion
 
     }
 }

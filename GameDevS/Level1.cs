@@ -1,4 +1,5 @@
-﻿using GameDevS.Enemies.Factories;
+﻿using GameDevS.Collectibles.Factories;
+using GameDevS.Enemies.Factories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -107,32 +108,34 @@ namespace GameDevS
 
         protected override void LoadCollectibles()
         {
-            CreateCoin(new Vector2(9, 6));
-            CreateCoin(new Vector2(10, 6));
-            CreateCoin(new Vector2(11, 6));
+            ICollectibleFactory collectibleFactory = new CollectibleFactory(ContentManager, TILESIZE);
 
-            CreateCoin(new Vector2(24, 6));
-            CreateCoin(new Vector2(25, 6));
-            CreateCoin(new Vector2(26, 6));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(9, 6)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(10, 6)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(11, 6)));
+
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(24, 6)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(25, 6)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(26, 6)));
 
             for (int x = 72; x <= 76; x++)
             {
-                CreateCoin(new Vector2(x, 1));
+                collectibles.Add(collectibleFactory.CreateCoin(new Vector2(x, 1)));
             }
 
             for (int y = 11; y <= 12; y++)
             {
                 for (int x = 137; x <= 151; x++)
                 {
-                    CreateCoin(new Vector2(x, y));
+                    collectibles.Add(collectibleFactory.CreateCoin(new Vector2(x, y)));
                 }
             }
 
-            CreateCoin(new Vector2(163, 0));
-            CreateCoin(new Vector2(165, 0));
-            CreateCoin(new Vector2(162, 1));
-            CreateCoin(new Vector2(164, 1));
-            CreateCoin(new Vector2(166, 1));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(163, 0)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(165, 0)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(162, 1)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(164, 1)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(166, 1)));
         }
 
         protected override void LoadBackground()
@@ -164,27 +167,5 @@ namespace GameDevS
             ServiceLocator.AudioService.PlayMusic("jungleBG");
         }
 
-
-        #region Private Methods
-
-        private void CreateCoin(Vector2 coordinates)
-        {
-            Vector2 position = new Vector2(
-                coordinates.X * TILESIZE,
-                coordinates.Y * TILESIZE
-            );
-
-            Texture2D texture = ContentManager.Load<Texture2D>("collectibles/goldenCoin_one");
-            SpriteSheet spriteSheet = new SpriteSheet(texture, 5, 2);
-            Animation2 animation = new Animation2(spriteSheet);
-
-            Coin coin = new Coin(position, 0.06f, 36, 36);
-
-            coin.AddAnimation(AnimationState.IDLE, animation);
-
-            collectibles.Add(coin);
-        }
-
-        #endregion
     }
 }
