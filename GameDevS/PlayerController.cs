@@ -1,50 +1,22 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
 
 namespace GameDevS
 {
     internal class PlayerController : IMovementController
     {
-        //private KeyboardState _keyboardState;
-
-        //public Vector2 GetDesiredVelocity(IMovable movable, float dt)
-        //{
-        //    if (movable is Player player && player.IsKnockBackActive)
-        //    {
-        //        return player.KnockbackVelocity;
-        //    }
-
-        //    _keyboardState = Keyboard.GetState();
-
-        //    Vector2 velocity = Vector2.Zero;
-
-        //    if (_keyboardState.IsKeyDown(Keys.Right))
-        //    { 
-        //        velocity.X = movable.Speed; 
-        //    }
-        //    else if (_keyboardState.IsKeyDown(Keys.Left))
-        //    { 
-        //        velocity.X = -movable.Speed; 
-        //    }
-
-        //    if (movable.IsGrounded && _keyboardState.IsKeyDown(Keys.Up))
-        //    {
-        //        velocity.Y = -movable.JumpSpeed;
-        //        ServiceLocator.AudioService.Play("jump");
-        //    }
-
-        //    return velocity;
-        //}
-
         private InputHandler inputHandler = new InputHandler();
 
         public Vector2 GetDesiredVelocity(IMovable movable, float dt)
         {
-            if (movable is Player player && !player.IsKnockBackActive)
+            if (movable is Player player)
             {
-                inputHandler.HandleInput(movable, dt);
-                return movable.Velocity;
+                if (!player.IsKnockBackActive)
+                {
+                    inputHandler.HandleInput(movable, dt);
+                    return movable.Velocity;
+                }
+                return player.KnockbackVelocity;
             }
 
             return Vector2.Zero;
