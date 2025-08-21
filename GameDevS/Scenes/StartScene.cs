@@ -1,0 +1,161 @@
+﻿using GameDevS.Menus;
+using GameDevS.Scenes.Levels;
+using GameDevS.Services;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using System;
+
+namespace GameDevS.Scenes
+{
+    public class StartScene : IScene
+    {
+        private ContentManager contentManager;
+        private SceneManager sceneManager;
+        private GraphicsDevice graphicsDevice;
+
+        private Texture2D woodenBoard;
+
+        private Texture2D[] parallax;
+
+        private SpriteFont titleFont;
+
+        private Option[] menuOptions;
+        private int selectedOption;
+
+        private bool selectionKeyLifted;
+
+        private bool enterKeyLifted;
+        public StartScene(ContentManager contentManager, SceneManager sceneManager, GraphicsDevice graphicsDevice)
+        {
+            this.contentManager = contentManager;
+            this.sceneManager = sceneManager;
+            this.graphicsDevice = graphicsDevice;
+        }
+
+        public void Load()
+        {
+            woodenBoard = contentManager.Load<Texture2D>("woodenBoard");
+
+            parallax = new Texture2D[5];
+
+            for (int i = 0; i < 5; i++)
+            {
+                string fileName = "background/jungle/plx-" + (i + 1).ToString();
+
+                parallax[i] = contentManager.Load<Texture2D>(fileName);
+            }
+
+            titleFont = contentManager.Load<SpriteFont>("fonts/UnifrakturCook");
+
+            menuOptions = new Option[4];
+            menuOptions[0] = new Option(contentManager.Load<SpriteFont>("fonts/Jacquard24"), "Level 1", new Color(64, 48, 22), Color.Gold);
+            menuOptions[1] = new Option(contentManager.Load<SpriteFont>("fonts/Jacquard24"), "Level 2", new Color(64, 48, 22), Color.Gold);
+            menuOptions[2] = new Option(contentManager.Load<SpriteFont>("fonts/Jacquard24"), "Settings", new Color(64, 48, 22), Color.Gold);
+            menuOptions[3] = new Option(contentManager.Load<SpriteFont>("fonts/Jacquard24"), "Quit", new Color(64, 48, 22), Color.Gold);
+
+            menuOptions[0].Selected = true;
+            selectedOption = 0;
+
+            selectionKeyLifted = true;
+
+            ServiceLocator.AudioService.PlayMusic("introMusic");
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            if (Keyboard.GetState().IsKeyUp(Keys.Enter))
+            {
+                enterKeyLifted = true;
+            }
+
+            if (selectionKeyLifted && Keyboard.GetState().IsKeyDown(Keys.Down))
+            {
+                menuOptions[selectedOption].Selected = false;
+
+                selectedOption++;
+                if (selectedOption > menuOptions.Length - 1)
+                {
+                    selectedOption = 0;
+                }
+                
+                menuOptions[selectedOption].Selected = true;
+
+                selectionKeyLifted = false;
+            }
+
+            if (selectionKeyLifted && Keyboard.GetState().IsKeyDown(Keys.Up))
+            {
+                menuOptions[selectedOption].Selected = false;
+
+                selectedOption--;
+                if (selectedOption < 0)
+                {
+                    selectedOption = menuOptions.Length - 1;
+                }
+
+                menuOptions[selectedOption].Selected = true;
+
+                selectionKeyLifted = false;
+            }
+
+            if (!selectionKeyLifted && Keyboard.GetState().IsKeyUp(Keys.Down) && Keyboard.GetState().IsKeyUp(Keys.Up))
+            {
+                selectionKeyLifted = true;
+            }
+
+            if (enterKeyLifted && Keyboard.GetState().IsKeyDown(Keys.Enter))
+            {
+                switch (selectedOption)
+                {
+                    case 0:
+                        enterKeyLifted = false;
+                        ServiceLocator.AudioService.StopMusic();
+                        sceneManager.AddScene(new Level1(contentManager, sceneManager, graphicsDevice));
+                        break;
+                    case 1:
+                        enterKeyLifted = false;
+                        ServiceLocator.AudioService.StopMusic();
+                        sceneManager.AddScene(new Level2(contentManager, sceneManager, graphicsDevice));
+                        break;
+                    case 2:
+                        enterKeyLifted = false;
+                        sceneManager.AddScene(new SettingsScene(contentManager, sceneManager, graphicsDevice));
+                        break;
+                    case 3:
+                        ServiceLocator.GameExitService.Exit();
+                        break;
+                    default:
+                        throw new IndexOutOfRangeException();
+                }
+            }
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Begin();
+
+            foreach (var bg in parallax)
+            {
+                spriteBatch.Draw(bg, new Rectangle(0, 0, graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height), Color.White);
+            }
+
+            int startingpointX = (graphicsDevice.Viewport.Width - woodenBoard.Width) / 2;
+            int startingpointY = (graphicsDevice.Viewport.Height - woodenBoard.Height) / 2;
+
+            spriteBatch.Draw(woodenBoard, new Rectangle(startingpointX, startingpointY, woodenBoard.Width, woodenBoard.Height), Color.White);
+
+            spriteBatch.DrawString(titleFont, "Ancient Escape", new Vector2(woodenBoard.Width / 2, startingpointY + 30), Color.Gold);
+
+            int spacer = 110;
+            foreach (var option in menuOptions)
+            {
+                spriteBatch.DrawString(option.Font, option.Text, new Vector2(woodenBoard.Width/2, startingpointY + spacer), option.GetColor());
+                spacer += 40;
+            }
+
+            spriteBatch.End();
+        }
+    }
+}

@@ -1,4 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GameDevS.Debug;
+using GameDevS.Scenes;
+using GameDevS.Services;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
