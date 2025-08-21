@@ -4,13 +4,12 @@ using GameDevS.Entities.Enemies;
 using GameDevS.Entities.PlayerMap;
 using GameDevS.Movement.Controllers;
 using Microsoft.Xna.Framework;
-using System.Diagnostics;
+using System;
 
 namespace GameDevS.Movement
 {
     public class MovementManager
     {
-        //private readonly float speed; (speed is a property of a movable | If not, speed should be set via ctor)
         private readonly ICollisionService2 collisionService;
 
         private readonly float gravity;
@@ -22,10 +21,8 @@ namespace GameDevS.Movement
             gravity = 2200f;
         }
 
-        //public void Move(IMovable movable, IMovementController movementController, float dt)
         public void Move(IMovable movable, float dt)
         {
-            //float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
             float groundSnap = 2f;
 
             var collidableMovable = (ICollidable2)movable;
@@ -45,7 +42,30 @@ namespace GameDevS.Movement
             Vector2 velocity = movable.Velocity;
             Vector2 desired = movable.MovementController.GetDesiredVelocity(movable, dt);
 
-            velocity.X = desired.X;
+            #region Acceleration & Deceleration
+
+            if (Math.Abs(desired.X) > 0.01f)
+            {
+                velocity.X += desired.X * (movable is Player player ? player.Acceleration : 200f) * dt;
+
+                float maxSpeed = (movable is Player player2 ? player2.MaxSpeed : 75f);
+                velocity.X = Math.Clamp(velocity.X, -maxSpeed, maxSpeed);
+            }
+            else
+            {
+                float deceleration = (movable is Player player3 ? player3.Deceleration : 250f) * dt;
+                if (velocity.X > 0)
+                {
+                    velocity.X = Math.Max(0, velocity.X - deceleration);
+                }
+                else if (velocity.X < 0)
+                {
+                    velocity.X = Math.Min(0, velocity.X + deceleration);
+                }
+            }
+
+            #endregion
+
             if (desired.Y != 0) velocity.Y = desired.Y;
 
             if (!movable.IsGrounded)

@@ -1,9 +1,7 @@
 ﻿using GameDevS.Entities.PlayerMap;
 using GameDevS.Graphics;
-using GameDevS.Movement;
 using GameDevS.Movement.Input;
 using Microsoft.Xna.Framework;
-using System.Diagnostics;
 
 namespace GameDevS.Movement.Controllers
 {
@@ -27,7 +25,11 @@ namespace GameDevS.Movement.Controllers
                 if (!player.IsKnockBackActive)
                 {
                     inputHandler.HandleInput(movable, dt);
-                    return movable.Velocity;
+
+                    return new Vector2(
+                        (movable.Velocity.X < 0 ? -1 : (movable.Velocity.X > 0 ? 1 : 0)),
+                        movable.Velocity.Y
+                    );
                 }
                 return player.KnockbackVelocity;
             }

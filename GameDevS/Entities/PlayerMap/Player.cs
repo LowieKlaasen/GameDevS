@@ -5,8 +5,6 @@ using GameDevS.Services;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace GameDevS.Entities.PlayerMap
 {
@@ -37,6 +35,10 @@ namespace GameDevS.Entities.PlayerMap
         public bool IsKnockBackActive => knockbackTimer > 0f;
 
         public Action OnDeathAnimationFinished;
+
+        public float Acceleration { get; private set; } = 900f;
+        public float Deceleration { get; private set; } = 1100f;
+        public float MaxSpeed { get; private set; } = 240f;
 
         public Player(Vector2 position, float scale, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight, IMovementController movementController) 
             : base(position, scale, hitboxStartX, hitboxStartY, hitboxWidth, hitboxHeight, movementController) 
