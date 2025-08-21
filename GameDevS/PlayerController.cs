@@ -5,7 +5,16 @@ namespace GameDevS
 {
     internal class PlayerController : IMovementController
     {
-        private InputHandler inputHandler = new InputHandler();
+        private InputHandler inputHandler;
+
+        public PlayerController() 
+        {
+            inputHandler = new InputHandler();
+        }
+        public PlayerController(InputHandler inputHandler)
+        {
+            this.inputHandler = inputHandler;
+        }
 
         public Vector2 GetDesiredVelocity(IMovable movable, float dt)
         {

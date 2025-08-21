@@ -8,9 +8,6 @@ namespace GameDevS
 {
     public class Player : Sprite, ICollidable2
     {
-        // ToDo: Check if this is necessery (& remove)
-        private List<Sprite> collisionGroup;
-
         public Health Health { get; private set; }
 
         public float deathTimer = 0f;
@@ -37,11 +34,9 @@ namespace GameDevS
 
         public Action OnDeathAnimationFinished;
 
-        public Player(Vector2 position, float scale, List<Sprite> collisionGroup, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight, IMovementController movementController) 
+        public Player(Vector2 position, float scale, int hitboxStartX, int hitboxStartY, int hitboxWidth, int hitboxHeight, IMovementController movementController) 
             : base(position, scale, hitboxStartX, hitboxStartY, hitboxWidth, hitboxHeight, movementController) 
         {
-            this.collisionGroup = collisionGroup;
-
             speed = 240f;
             jumpSpeed = 680f;
 

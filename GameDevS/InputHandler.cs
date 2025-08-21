@@ -16,6 +16,12 @@ namespace GameDevS
             _keyBindings[Keys.Up] = new JumpCommand();
         }
 
+        public InputHandler(Keys moveLeft, Keys moveRight)
+        {
+            _keyBindings[moveLeft] = new MoveLeftCommand();
+            _keyBindings[moveRight] = new MoveRightCommand();
+        }
+
         public void HandleInput(IMovable movable, float dt)
         {
             Vector2 velocity = movable.Velocity;

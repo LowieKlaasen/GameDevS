@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Diagnostics;
-using static GameDevS.CollisionManager2;
 
 namespace GameDevS
 {

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace GameDevS
 {
@@ -25,7 +26,7 @@ namespace GameDevS
             SpriteSheet dieSheet = new SpriteSheet(_heroTextureDying, 5, 2);
             SpriteSheet hurtSheet = new SpriteSheet(_heroTextureHurting, 4, 1);
 
-            player = new Player(Vector2.Zero, 1f, sprites, 22, 21, 48, 53, new PlayerController());
+            player = new Player(Vector2.Zero, 1f, 22, 21, 48, 53, new PlayerController());
 
             Animation2 idleAnimation = new Animation2(idleSheet);
             player.AddAnimation(AnimationState.IDLE, idleAnimation);
@@ -43,6 +44,23 @@ namespace GameDevS
             player.AddAnimation(AnimationState.HURTING, hurtAnimation);
 
             sprites.Add(player);
+
+            Texture2D skeletonIdleTexture = ContentManager.Load<Texture2D>("skeleton/skeleton_idle");
+            SpriteSheet skeletonIdleSheet = new SpriteSheet(skeletonIdleTexture, 6, 3);
+            Animation2 skeletonIdleAnimation = new Animation2(skeletonIdleSheet);
+
+            Texture2D skeletonRunningTexture = ContentManager.Load<Texture2D>("skeleton/skeleton_walking");
+            SpriteSheet skeletonRunningSheet = new SpriteSheet(skeletonRunningTexture, 8, 3);
+            Animation2 skeletonRunningAnimation = new Animation2(skeletonRunningSheet);
+
+            InputHandler inputHandler = new InputHandler(Keys.A, Keys.E);
+
+            Player skeleton = new Player(new Vector2(23 * TILESIZE, 9 * TILESIZE), 0.1f, 22, 21, 48, 53, new PlayerController(inputHandler));
+
+            skeleton.AddAnimation(AnimationState.IDLE, skeletonIdleAnimation);
+            skeleton.AddAnimation(AnimationState.RUNNING, skeletonRunningAnimation);
+
+            sprites.Add(skeleton);
         }
 
         protected override void LoadMap()
@@ -50,7 +68,7 @@ namespace GameDevS
             Texture2D textureSwamp = ContentManager.Load<Texture2D>("map/swamp_tileset");
 
             map = new TileMap2(textureSwamp, TILESIZE, 32, 10);
-            map.LoadMap("../../../Data/Level1_v2.csv");
+            map.LoadMap("../../../Data/Level1_v3.csv");
 
             foreach (var tile in map.GetCollidables())
             {
