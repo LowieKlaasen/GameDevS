@@ -6,7 +6,6 @@ using GameDevS.Entities.PlayerMap;
 using GameDevS.Graphics;
 using GameDevS.Map;
 using GameDevS.Movement.Controllers;
-using GameDevS.Scenes;
 using GameDevS.Services;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -83,11 +82,27 @@ namespace GameDevS.Scenes.Levels
         {
             IEnemyFactory enemyFactory = new TempleEnemyFactory(ContentManager, collisionManager, TILESIZE);
 
-            sprites.Add(enemyFactory.CreateActivePatrolEnemy(new Vector2(13, 9), player));
+            sprites.Add(enemyFactory.CreateStationaryEnemy(new Vector2(58, 3)));
+            sprites.Add(enemyFactory.CreateStationaryEnemy(new Vector2(60, 3)));
+            sprites.Add(enemyFactory.CreateStationaryEnemy(new Vector2(75, 5)));
+            sprites.Add(enemyFactory.CreateStationaryEnemy(new Vector2(153, 10)));
+            sprites.Add(enemyFactory.CreateStationaryEnemy(new Vector2(157, 4)));
+            sprites.Add(enemyFactory.CreateStationaryEnemy(new Vector2(160, 10)));
 
-            // ToDo: Add extra enemies
+            sprites.Add(enemyFactory.CreatePassivePatrolEnemy(new Vector2(54, 2)));
+            sprites.Add(enemyFactory.CreatePassivePatrolEnemy(new Vector2(81, 6)));
+            sprites.Add(enemyFactory.CreatePassivePatrolEnemy(new Vector2(84, 6)));
+            sprites.Add(enemyFactory.CreatePassivePatrolEnemy(new Vector2(86, 6)));
+            sprites.Add(enemyFactory.CreatePassivePatrolEnemy(new Vector2(156, 10)));
 
-            //CreatePassivePatrolEnemy(new Vector2(54, 4));
+            sprites.Add(enemyFactory.CreateActivePatrolEnemy(new Vector2(14, 9), player));
+            sprites.Add(enemyFactory.CreateActivePatrolEnemy(new Vector2(37, 2), player));
+            sprites.Add(enemyFactory.CreateActivePatrolEnemy(new Vector2(81, 3), player));
+            sprites.Add(enemyFactory.CreateActivePatrolEnemy(new Vector2(91, 3), player));
+            sprites.Add(enemyFactory.CreateActivePatrolEnemy(new Vector2(110, 12), player));
+            sprites.Add(enemyFactory.CreateActivePatrolEnemy(new Vector2(123, 11), player));
+            sprites.Add(enemyFactory.CreateActivePatrolEnemy(new Vector2(148, 4), player));
+            sprites.Add(enemyFactory.CreateActivePatrolEnemy(new Vector2(171, 2), player));
 
             foreach (var sprite in sprites)
             {
@@ -97,13 +112,68 @@ namespace GameDevS.Scenes.Levels
 
         protected override void LoadCollectibles()
         {
-            // ToDo: add coins
-
             ICollectibleFactory collectibleFactory = new CollectibleFactory(ContentManager, TILESIZE);
 
             collectibles.Add(collectibleFactory.CreateCoin(new Vector2(20, 9)));
             collectibles.Add(collectibleFactory.CreateCoin(new Vector2(22, 8)));
             collectibles.Add(collectibleFactory.CreateCoin(new Vector2(25, 7)));
+
+            for (int x = 35; x <= 38; x++)
+            {
+                collectibles.Add(collectibleFactory.CreateCoin(new Vector2(x, 12)));
+            }
+
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(50, 1)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(51, 1)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(50, 2)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(51, 2)));
+
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(64, 4)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(65, 3)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(66, 3)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(67, 4)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(68, 3)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(69, 3)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(70, 4)));
+
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(96, 4)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(100, 4)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(98, 6)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(96, 8)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(100, 8)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(98, 10)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(96, 12)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(100, 12)));
+
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(116, 12)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(117, 11)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(118, 10)));
+            collectibles.Add(collectibleFactory.CreateCoin(new Vector2(119, 11)));
+
+            for (int x = 129; x <= 133; x++)
+            {
+                collectibles.Add(collectibleFactory.CreateCoin(new Vector2(x, 9)));
+            }
+
+            for (int x = 139; x <= 141; x++)
+            {
+                collectibles.Add(collectibleFactory.CreateCoin(new Vector2(x, 4)));
+            }
+
+            for (int x = 176; x <= 178; x++)
+            {
+                collectibles.Add(collectibleFactory.CreateCoin(new Vector2(x, 4)));
+            }
+
+            for (int x = 181; x <= 185; x++)
+            {
+                collectibles.Add(collectibleFactory.CreateCoin(new Vector2(x, 8)));
+            }
+
+            for (int x = 183; x <= 185; x++)
+            {
+                collectibles.Add(collectibleFactory.CreateCoin(new Vector2(x, 5)));
+            }
         }
 
         protected override void LoadBackground()
