@@ -1,26 +1,19 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace GameDevS.Collectibles.Factories
 {
-    public class CollectibleFactory : ICollectibleFactory
+    public class CollectibleFactory : FactoryBase, ICollectibleFactory
     {
-        private readonly ContentManager contentManager;
-        private readonly int TILESIZE;
-
         public CollectibleFactory(ContentManager contentManager, int tileSize)
-        {
-            this.contentManager = contentManager;
-            TILESIZE = tileSize;
-        }
+            : base (contentManager, tileSize)
+        { }
 
         public ICollectible CreateCoin(Vector2 coordinates)
         {
-            Vector2 position = new Vector2(
-                coordinates.X * TILESIZE,
-                coordinates.Y * TILESIZE
-            );
+            Vector2 position = ConvertCoordinates(coordinates);
 
             Texture2D texture = contentManager.Load<Texture2D>("collectibles/goldenCoin_one");
             SpriteSheet spriteSheet = new SpriteSheet(texture, 5, 2);

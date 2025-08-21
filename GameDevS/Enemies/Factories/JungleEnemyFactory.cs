@@ -4,25 +4,19 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameDevS.Enemies.Factories
 {
-    public class JungleEnemyFactory : IEnemyFactory
+    public class JungleEnemyFactory : FactoryBase, IEnemyFactory
     {
-        private readonly ContentManager contentManager;
         private readonly CollisionManager2 collisionManager;
-        private readonly int TILESIZE;
 
         public JungleEnemyFactory(ContentManager contentManager, CollisionManager2 collisionManager, int tileSize)
+            : base(contentManager, tileSize)
         {
-            this.contentManager = contentManager;
             this.collisionManager = collisionManager;
-            TILESIZE = tileSize;
         }
 
         public Enemy CreateStationaryEnemy(Vector2 startCoordinates)
         {
-            Vector2 startPosition = new Vector2(
-                startCoordinates.X * TILESIZE,
-                startCoordinates.Y * TILESIZE
-            );
+            Vector2 startPosition = ConvertCoordinates(startCoordinates);
 
             Texture2D walkTexture = contentManager.Load<Texture2D>("enemies/orc/orc_walking");
             SpriteSheet walkSheet = new SpriteSheet(walkTexture, 8, 3);
@@ -51,10 +45,7 @@ namespace GameDevS.Enemies.Factories
 
         public Enemy CreatePassivePatrolEnemy(Vector2 startCoordinates)
         {
-            Vector2 startPosition = new Vector2(
-                startCoordinates.X * TILESIZE,
-                startCoordinates.Y * TILESIZE
-            );
+            Vector2 startPosition = ConvertCoordinates(startCoordinates);
 
             Texture2D walkTexture = contentManager.Load<Texture2D>("enemies/goblin/golem_walking");
             SpriteSheet walkSheet = new SpriteSheet(walkTexture, 8, 3);
@@ -79,10 +70,7 @@ namespace GameDevS.Enemies.Factories
 
         public Enemy CreateActivePatrolEnemy(Vector2 startCoordinates, Player player)
         {
-            Vector2 startPosition = new Vector2(
-                startCoordinates.X * TILESIZE,
-                startCoordinates.Y * TILESIZE
-            );
+            Vector2 startPosition = ConvertCoordinates(startCoordinates);
 
             Texture2D walkTexture = contentManager.Load<Texture2D>("enemies/ogre/ogre_walking");
             SpriteSheet walkSheet = new SpriteSheet(walkTexture, 8, 3);

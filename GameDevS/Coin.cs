@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace GameDevS
 {
-    internal class Coin : AnimatedEntity, ICollectible
+    public class Coin : AnimatedEntity, ICollectible
     {
         private int width;
         private int height;

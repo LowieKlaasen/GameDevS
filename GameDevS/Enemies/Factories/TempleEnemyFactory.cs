@@ -4,25 +4,19 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameDevS.Enemies.Factories
 {
-    public class TempleEnemyFactory : IEnemyFactory
+    public class TempleEnemyFactory : FactoryBase, IEnemyFactory
     {
-        private readonly ContentManager contentManager;
         private readonly CollisionManager2 collisionManager;
-        private readonly int TILESIZE;
 
         public TempleEnemyFactory(ContentManager contentManager, CollisionManager2 collisionManager, int tileSize)
+            : base(contentManager, tileSize)
         {
-            this.contentManager = contentManager;
             this.collisionManager = collisionManager;
-            TILESIZE = tileSize;
         }
 
         public Enemy CreateStationaryEnemy(Vector2 startCoordinates)
         {
-            Vector2 startPosition = new Vector2(
-                startCoordinates.X * TILESIZE,
-                startCoordinates.Y * TILESIZE
-            );
+            Vector2 startPosition = ConvertCoordinates(startCoordinates);
 
             Texture2D idleTexture = contentManager.Load<Texture2D>("enemies/golems/golem1_idle");
             SpriteSheet idleSheet = new SpriteSheet(idleTexture, 6, 3);
@@ -42,10 +36,7 @@ namespace GameDevS.Enemies.Factories
 
         public Enemy CreatePassivePatrolEnemy(Vector2 startCoordinates)
         {
-            Vector2 startPosition = new Vector2(
-                startCoordinates.X * TILESIZE,
-                startCoordinates.Y * TILESIZE
-            );
+            Vector2 startPosition = ConvertCoordinates(startCoordinates);
 
             Texture2D walkTexture = contentManager.Load<Texture2D>("enemies/golems/golem2_walking");
             SpriteSheet walkSheet = new SpriteSheet(walkTexture, 6, 4);
@@ -70,10 +61,7 @@ namespace GameDevS.Enemies.Factories
 
         public Enemy CreateActivePatrolEnemy(Vector2 startCoordinates, Player player)
         {
-            Vector2 startPosition = new Vector2(
-                startCoordinates.X * TILESIZE,
-                startCoordinates.Y * TILESIZE
-            );
+            Vector2 startPosition = ConvertCoordinates(startCoordinates);
 
             Texture2D walkTexture = contentManager.Load<Texture2D>("enemies/golems/golem3_walking");
             SpriteSheet walkSheet = new SpriteSheet(walkTexture, 6, 4);
