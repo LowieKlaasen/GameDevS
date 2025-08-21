@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace GameDevS
 {
-    internal abstract class Enemy : Sprite
+    public abstract class Enemy : Sprite
     {
         public bool IsAlive;
         public bool IsDying => currentState == AnimationState.DYING;
