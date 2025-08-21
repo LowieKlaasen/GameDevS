@@ -25,8 +25,7 @@ namespace GameDevS
             SpriteSheet dieSheet = new SpriteSheet(_heroTextureDying, 5, 2);
             SpriteSheet hurtSheet = new SpriteSheet(_heroTextureHurting, 4, 1);
 
-            //player = new Player(Vector2.Zero, 1f, sprites, 22, 21, 48, 53, new PlayerController());
-            player = new Player(new Vector2(183 * TILESIZE, 6 * TILESIZE), 1f, sprites, 22, 21, 48, 53, new PlayerController());
+            player = new Player(Vector2.Zero, 1f, sprites, 22, 21, 48, 53, new PlayerController());
 
             Animation2 idleAnimation = new Animation2(idleSheet);
             player.AddAnimation(AnimationState.IDLE, idleAnimation);
@@ -51,7 +50,6 @@ namespace GameDevS
             Texture2D textureSwamp = ContentManager.Load<Texture2D>("map/swamp_tileset");
 
             map = new TileMap2(textureSwamp, TILESIZE, 32, 10);
-            //map.LoadMap("../../../Data/Level1_TempEnding.csv");
             map.LoadMap("../../../Data/Level1_v2.csv");
 
             foreach (var tile in map.GetCollidables())
