@@ -57,6 +57,13 @@ namespace GameDevS
             {
                 collisionManager.Register(tile);
             }
+
+            goalZone = new Rectangle(
+                195 * TILESIZE,
+                0,
+                5 * TILESIZE,
+                15 * TILESIZE
+            );
         }
 
         protected override void LoadEnemies()

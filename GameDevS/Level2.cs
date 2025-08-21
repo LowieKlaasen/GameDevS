@@ -31,7 +31,8 @@ namespace GameDevS
                 SpriteSheet dieSheet = new SpriteSheet(_heroTextureDying, 5, 2);
                 SpriteSheet hurtSheet = new SpriteSheet(_heroTextureHurting, 4, 1);
 
-                player = new Player(new Vector2(1 * TILESIZE, 5 * TILESIZE), 1f, sprites, 22, 21, 48, 53, new PlayerController());
+                //player = new Player(new Vector2(1 * TILESIZE, 5 * TILESIZE), 1f, sprites, 22, 21, 48, 53, new PlayerController());
+                player = new Player(new Vector2(188 * TILESIZE, 7 * TILESIZE), 1f, sprites, 22, 21, 48, 53, new PlayerController());
 
                 Animation2 idleAnimation = new Animation2(idleSheet);
                 player.AddAnimation(AnimationState.IDLE, idleAnimation);
@@ -62,6 +63,13 @@ namespace GameDevS
             {
                 collisionManager.Register(tile);
             }
+
+            goalZone = new Rectangle(
+                195 * TILESIZE,
+                0,
+                5 * TILESIZE,
+                15 * TILESIZE
+            );
         }
 
         protected override void LoadEnemies()

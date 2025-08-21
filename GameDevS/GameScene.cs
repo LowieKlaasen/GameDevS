@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace GameDevS
 {
@@ -32,6 +33,8 @@ namespace GameDevS
         protected ScrollingBackground scrollingBackground;
 
         protected int TILESIZE = 54;
+
+        protected Rectangle goalZone;
 
         public GameScene(ContentManager contentManager, SceneManager sceneManager, GraphicsDevice graphicsDevice)
         {
@@ -159,6 +162,8 @@ namespace GameDevS
             {
                 GameOver = true;
             }
+
+            CheckGoalReached();
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
@@ -223,6 +228,19 @@ namespace GameDevS
 
             IsPaused = false;
             GameOver = false;
+        }
+
+        protected void CheckGoalReached()
+        {
+            if (player != null && goalZone.Contains(player.HitBox))
+            {
+                OnGoalReached();
+            }
+        }
+
+        protected virtual void OnGoalReached()
+        {
+            Debug.WriteLine("GoalZone reached");
         }
         
     }
