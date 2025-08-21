@@ -1,10 +1,8 @@
 ﻿using GameDevS.Collision;
 using GameDevS.Entities.Enemies;
 using GameDevS.Entities.PlayerMap;
-using GameDevS.Movement;
 using Microsoft.Xna.Framework;
 using System;
-using System.Diagnostics;
 
 namespace GameDevS.Movement.Controllers
 {

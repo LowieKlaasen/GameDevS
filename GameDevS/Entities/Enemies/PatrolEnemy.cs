@@ -3,8 +3,6 @@ using GameDevS.Collision;
 using GameDevS.Map;
 using GameDevS.Movement.Controllers;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
 
 namespace GameDevS.Entities.Enemies
 {

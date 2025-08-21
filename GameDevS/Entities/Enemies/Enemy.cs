@@ -3,7 +3,6 @@ using GameDevS.Movement.Controllers;
 using GameDevS.Services;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Diagnostics;
 
 namespace GameDevS.Entities.Enemies
 {
@@ -26,8 +25,6 @@ namespace GameDevS.Entities.Enemies
 
         public override void Update(float dt)
         {
-            //float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
             if (IsDying)
             {
                 deathTimer -= dt;

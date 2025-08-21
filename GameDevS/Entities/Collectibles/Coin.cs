@@ -1,7 +1,6 @@
 ﻿using GameDevS.Entities.PlayerMap;
 using GameDevS.Services;
 using Microsoft.Xna.Framework;
-using System.Diagnostics;
 
 namespace GameDevS.Entities.Collectibles
 {

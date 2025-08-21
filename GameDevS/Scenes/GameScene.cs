@@ -15,7 +15,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace GameDevS.Scenes
 {
@@ -49,7 +48,6 @@ namespace GameDevS.Scenes
 
         protected int TILESIZE = 54;
 
-        //protected Rectangle goalZone;
         protected GoalZone goalZone;
 
         public GameScene(ContentManager contentManager, SceneManager sceneManager, GraphicsDevice graphicsDevice)

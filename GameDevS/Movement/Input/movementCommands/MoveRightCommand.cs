@@ -1,5 +1,4 @@
-﻿using GameDevS.Movement;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
 namespace GameDevS.Movement.Input.movementCommands
 {

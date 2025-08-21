@@ -19,14 +19,11 @@ namespace GameDevS
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
-            // ToDo: Check if sceneManager initialization should be here or in Initialize()-method
             sceneManager = new SceneManager();
         }
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             base.Initialize();
         }
 
@@ -39,10 +36,6 @@ namespace GameDevS
             ServiceLocator.AudioService = new AudioService(Content);
             ServiceLocator.GameExitService = new GameExitService(this);
 
-            // TODO: use this.Content to load your game content here
-
-            // ToDo: Check wheter AddScene needs to be here or in Initialize()?
-            //sceneManager.AddScene(new GameScene(Content, sceneManager));
             sceneManager.AddScene(new StartScene(Content, sceneManager, GraphicsDevice));
         }
 
@@ -60,12 +53,7 @@ namespace GameDevS
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
-            //_spriteBatch.Begin();
-
             sceneManager.GetCurrentScene().Draw(_spriteBatch);
-
-            //_spriteBatch.End();
 
             base.Draw(gameTime);
         }

@@ -20,7 +20,6 @@ namespace GameDevS.Graphics
             float topBoundary, float bottomBoundary)
         {
             float cameraX = target.X - Viewport.Width / 3f;
-            //float cameraY = target.Y - _viewport.Height / 1.5f;
             float cameraY = target.Y - Viewport.Height / 2f;
 
             cameraX = MathHelper.Clamp(cameraX, leftBoundary, rightBoundary - Viewport.Width);

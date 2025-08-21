@@ -1,7 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using System.Diagnostics;
-
-namespace GameDevS.Entities.PlayerMap
+﻿namespace GameDevS.Entities.PlayerMap
 {
     public class Health
     {

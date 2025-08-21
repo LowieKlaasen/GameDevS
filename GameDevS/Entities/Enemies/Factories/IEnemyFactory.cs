@@ -1,5 +1,4 @@
-﻿using GameDevS.Entities.Enemies;
-using GameDevS.Entities.PlayerMap;
+﻿using GameDevS.Entities.PlayerMap;
 using Microsoft.Xna.Framework;
 
 namespace GameDevS.Entities.Enemies.Factories

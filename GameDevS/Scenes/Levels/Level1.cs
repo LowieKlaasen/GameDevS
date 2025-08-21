@@ -7,7 +7,6 @@ using GameDevS.Graphics;
 using GameDevS.Map;
 using GameDevS.Movement.Controllers;
 using GameDevS.Movement.Input;
-using GameDevS.Scenes;
 using GameDevS.Services;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;

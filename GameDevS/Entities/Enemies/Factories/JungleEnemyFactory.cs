@@ -1,6 +1,5 @@
 ﻿using GameDevS.Animations;
 using GameDevS.Collision;
-using GameDevS.Entities.Enemies;
 using GameDevS.Entities.PlayerMap;
 using GameDevS.Movement.Controllers;
 using Microsoft.Xna.Framework;

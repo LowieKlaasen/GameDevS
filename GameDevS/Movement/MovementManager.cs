@@ -144,11 +144,8 @@ namespace GameDevS.Movement
 
                 if (horizontalResult.Collidable is Enemy enemy)
                 {
-                    // ToDo: player damage
                     if (movable is Player player)
                     {
-                        System.Diagnostics.Debug.WriteLine($"{movable.GetType()} took side damage");
-
                         player.TakeDamage(1, horizontalResult.Direction);
                     }
                 }
@@ -157,7 +154,6 @@ namespace GameDevS.Movement
                 {
                     if (horizontalResult.Collidable is Player player)
                     {
-                        System.Diagnostics.Debug.WriteLine("Player took damage from passive patrol enemy");
                         player.TakeDamage(1, horizontalResult.Direction);
                     }
 
@@ -167,7 +163,6 @@ namespace GameDevS.Movement
                 {
                     if (horizontalResult.Collidable is Player player)
                     {
-                        System.Diagnostics.Debug.WriteLine("Player took damage from active patrol enemy");
                         player.TakeDamage(1, horizontalResult.Direction);
                     }
 

@@ -1,9 +1,7 @@
 ﻿using GameDevS.Entities;
 using GameDevS.Entities.Enemies;
 using GameDevS.Entities.PlayerMap;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Reflection.Metadata.Ecma335;
 
 namespace GameDevS.Animations
 {

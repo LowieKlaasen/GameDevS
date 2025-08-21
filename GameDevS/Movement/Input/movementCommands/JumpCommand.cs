@@ -1,5 +1,4 @@
 ﻿using GameDevS.Entities.PlayerMap;
-using GameDevS.Movement;
 using GameDevS.Services;
 using Microsoft.Xna.Framework;
 
