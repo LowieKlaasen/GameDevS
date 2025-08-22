@@ -65,12 +65,9 @@ namespace GameDevS.Services
             {
                 musicVolume = MathHelper.Clamp(volume, 0f, 1f);
                 MediaPlayer.Volume = musicVolume;
-                System.Diagnostics.Debug.WriteLine(volumeType + ": " + volume);
                 return;
             }
             soundEffectVolume = MathHelper.Clamp(volume, 0f, 1f);
-
-            System.Diagnostics.Debug.WriteLine(volumeType + ": " + volume);
         }
 
         public void PlayMusic(string musicName, bool loop = true) 

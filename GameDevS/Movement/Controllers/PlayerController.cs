@@ -41,7 +41,6 @@ namespace GameDevS.Movement.Controllers
         {
             if (player.Position.Y > camera.Position.Y + viewportHeight)
             {
-                System.Diagnostics.Debug.WriteLine("player fell under the map");
                 return true;
             }
             return false;

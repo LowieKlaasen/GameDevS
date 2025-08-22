@@ -1,6 +1,5 @@
 ﻿using GameDevS.Animations;
 using GameDevS.Collision;
-using GameDevS.Debug;
 using GameDevS.Entities;
 using GameDevS.Entities.Collectibles;
 using GameDevS.Entities.Enemies;
@@ -195,18 +194,9 @@ namespace GameDevS.Scenes
 
             map.Draw(spriteBatch);
 
-            // ToDo: Remove draw hollow rectangle
-            foreach (var tile in map.GetCollidables())
-            {
-                DebugDraw.DrawHollowRectangle(spriteBatch, tile.HitBox, Color.Green);
-            }
-
             foreach (var sprite in sprites)
             {
                 sprite.Draw(spriteBatch);
-
-                // ToDo: Remove draw hollow rectangle
-                DebugDraw.DrawHollowRectangle(spriteBatch, sprite.HitBox, Color.Red);
             }
 
             foreach (ICollectible collectible in collectibles)
@@ -220,11 +210,7 @@ namespace GameDevS.Scenes
                 {
                     animatedEntity.Draw(spriteBatch);
                 }
-
-                DebugDraw.DrawHollowRectangle(spriteBatch, collectible.Bounds, Color.Purple);
             }
-
-            DebugDraw.DrawHollowRectangle(spriteBatch, goalZone.Rectangle, Color.HotPink);
 
             spriteBatch.End();
 
@@ -270,7 +256,6 @@ namespace GameDevS.Scenes
 
         protected virtual void OnGoalReached()
         {
-            System.Diagnostics.Debug.WriteLine("GoalZone reached");
             Won = true;
         }
         

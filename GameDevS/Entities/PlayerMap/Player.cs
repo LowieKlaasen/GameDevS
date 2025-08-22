@@ -160,8 +160,6 @@ namespace GameDevS.Entities.PlayerMap
                 return;
             }
 
-            System.Diagnostics.Debug.WriteLine("Player died");
-
             currentState = AnimationState.DYING;
             ServiceLocator.AudioService.Play("playerDeath");
 

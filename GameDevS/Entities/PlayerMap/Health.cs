@@ -21,7 +21,6 @@
             {
                 Current = 0;
             }
-            System.Diagnostics.Debug.WriteLine("Player Health: " + Current);
         }
 
         public void Heal(int amount)

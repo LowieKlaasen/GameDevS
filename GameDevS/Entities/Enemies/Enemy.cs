@@ -54,8 +54,6 @@ namespace GameDevS.Entities.Enemies
                 return;
             }
 
-            System.Diagnostics.Debug.WriteLine("Enemy died");
-
             currentState = AnimationState.DYING;
             ServiceLocator.AudioService.Play("monsterDeath");
 
